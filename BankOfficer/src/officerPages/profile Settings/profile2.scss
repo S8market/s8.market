@@ -73,7 +73,7 @@
         height: 140px;
         border-radius: 50%;
         border:2px solid #004663;
-        object-fit: cover;
+        object-fit: contain;
 
         @include md {
           width: 100px;
@@ -384,9 +384,11 @@
         align-items: center;
         gap: 5px;
         width: 480px;
+        max-width: 480px;
 
         @include md {
-          width: 271px;
+          // width: 271px;
+          width: 100%;
         }
     }
 
@@ -463,7 +465,7 @@
 
      textarea{
       width: 100%; // Makes the input field stretch fully
-      max-width: 387px; // Ensures it doesn't get too wide
+      max-width: 389px; // Ensures it doesn't get too wide
       min-width: 387px; // Prevents it from becoming too small
       padding: 10px;
       border: 1px solid #ccc;
@@ -478,8 +480,8 @@
       @include md {
         width: 100%;
         font-size: 14px;
-        max-width: 273px; // Ensures it doesn't get too wide
-      min-width: 273px; // Prevents it from becoming too small
+        // max-width: 373px; // Ensures it doesn't get too wide
+      min-width: 100%; // Prevents it from becoming too small
       }
     }
   }

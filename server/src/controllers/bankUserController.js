@@ -472,6 +472,7 @@ export const addProperties = async function (req, res) {
 // Update the Properties
 export const updateProperties = async function (req, res) {
   try {
+    console.log("reached")
     const userId = req.userId;
     console.log(userId);
     const {
@@ -531,6 +532,31 @@ export const updateProperties = async function (req, res) {
       !latitude ||
       !longitude
     ) {
+      console.log(
+          propertyId,
+          title,
+          category,
+          auctionType,
+          auctionDate,
+          auctionTime,
+          area,
+          price,
+          description,
+          auctionUrl,
+          nearbyPlaces,
+          address,
+          contact,
+          borrower,
+          amountDue,
+          deposit,
+          bidInc,
+          inspectDate,
+          inspectTime,
+          reservPrice,
+          message,
+          latitude,
+          longitude,
+      )
       return res.json({ success: false, message: "Provide all the fields" });
     }
 

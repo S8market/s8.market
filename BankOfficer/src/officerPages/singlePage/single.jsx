@@ -153,6 +153,13 @@ const Single = () => {
     }
   };
 
+//Map location
+const coordinates = property?.mapLocation
+  ? [{ latitude: Number(property.mapLocation.latitude), longitude: Number(property.mapLocation.longitude) }]
+  : [];
+
+ // Debugging: Check if mapLocation is being received correctly
+ console.log("Coordinates:", property?.mapLocation);
 
   return (
     <div className="singlePage">
@@ -226,15 +233,19 @@ const Single = () => {
                     </div>
 
                     <div className="info-item">
-                      <img src="/video.svg" alt="video" className="info-icon" />
-                      <span className="info-label">Asset Video:</span>
-                      <span className="info-value">{property.video}</span>
+                     <img src="/video.svg" alt="video" className="info-icon" />
+                     <span className="info-label">Asset Video:</span>
+                     <a href={property.video} className="info-link" target="_blank" rel="noopener noreferrer">
+                      {property.video}
+                     </a>
                     </div>
 
                     <div className="info-item">
-                      <img src="/link.svg" alt="link" className="info-icon" />
-                      <span className="info-label">Enquiry URL:</span>
-                      <a href={property.auctionUrl} className="info-link">{property.auctionUrl}</a>
+                     <img src="/link.svg" alt="link" className="info-icon" />
+                     <span className="info-label">Enquiry URL:</span>
+                     <a href={property.auctionUrl} className="info-link" target="_blank" rel="noopener noreferrer">
+                     {property.auctionUrl}
+                    </a>
                     </div>
 
                     <div className="info-item description">
@@ -321,7 +332,8 @@ const Single = () => {
 
               {/* Map Section */}
               <h3>Property Location :</h3>
-              <GMap
+              <GMap items={coordinates} />
+              {/* <GMap
                 items={[
                   {
                     id: property.id,
@@ -329,7 +341,8 @@ const Single = () => {
                     longitude: property.longitude,
                   },
                 ]}
-              />
+              /> */}
+
 
               {/* Action Buttons */}
               <div className="actionButtons">

@@ -1,5 +1,5 @@
+@use "../../responsive.scss" as res;
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
-@import "../../responsive.scss";
 
 .myAssetsView{
   font-family: "Poppins", sans-serif;
@@ -11,7 +11,7 @@
         min-width: 245px; /* Optional: Minimum width for sidebar */
         background-color: white; /* Example styling for visibility */
       
-      @include md{
+      @include res.md{
         min-width: 80px;
       }
       }
@@ -20,6 +20,12 @@
         flex: 8; /* Main content takes the remaining space */
         display: flex;
         flex-direction: column; /* Stack items vertically */
+      
+        @include res.md{
+          display: flex;
+          width: 70%;
+          margin-top: -9px;
+        }
       }
       
 } 

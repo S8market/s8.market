@@ -1,3 +1,5 @@
+@use "../../responsive.scss" as res;
+
 .propertyCard {
   font-family: "Poppins", sans-serif;
   display: flex;
@@ -8,11 +10,18 @@
   font-family: "Poppins", sans-serif;
   border-radius: 20px;
   min-width: 260px;
+  max-width: 360px;
   width: 360px;
   height: 520px;
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.25);
   overflow: hidden;
+
+@include res.md{
+  width: 300px;
+  max-width: 300px;
+  margin-left: -15px;
+}
 }
 
 .propertyCard:hover {

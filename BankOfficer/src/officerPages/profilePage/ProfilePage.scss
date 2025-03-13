@@ -1,4 +1,4 @@
-@import "../../responsive.scss";
+@use "../../responsive.scss" as res;
 
 .home {
   display: flex;
@@ -11,7 +11,7 @@
     min-width: 245px;
     transition: transform 0.3s ease-in-out;
 
-    @include md {
+    @include res.md{
       min-width: 80px;
     }
   }
@@ -24,7 +24,7 @@
     // transition: margin-left 0.3s ease-in-out;
   
     
-    @include md {
+    @include res.md  {
       display: flex;
       width: 70%;
       margin-top: -9px;
@@ -41,7 +41,7 @@
     padding: 20px;
 
 
-    @include md {
+    @include res.md  {
       flex-direction: column;
       gap: 20px;
       padding: 0px;

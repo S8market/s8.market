@@ -1,4 +1,4 @@
-@import "../../responsive.scss";
+@use "../../responsive.scss" as res;
 
 .myAssetsCardsContainer {
   font-family: "Poppins", sans-serif;
@@ -10,13 +10,15 @@
   padding-bottom: 24px;
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.25);
-  height: 480px;
+  height: 460px;
   width: 400px;
   // -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
   // box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
 
-@include md {
-  height: 450px;
+@include res.md {
+  height: 436px;
+  width: 370px;
+  max-width: 370px;
 }
 
   .headerContainer2 {
@@ -33,7 +35,7 @@
       color: #333;
       margin: 0; // Remove left margin
 
-      @include md {
+      @include res.md {
         font-size: 20px;
       }
     }
@@ -46,7 +48,7 @@
       margin-left: auto; // Push to right
       padding-left: 20px; // Add spacing between h2 and h3
     
-    @include md {
+      @include res.md{
       font-size: 14px;
     }
    }
@@ -58,9 +60,9 @@
     overflow-x: auto; // Enable horizontal scrolling
     padding-bottom: 10px; // Space for scrollbar
     position: relative; // For positioning the "View All" button
-    margin-top: 0px;
+    margin-top: -10px;
     
-    @include md {
+    @include res.md{
      margin-bottom: -13px;
     }
 
@@ -107,7 +109,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 360px; // Set a larger fixed height for uniformity
+    height: 355px; // Set a larger fixed height for uniformity
     padding-bottom: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 
@@ -117,7 +119,7 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    @include md {
+    @include res.md{
       max-width: 310px;
       height: 340px;
     }
@@ -134,7 +136,7 @@
         object-fit: cover; // Ensure the image covers the area without distortion
         object-position: center; // Center the image inside the container
       
-      @include md {
+        @include res.md{
         height: 90%;
        }
       }
@@ -150,7 +152,7 @@
         border: 3px solid white; // Optional: Add a border to make it stand out
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-       @include md {
+        @include res.md{
         height: 50px;
         width: 50px;
        }
@@ -184,7 +186,7 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
       
-      @include md {
+        @include res.md{
         font-size: 14px;
        }
       }
@@ -194,7 +196,7 @@
         color: #555;
         margin: 0 0 10px 0;
 
-        @include md {
+        @include res.md{
           font-size: 12px;
         }
       }
@@ -213,7 +215,7 @@
       word-break: break-word;
       white-space: normal; /* Ensures proper wrapping */
    
-   @include md {
+      @include res.md {
     font-size: 12.5px;
     }
    }
@@ -238,7 +240,7 @@
           background-color: #004f6e;
         }
 
-        @include md {
+        @include res.md{
           margin-top: -5px;
         }
     }
@@ -268,7 +270,7 @@
       color: #000;
     }
 
-    @include md {
+    @include res.md {
       padding: 8px 16px;
       font-size: 13px;
       margin-bottom: 10px;

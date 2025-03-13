@@ -186,7 +186,6 @@ const Single = () => {
     </div>
   </div>
 </div>
-
 </div>
 
                     <div className="info-item">

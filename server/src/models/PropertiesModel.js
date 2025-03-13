@@ -24,7 +24,7 @@ const propertySchema = new Schema(
     category: {
       type: String,
       required: true,
-      enum: ["Residential", "Commercial", "Industrial", "Land"],
+      // enum: ["Residential", "Commercial", "Industrial", "Land"],
     },
     bankName: {
       type: String,

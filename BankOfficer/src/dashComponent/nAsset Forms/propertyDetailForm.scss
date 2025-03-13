@@ -1,3 +1,4 @@
+@use "../../responsive.scss" as res;
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
 $primary-color: #004663;
@@ -14,6 +15,10 @@ $input-padding: 12px 20px;
   max-width: 750px; // Increase width for better alignment
   margin: 20px ; // Center the form properly
   font-family: "Poppins", sans-serif;
+
+// @include res.md {
+//   margin-top: -20px;
+// }
 }
 
 .formContent {

@@ -39,6 +39,7 @@ const AuctionDetailsForm = ({ prevStep }) => {
       newFormData.append("auctionTime", formData.auctionTime);
       newFormData.append("area", formData.area);
       newFormData.append("price", formData.price);
+      newFormData.append("video", formData.video);
       newFormData.append("description", formData.description);
       newFormData.append("contact", formData.contact);
       newFormData.append("nearbyPlaces", formData.nearbyPlaces);
@@ -81,6 +82,7 @@ const AuctionDetailsForm = ({ prevStep }) => {
           auctionTime: "",
           area: "",
           price: "",
+          video: "",
           description: "",
           contact: "",
           nearbyPlaces: "",
@@ -108,10 +110,10 @@ const AuctionDetailsForm = ({ prevStep }) => {
         // console.log("Updating property");
         // let newObj
         // console.log(formData);
-        // console.log(newFormData);
-        // for (let [key, value] of newFormData.entries()) {
-        //   console.log(`${key}: ${value}`);
-      // }
+        console.log(newFormData);
+        for (let [key, value] of newFormData.entries()) {
+          console.log(`${key}: ${value}`);
+      }
         const { data } = await axios.post(
           serverUrl + "/api/v1/bank-user/update-property",
           newFormData,
@@ -128,6 +130,7 @@ const AuctionDetailsForm = ({ prevStep }) => {
           setTimeout(() => setShowPopup(false), 2000); // Hide popup after 2 seconds
         }
         setEditProperty(false);
+        console.log(formData)
         setFormData({
           title: "",
           category: "",
@@ -136,6 +139,7 @@ const AuctionDetailsForm = ({ prevStep }) => {
           auctionTime: "",
           area: "",
           price: "",
+          video: "",
           description: "",
           contact: "",
           nearbyPlaces: "",

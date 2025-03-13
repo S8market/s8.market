@@ -44,7 +44,7 @@ export const UserAvatar = ({ imageSrc, name, address, size = 'small' }) => {
       {name && address && (
         <div className="userInfo">
           <span className="userName">{userDetails.firstName}</span>
-          <span className="userLocation">{address}</span>
+          {/* <span className="userLocation">{address}</span> */}
         </div>
       )}
       <button

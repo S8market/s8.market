@@ -1,3 +1,5 @@
+@use "../../responsive.scss" as res;
+
 .image-upload-container {
   font-family: "Poppins", sans-serif;
 
@@ -25,6 +27,10 @@
   align-items: center;
   justify-content: center;
   margin-left: 40px;
+
+  @include res.md{
+    margin-left: 0px;
+  }
 
   .upload-area {
     display: flex;
@@ -84,7 +90,12 @@
 
   ul {
     list-style: none;
-    padding: 0;
+    padding: 10px;
+    margin-left: -20px;
+
+    @include res.md{
+      margin-right: -10px;
+    }
   }
 
   .file-item {

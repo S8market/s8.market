@@ -1,18 +1,29 @@
+@use "../../responsive.scss" as res;
+
 .addAsset {
   font-family: "Poppins", sans-serif;
-
     display: flex;
     // height: 100vh;
   
     .sideContainerAdd {
       flex: 1; // Sidebar takes 1 part of the total flex space
       min-width: 245px;
+
+      @include res.md{
+        min-width: 80px;
+      }
     }
   
     .addAssetContainer {
       flex: 8; // Main content takes remaining space
       display: flex;
       flex-direction: column;
+   
+   @include res.md{
+    display: flex;
+    width: 70%;
+    margin-top: -9px;
+   }
     }
   
     //{Top header}
@@ -22,13 +33,13 @@
       flex-direction: column;
       border-radius: 20px;
       border: 1px solid rgba(0, 0, 0, 0.25);
-    
+
       .container-header {
         font-size: 16px;
         color: #555;
         padding: 10px 20px;
         font-weight: 500;
-        width: 94%;
+        width: 97%;
         margin: auto;
         position: relative;
     
@@ -79,6 +90,18 @@
         height: auto; /* Keep it flexible and adjustable */
         padding-left: 30px; /* Add spacing for better visibility */
         margin-left: -20px;
+      
+      @include res.md{
+        border-left: none;
+        height: auto;
+      }
+      }
+
+      @include res.md { 
+        flex-direction: column; // Stack items in a column on medium screens
+        align-items: center; // Center align for better UI
+      }
+
         .formContent {
           .formSection {
             display: flex;
@@ -136,7 +159,7 @@
         //   }
         // }
 
-      }
+    
     }
   }
   

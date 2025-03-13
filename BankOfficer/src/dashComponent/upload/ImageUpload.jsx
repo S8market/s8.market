@@ -81,7 +81,7 @@ const ImageUpload = () => {
         <div className="upload-area">
         <img src="/upload.svg" alt="Upload Icon" className="upload-icon" />
           <p>Choose a file or drag & drop it here</p>
-          <p className="file-info">JPEG, PNG, PDF, and video formats, up to 50MB</p>
+          <p className="file-info">JPEG, PNG up to 20MB</p>
           
           {/* Browse Button triggers file input */}
           <button className="browse-btn" onClick={handleBrowseClick}>Browse File</button>

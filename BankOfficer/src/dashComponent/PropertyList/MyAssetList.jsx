@@ -27,7 +27,7 @@ const MyAssetList = () => {
   
   const getProp = async () => {
     try {
-      console.log("hehu")
+      // console.log("")
       const response = await axios.post(
         `${serverUrl}/api/v1/bank-user/searchProperties`,
         { searchString },

@@ -1,3 +1,5 @@
+@use "../../responsive.scss" as res;
+
 .auction-container {
   font-family: "Poppins", sans-serif;
   padding: 24px;
@@ -7,7 +9,12 @@
   border: 1px solid rgba(0, 0, 0, 0.25);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   min-height: 100vh;
-width: 1230px;}
+width: 1230px;
+
+@include res.md{
+  width: 100%;
+}
+}
 
 // .auction-box {
 //   background: #fff;
@@ -250,7 +257,7 @@ td span.status {
  }
 
 
-.download-button{
+.download-button1{
   font-size: 16px; /* Ensure font size is consistent */
   padding: 10px 20px; /* Adds padding around the text */
   border-radius: 4px;
@@ -259,6 +266,11 @@ td span.status {
   background-color: transparent;
   color: #004f6e;
   transition: background-color 0.3s ease, color 0.3s ease;
+
+  @include res.md{
+  margin-top: 20px;
+  width: 200px;
+ }
 }
 
 .pagination-container {

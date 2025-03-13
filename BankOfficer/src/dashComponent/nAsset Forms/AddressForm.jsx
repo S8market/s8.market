@@ -83,20 +83,36 @@ const AddressDetailsForm = ({ nextStep, prevStep }) => {
         {/* Asset Longitude , Latitude */}
         <div className="form-row">
         <section className="formGroup">
-           <label>Longitude:</label>
+           <label>Latitude:</label>
            <div className="inputWrapper">
-            <input name="longitude" value={formData.longitude} 
-              onChange={(e) => setFormData({ ...formData, longitude: e.target.value })}
-            type="text" placeholder="Enter Asset longitude" />
+           <input
+  type="number"
+  step="any"
+  value={formData.address.latitude || ""}
+  onChange={(e) =>
+    setFormData({
+      ...formData,
+      address: { ...formData.address, latitude: parseFloat(e.target.value) || "" }
+    })
+  }
+  placeholder="Enter Asset Latitude"
+/>
            </div>
         </section>
 
         <section className="formGroup">
-           <label>Latitude:</label>
-           <div className="inputWrapper">
-            <input name="latitude" value={formData.latitude} 
-            onChange={(e) => setFormData({ ...formData, latitude: e.target.value })}
-            type="text" placeholder="Enter Asset longitude" />
+         <label>Longitude:</label>
+          <div className="inputWrapper">
+           <input
+            type="number"
+            step="any"
+            value={formData.address.longitude || ""}
+            onChange={(e) =>
+            setFormData({
+             ...formData,
+            address: { ...formData.address, longitude: parseFloat(e.target.value) || "" }
+            })}
+             placeholder="Enter Asset Longitude"/>
            </div>
         </section>
         </div>

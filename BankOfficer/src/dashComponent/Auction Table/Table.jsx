@@ -288,7 +288,7 @@ const handleDelete = async (propertyId) => {
         </select>
       </div>
       <div className="download" style={{ display: "flex", justifyContent: "flex-end" }}>
-        <button className="download-button" style={{ marginBottom: "25px" }} onClick={exportToExcel}>
+        <button className="download-button1" style={{ marginBottom: "25px" }} onClick={exportToExcel}>
           Download Excel
         </button>
       </div>
