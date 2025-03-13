@@ -6,6 +6,6 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: process.env.PORT || 4000,
-    allowedHosts: ['s8-client.onrender.com'],
+    allowedHosts: ['s8-client.onrender.com', 's8market.com', 'www.s8market.com'],
   }
 });
