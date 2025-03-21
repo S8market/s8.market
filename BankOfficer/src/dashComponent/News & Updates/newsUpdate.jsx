@@ -16,7 +16,7 @@ const News = () => {
         <button
           className="exploreNowButton"
           // onClick={() => (window.location.href = "https://example.com")}
-          onClick={() => window.location.href = 'https://s8test-client.onrender.com/'}
+          onClick={() => window.location.href = 'https://s8market.com'}
         >
          Home Page
         </button>

@@ -88,11 +88,11 @@ const AddressDetailsForm = ({ nextStep, prevStep }) => {
            <input
   type="number"
   step="any"
-  value={formData.address.latitude || ""}
+  value={formData.latitude || ""}
   onChange={(e) =>
     setFormData({
       ...formData,
-      address: { ...formData.address, latitude: parseFloat(e.target.value) || "" }
+      address: { ...formData, latitude: parseFloat(e.target.value) || "" }
     })
   }
   placeholder="Enter Asset Latitude"
@@ -106,11 +106,11 @@ const AddressDetailsForm = ({ nextStep, prevStep }) => {
            <input
             type="number"
             step="any"
-            value={formData.address.longitude || ""}
+            value={formData.longitude || ""}
             onChange={(e) =>
             setFormData({
              ...formData,
-            address: { ...formData.address, longitude: parseFloat(e.target.value) || "" }
+            address: { ...formData,longitude: parseFloat(e.target.value) || "" }
             })}
              placeholder="Enter Asset Longitude"/>
            </div>
