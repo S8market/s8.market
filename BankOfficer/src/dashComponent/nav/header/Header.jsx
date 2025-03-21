@@ -11,7 +11,7 @@ const Header = () => {
       <UserAvatar
        imageSrc="/user.png"
        name="Anima Agrawal"
-{/*        address="U.P, India" */}
+       address="U.P, India"
        />
       </div>
     </header>
