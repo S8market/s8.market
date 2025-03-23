@@ -22,6 +22,7 @@ export const UserAvatar = ({ imageSrc, name, address, size = 'small' }) => {
       
       // Clear local authentication state
       setIsAuthenticated(false);
+      window.location.href = import.meta.env.VITE_CLIENT_URL
       // setUserInfo({});
       // setAvatar(null);
     } catch (error) {
