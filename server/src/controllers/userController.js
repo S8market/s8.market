@@ -12,11 +12,14 @@ import bcrypt from "bcrypt";
 // User Registration
 export const userRegister = async (req, res) => {
   try {
-    const { name, email, phone, password, verificationMethod } = req.body; ////////////////////////////////
+    const { name, email, phone, password, verificationMethod } = req.body;
+    
+    // Validate all required details are provided
     if (!name || !email || !phone || !password || !verificationMethod) {
       return res.json({ success: false, message: "Missing Details" });
     }
 
+    // Validate email format
     if (!validator.isEmail(email)) {
       return res.json({
         success: false,
@@ -24,7 +27,7 @@ export const userRegister = async (req, res) => {
       });
     }
 
-    // validating the password format
+    // Validate password strength
     if (password.length < 8) {
       return res.json({
         success: false,
@@ -32,41 +35,41 @@ export const userRegister = async (req, res) => {
       });
     }
 
+    // Optional: Validate phone number format (Uncomment if needed)
     function validatePhoneNumber(phone) {
-      const phoneRegex = /^\+91\d{10}$/; /////////////////////////////////////
+      const phoneRegex = /^\+91\d{10}$/;
       return phoneRegex.test(phone);
     }
-
     // if (!validatePhoneNumber(phone)) {
     //   return res.json({ success: false, message: "Enter valid Phone number" });
     // }
 
+    // Check if a verified user with this email or phone already exists
     const existingUser = await User.findOne({
       $or: [
-        {
-          email,
-          verified: true,
-        },
-        {
-          phone,
-          verified: true,
-        },
+        { email, verified: true },
+        { phone, verified: true },
       ],
     });
-
     if (existingUser) {
       return res.json({ success: false, message: "User Already exist" });
     }
 
-    // Registration Attempts
+    // Calculate time threshold for one hour ago
+    const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+
+    // Query registration attempts within the last hour for the provided phone or email (unverified users)
     const registrationAttemptsByUser = await User.find({
       $or: [
         { phone, verified: false },
         { email, verified: false },
       ],
+      attemptedAt: { $gte: oneHourAgo }
     });
+    console.log("Recent registration attempts:", registrationAttemptsByUser);
 
-    if (registrationAttemptsByUser >= 3) {
+    // If more than or equal to 3 attempts have been made in the last hour, deny registration
+    if (registrationAttemptsByUser.length >= 3) {
       return res.json({
         success: false,
         message:
@@ -74,17 +77,21 @@ export const userRegister = async (req, res) => {
       });
     }
 
+    // Record the new user's attempt with a timestamp
     const userData = {
       name,
       email,
       phone,
       password,
+      attemptedAt: new Date(), // Timestamp for the current attempt
     };
 
+    // Create and save the new user
     const newUser = new User(userData);
     const verificationCode = await newUser.generateVerificationCode();
     const user = await newUser.save();
 
+    // Send verification code via the chosen verification method
     sendVerificationCode(
       verificationMethod,
       verificationCode,
@@ -98,6 +105,7 @@ export const userRegister = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
 
 async function sendVerificationCode(
   verificationMethod,

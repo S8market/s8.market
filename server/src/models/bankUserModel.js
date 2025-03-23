@@ -27,8 +27,6 @@ const bankUserSchema = new Schema(
     password: {
       type: String,
       required: true,
-      minLength: [8, "Password must have at least 8 characters."],
-      maxLength: [32, "Password cannot have more than 32 characters."],
       select: false,
     },
     employeeID: {
@@ -87,6 +85,10 @@ const bankUserSchema = new Schema(
         pincode: "",
       },
     },
+    attemptedAt: {
+      type: Date,
+      default: Date.now,
+    },
 
     addedProperties: [
       {
@@ -101,6 +103,13 @@ const bankUserSchema = new Schema(
     resetPasswordExpire: Date,
   },
   { timestamps: true }
+);
+
+
+// Create a TTL index that will remove documents where verified is false after 3600 seconds (1 hour)
+bankUserSchema.index(
+  { attemptedAt: 1 },
+  { expireAfterSeconds: 3600, partialFilterExpression: { verified: false } }
 );
 
 // Password Hashing

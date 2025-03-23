@@ -9,14 +9,26 @@ import cloudinary from "cloudinary";
 // bankUser Registration
 export const bankUserRegister = async (req, res) => {
   try {
-    const { firstName, email, phone, password, verificationMethod, bankName, lastName, address, city, state, pincode, bankbranch, employeeID, designation } =
-      req.body; ////////////////////////////////
-      console.log(bankName, lastName  )
-      if (!firstName || !email || !phone || !password || !verificationMethod || !lastName|| !address|| !city|| !state|| !pincode|| !bankbranch || !employeeID || !designation) {
-      console.log(firstName, email, phone, password, verificationMethod, bankName, lastName, address, city, state, pincode, bankbranch, employeeID, designation)
+    const { 
+      firstName, email, phone, password, verificationMethod, 
+      bankName, lastName, address, city, state, pincode, bankbranch, 
+      employeeID, designation 
+    } = req.body;
+    
+    // Log bankName and lastName for debugging if needed
+    console.log(bankName, lastName);
+
+    // Validate required details
+    if (
+      !firstName || !email || !phone || !password || !verificationMethod || 
+      !lastName || !address || !city || !state || !pincode || 
+      !bankbranch || !employeeID || !designation
+    ) {
+      console.log(firstName, email, phone, password, verificationMethod, bankName, lastName, address, city, state, pincode, bankbranch, employeeID, designation);
       return res.json({ success: false, message: "Missing Details" });
     }
 
+    // Validate email format
     if (!validator.isEmail(email)) {
       return res.json({
         success: false,
@@ -24,7 +36,7 @@ export const bankUserRegister = async (req, res) => {
       });
     }
 
-    // validating the password format
+    // Validate password strength
     if (password.length < 8) {
       return res.json({
         success: false,
@@ -32,25 +44,21 @@ export const bankUserRegister = async (req, res) => {
       });
     }
 
+    // Optional: Validate phone number format
     function validatePhoneNumber(phone) {
-      const phoneRegex = /^\+91\d{10}$/; /////////////////////////////////////
+      const phoneRegex = /^\+91\d{10}$/;
       return phoneRegex.test(phone);
     }
-
+    // Uncomment below if phone validation is required
     // if (!validatePhoneNumber(phone)) {
     //   return res.json({ success: false, message: "Enter valid Phone number" });
     // }
 
+    // Check if a verified bank user with this email or phone already exists
     const existingUser = await bankUser.findOne({
       $or: [
-        {
-          email,
-          verified: true,
-        },
-        {
-          phone,
-          verified: true,
-        },
+        { email, verified: true },
+        { phone, verified: true },
       ],
     });
 
@@ -58,41 +66,51 @@ export const bankUserRegister = async (req, res) => {
       return res.json({ success: false, message: "User Already exist" });
     }
 
-    // Registration Attempts
+    // Calculate time threshold for one hour ago
+    const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+
+    // Check registration attempts within the last hour for this email or phone (unverified users)
     const registrationAttemptsByUser = await bankUser.find({
       $or: [
         { phone, verified: false },
         { email, verified: false },
       ],
+      attemptedAt: { $gte: oneHourAgo }
     });
 
-    if (registrationAttemptsByUser >= 3) {
+    if (registrationAttemptsByUser.length >= 3) {
       return res.json({
         success: false,
-        message:
-          "You have exceeded the maximum number of attempts (3). Please try again after an hour.",
+        message: "You have exceeded the maximum number of attempts (3). Please try again after an hour.",
       });
     }
 
+    // Build user data and add the current timestamp for attemptedAt
     const userData = {
       firstName,
       email,
       phone,
       password,
       bankAddress: {
-        type: Object,
-          address,
-          city,
-          state,
-          pincode,
+        address,
+        city,
+        state,
+        pincode,
       },
-      bankName,lastName,  bankbranch, employeeID, designation
+      bankName,
+      lastName,
+      bankbranch,
+      employeeID,
+      designation,
+      attemptedAt: new Date(),
     };
 
+    // Create new bank user, generate verification code, and save user
     const newUser = new bankUser(userData);
     const verificationCode = await newUser.generateVerificationCode();
     const user = await newUser.save();
 
+    // Send verification code via the selected method
     sendVerificationCode(
       verificationMethod,
       verificationCode,
