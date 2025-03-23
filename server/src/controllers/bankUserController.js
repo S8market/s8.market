@@ -1024,3 +1024,44 @@ export const checkAuth = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 }
+
+export const changePassword = async (req, res) => {
+  try {
+    const { oldPassword, newPassword, confirmPassword } = req.body;
+    const userId = req.userId;
+    // Validate that new password and confirmation match
+    if (newPassword !== confirmPassword) {
+      return res.status(400).json({ error: "New password and confirmation do not match." });
+    }
+
+    // Validate new password length
+    if (newPassword.length < 8 || newPassword.length > 32) {
+      return res.status(400).json({ error: "Password must be between 8 and 32 characters." });
+    }
+
+    // Retrieve user with password field (not selected by default)
+    const user = await bankUser.findById(userId).select("+password");
+    if (!user) {
+      return res.status(404).json({ error: "User not found." });
+    }
+
+    // Check if the old password matches the current password
+    const isMatch = await bcrypt.compare(oldPassword, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ error: "Old password is incorrect." });
+    }
+    console.log(isMatch)
+
+    // Hash the new password and update the user
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(newPassword, salt);
+    console.log(user.password)
+    // Save the updated user document
+    await user.save();
+
+    res.json({ message: "Password updated successfully." });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error." });
+  }
+};

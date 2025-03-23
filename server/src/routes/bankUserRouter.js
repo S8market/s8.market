@@ -15,6 +15,7 @@ import {
   updateProfileImage,
   updateProperties,
   verifyOTP,
+  changePassword
 } from "../controllers/bankUserController.js";
 import bankUserAuth from "../middlewares/bankUser.js";
 import upload from "../middlewares/multer.js";  
@@ -25,6 +26,7 @@ bankUserRouter.post("/register", bankUserRegister);
 bankUserRouter.post("/otp-verification", verifyOTP);
 bankUserRouter.post("/login", login);
 bankUserRouter.get("/logout",bankUserAuth, logout);
+bankUserRouter.get("/change-password",bankUserAuth, changePassword);
 bankUserRouter.post("/add-property", bankUserAuth, upload.array('files'), addProperties)
 bankUserRouter.post("/update-property", bankUserAuth, upload.array('files'), updateProperties)
 bankUserRouter.post("/delete-property", bankUserAuth, deleteProperty)

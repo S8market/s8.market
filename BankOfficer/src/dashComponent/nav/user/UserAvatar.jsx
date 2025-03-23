@@ -24,6 +24,7 @@ export const UserAvatar = ({ imageSrc, name, address, size = 'small' }) => {
       setIsAuthenticated(false);
       // setUserInfo({});
       // setAvatar(null);
+      window.location.href = import.meta.env.VITE_CLIENT_URL;
     } catch (error) {
       console.error("Error logging out:", error);
     } finally {
