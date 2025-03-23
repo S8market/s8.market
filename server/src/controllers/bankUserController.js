@@ -301,7 +301,11 @@ export const login = async function (req, res) {
 // User Logout
 export const logout = (req, res) => {
   return res
-    .cookie("s8Token", "", { expires: new Date(Date.now()) })
+    .cookie("s8Token", "", { expires: new Date(Date.now()) ,
+      httpOnly: true,
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      secure: process.env.NODE_ENV === 'production'
+    })
     .json({
       success: true,
       message: "Logged out successfully.",

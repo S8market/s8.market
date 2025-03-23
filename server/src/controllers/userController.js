@@ -322,7 +322,10 @@ export const login = async function (req, res) {
 // User Logout
 export const logout = (req, res) => {
   res
-    .cookie("s8userToken", "", { expires: new Date(0), httpOnly: true })
+    .cookie("s8userToken", "", { expires: new Date(0), httpOnly: true, 
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    secure: process.env.NODE_ENV === 'production'
+     })
     .json({
       success: true,
       message: "Logged out successfully.",
