@@ -1,12 +1,6 @@
-import validator from "validator";
-import { sendEmail } from "../utils/sendEmail.js";
-import { sendToken } from "../utils/sendToken.js";
-import passport from "passport";
-import bankUser from "../models/bankUserModel.js";
-import propertyModel from "../models/PropertiesModel.js";
-import cloudinary from "cloudinary";
-
-// bankUser Registration
+// *******************************
+// BANK USER REGISTRATION FUNCTIONALITY
+// *******************************
 export const bankUserRegister = async (req, res) => {
   try {
     const { 
@@ -25,12 +19,12 @@ export const bankUserRegister = async (req, res) => {
       !bankbranch || !employeeID || !designation
     ) {
       console.log(firstName, email, phone, password, verificationMethod, bankName, lastName, address, city, state, pincode, bankbranch, employeeID, designation);
-      return res.json({ success: false, message: "Missing Details" });
+      return res.status(400).json({ success: false, message: "Missing Details" });
     }
 
     // Validate email format
     if (!validator.isEmail(email)) {
-      return res.json({
+      return res.status(400).json({
         success: false,
         message: "Please enter a valid email",
       });
@@ -38,7 +32,7 @@ export const bankUserRegister = async (req, res) => {
 
     // Validate password strength
     if (password.length < 8) {
-      return res.json({
+      return res.status(400).json({
         success: false,
         message: "Please enter a strong password",
       });
@@ -51,7 +45,7 @@ export const bankUserRegister = async (req, res) => {
     }
     // Uncomment below if phone validation is required
     // if (!validatePhoneNumber(phone)) {
-    //   return res.json({ success: false, message: "Enter valid Phone number" });
+    //   return res.status(400).json({ success: false, message: "Enter valid Phone number" });
     // }
 
     // Check if a verified bank user with this email or phone already exists
@@ -63,7 +57,7 @@ export const bankUserRegister = async (req, res) => {
     });
 
     if (existingUser) {
-      return res.json({ success: false, message: "User Already exist" });
+      return res.status(409).json({ success: false, message: "User Already exist" });
     }
 
     // Calculate time threshold for one hour ago
@@ -79,7 +73,7 @@ export const bankUserRegister = async (req, res) => {
     });
 
     if (registrationAttemptsByUser.length >= 3) {
-      return res.json({
+      return res.status(429).json({
         success: false,
         message: "You have exceeded the maximum number of attempts (3). Please try again after an hour.",
       });
@@ -121,7 +115,7 @@ export const bankUserRegister = async (req, res) => {
     );
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: error.message });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -175,7 +169,9 @@ async function sendVerificationCode(
   }
 }
 
-// Email Message Template
+// *******************************
+// EMAIL MESSAGE TEMPLATE FUNCTIONALITY
+// *******************************
 function generateEmailTemplate(verificationCode) {
   return `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
@@ -197,12 +193,14 @@ function generateEmailTemplate(verificationCode) {
   `;
 }
 
-// Verify OTP
+// *******************************
+// VERIFY OTP FUNCTIONALITY
+// *******************************
 export const verifyOTP = async function (req, res) {
   try {
     const { email, phone, otp } = req.body;
     if (!validator.isEmail(email)) {
-      return res.json({
+      return res.status(400).json({
         success: false,
         message: "Please enter a valid email",
       });
@@ -214,7 +212,7 @@ export const verifyOTP = async function (req, res) {
     }
 
     // if (!validatePhoneNumber(phone)) {
-    //   return res.json({ success: false, message: "Enter valid Phone number" });
+    //   return res.status(400).json({ success: false, message: "Enter valid Phone number" });
     // }
 
     const userAllEntries = await bankUser
@@ -233,7 +231,7 @@ export const verifyOTP = async function (req, res) {
       .sort({ createdAt: -1 });
 
     if (!userAllEntries) {
-      return res.json({ success: false, message: "User does not exist" });
+      return res.status(404).json({ success: false, message: "User does not exist" });
     }
 
     let user;
@@ -253,7 +251,7 @@ export const verifyOTP = async function (req, res) {
     }
 
     if (user.verificationCode !== Number(otp)) {
-      return res.json({ success: false, message: "Invalid OTP" });
+      return res.status(400).json({ success: false, message: "Invalid OTP" });
     }
 
     let currentTime = Date.now();
@@ -262,7 +260,7 @@ export const verifyOTP = async function (req, res) {
     ).getTime();
 
     if (currentTime > verificationCodeExpire) {
-      return res.json({ success: false, message: "OTP expired" });
+      return res.status(400).json({ success: false, message: "OTP expired" });
     }
 
     user.verified = true;
@@ -280,13 +278,15 @@ export const verifyOTP = async function (req, res) {
   }
 };
 
-// User Login
+// *******************************
+// USER LOGIN FUNCTIONALITY
+// *******************************
 export const login = async function (req, res) {
   try {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.json({
+      return res.status(400).json({
         success: false,
         message: "Email and Password are required",
       });
@@ -297,13 +297,13 @@ export const login = async function (req, res) {
       .select("+password");
 
     if (!user) {
-      return res.json({ success: false, message: "Invalid email or password" });
+      return res.status(401).json({ success: false, message: "Invalid email or password" });
     }
 
     const isPasswordCorrect = await user.isPasswordCorrect(password);
 
     if (!isPasswordCorrect) {
-      return res.json({ success: false, message: "Invalid email or password" });
+      return res.status(401).json({ success: false, message: "Invalid email or password" });
     }
 
     sendToken(user, "Logged in successfully", res);
@@ -316,7 +316,9 @@ export const login = async function (req, res) {
   }
 };
 
-// User Logout
+// *******************************
+// USER LOGOUT FUNCTIONALITY
+// *******************************
 export const logout = (req, res) => {
   return res
     .cookie("s8Token", "", { expires: new Date(Date.now()) ,
@@ -330,7 +332,9 @@ export const logout = (req, res) => {
     });
 };
 
-// OAuth Google
+// *******************************
+// OAUTH GOOGLE FUNCTIONALITY
+// *******************************
 export const googleAuth = passport.authenticate("google", {
   scope: ["profile", "email"],
 });
@@ -345,7 +349,9 @@ export const googleAuthCallback = (req, res) => {
   })(req, res);
 };
 
-// Add the Property
+// *******************************
+// ADD PROPERTY FUNCTIONALITY
+// *******************************
 export const addProperties = async function (req, res) {
   try {
     const userId = req.userId;
@@ -378,7 +384,7 @@ export const addProperties = async function (req, res) {
     const files  = req.files;
 
     if (!userId) {
-      return res.json({ success: false, message: "Unauthorized Access, Login Again" });
+      return res.status(401).json({ success: false, message: "Unauthorized Access, Login Again" });
     }
 
     if (
@@ -405,7 +411,7 @@ export const addProperties = async function (req, res) {
       !latitude ||
       !longitude
     ) {
-      return res.json({ success: false, message: "Provide all the fields" });
+      return res.status(400).json({ success: false, message: "Provide all the fields" });
     }
 
     if (!files || files.length === 0) {
@@ -491,7 +497,9 @@ export const addProperties = async function (req, res) {
   }
 };
 
-// Update the Properties
+// *******************************
+// UPDATE PROPERTY FUNCTIONALITY
+// *******************************
 export const updateProperties = async function (req, res) {
   try {
     console.log("reached")
@@ -527,7 +535,7 @@ export const updateProperties = async function (req, res) {
     // const  files  = req.files;
 
     if (!userId) {
-      return res.json({ success: false, message: "Unauthorized Access, Login Again" });
+      return res.status(401).json({ success: false, message: "Unauthorized Access, Login Again" });
     }
 
     if (
@@ -579,7 +587,7 @@ export const updateProperties = async function (req, res) {
           latitude,
           longitude,
       )
-      return res.json({ success: false, message: "Provide all the fields" });
+      return res.status(400).json({ success: false, message: "Provide all the fields" });
     }
 
     // if (!files || files.length === 0) {
@@ -735,44 +743,53 @@ export const deleteProperty = async function (req, res) {
   }
 };
 
-// To get the properties of their respective bank
+// *******************************
+// GET PROPERTIES BY BANK FUNCTIONALITY
+// *******************************
 export const getProperties = async (req, res) => {
   try {
     const userId = req.userId;
     const userBank = await bankUser.findById( userId ); 
     const bankName = userBank?.bankName
     const properties = await propertyModel.find({ bankName }); 
-    res.json({ success: true, properties });
+    res.status(200).json({ success: true, properties });
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: error.message });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
-// Get the property by ID
+// *******************************
+// GET PROPERTY BY ID FUNCTIONALITY
+// *******************************
 export const getPropertyById = async (req, res) => {
   try {
     const { id } = req.body;
     const property = await propertyModel.findById(id);
-    res.json({ success: true, property });
+    res.status(200).json({ success: true, property });
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: error.message });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
+// *******************************
+// GET PROFILE FUNCTIONALITY
+// *******************************
 export const getProfile = async (req, res) => {
   try {
     const userId = req.userId;
     const user = await bankUser.findById(userId).select("-_id -verificationCode -verificationCodeExpire -verified -createdAt -updatedAt -__v");
-    res.json({ success: true, user });
+    res.status(200).json({ success: true, user });
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: error.message });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
-// Update Profile
+// *******************************
+// UPDATE PROFILE FUNCTIONALITY
+// *******************************
 export const updateProfile = async (req, res) => {
   try {
     const userId = req.userId;
@@ -782,11 +799,11 @@ export const updateProfile = async (req, res) => {
     // const files = req.files;
 
     if (!user) {
-      return res.json({ success: false, message: "User not found" });
+      return res.status(404).json({ success: false, message: "User not found" });
     }
 
     if(!firstName || !lastName || !email || !phone || !bankBranch || !bankIFSC || !branchZone || !designation || !bankAddress) {
-      return res.json({ success: false, message: "Provide all the fields" });
+      return res.status(400).json({ success: false, message: "Provide all the fields" });
     }
 
     // if (!files || files.length === 0) {
@@ -834,13 +851,16 @@ export const updateProfile = async (req, res) => {
 
     user.set(userData); 
     await user.save();
-    res.json({ success: true, message: "Profile updated successfully" });
+    res.status(200).json({ success: true, message: "Profile updated successfully" });
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: error.message });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
+// *******************************
+// UPDATE PROFILE IMAGE FUNCTIONALITY
+// *******************************
 export const updateProfileImage = async (req, res) => {
   try {
     const file = req.file
@@ -881,98 +901,23 @@ export const updateProfileImage = async (req, res) => {
     user.bankProfileImage = imageData
     user.save()
 
-    res.json({success: true, message: "Avatar Updated"})
+    res.status(200).json({success: true, message: "Avatar Updated"})
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: error.message });
+    res.status(500).json({ success: false, message: error.message });
   }
 }
 
-// Search Property
-// export const searchProperty = async (req, res) => {
-//   try {
-//     const userId = "67b0df3d321e1f57fd794c1a"
-//     const { searchString } = req.body;
-    
-//     // Validate search string length
-//     if (!searchString || searchString.length < 3) {
-//       return res.json({ success: false, message: "Search String is short" });
-//     }
-
-//     // Step 1: Check if any document matches the search string for the given user
-//     const foundDocs = await propertyModel.find({
-//       userId,
-//       $or: [
-//         { title: { $regex: searchString, $options: "i" } },
-//         { category: { $regex: searchString, $options: "i" } },
-//         { bankName: { $regex: searchString, $options: "i" } },
-//         { address: { $regex: searchString, $options: "i" } },
-//         { description: { $regex: searchString, $options: "i" } },
-//         { nearbyPlaces: { $regex: searchString, $options: "i" } }
-//       ]
-//     });
-    
-//     if (foundDocs && foundDocs.length > 0) {
-//       // Step 2: If at least one matching document exists, retrieve all documents for that user
-//       const allDocs = await propertyModel.find({ userId });
-//       return res.json({ success: true, data: allDocs });
-//     } else {
-//       return res.json({ success: false, message: "No documents contain the search string." });
-//     }
-//   } catch (error) {
-//     return res.json({ success: false, message: error.message });
-//   }
-// };
-
-// export const searchProperty = async (req, res) => {
-//   try {
-//     // Get userId from authenticated user
-//     const userId = "67b0df3d321e1f57fd794c1a"
-//     const { searchString } = req.body;
-
-//     // Validate search string length
-//     if (!searchString || searchString.length < 3) {
-//       return res.json({ success: false, message: "Search string must be at least 3 characters." });
-//     }
-
-//     // Escape special regex characters to prevent injection
-//     const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-//     const escapedSearch = escapeRegex(searchString);
-//     // const foundProperties = await propertyModel.find()
-
-//     // Search across specified fields with regex
-//     const foundProperties = await propertyModel.find({
-//       userId,
-//       $or: [
-//         { title: { $regex: escapedSearch, $options: "i" } },
-//         { category: { $regex: escapedSearch, $options: "i" } },
-//         { bankName: { $regex: escapedSearch, $options: "i" } },
-//         { address: { $regex: escapedSearch, $options: "i" } },
-//         { description: { $regex: escapedSearch, $options: "i" } },
-//         { nearbyPlaces: { $regex: escapedSearch, $options: "i" } }
-//       ]
-//     });
-
-//     console.log(foundProperties)
-
-//     if (foundProperties.length > 0) {
-//       return res.json({ success: true, data: foundProperties });
-//     } else {
-//       return res.json({ success: false, message: "No properties found matching your search." });
-//     }
-//   } catch (error) {
-//     return res.json({ success: false, message: error.message });
-//   }
-// };
-
-
+// *******************************
+// SEARCH PROPERTY FUNCTIONALITY
+// *******************************
 export const searchProperty = async (req, res) => {
   try {
     const userId = req.userId; 
     const { searchString } = req.body;
 
     if (!searchString || searchString.length < 3) {
-      return res.json({ success: false, message: "Search string must be at least 3 characters." });
+      return res.status(400).json({ success: false, message: "Search string must be at least 3 characters." });
     }
 
     const user = await bankUser.findById(userId)
@@ -982,10 +927,10 @@ export const searchProperty = async (req, res) => {
       $text: { $search: searchString }
     })
     .then(results => {
-      return res.json({ success: true, data: results });
+      return res.status(200).json({ success: true, data: results });
     })
     .catch(err => {
-      return res.json({ success: false, message: "No properties found matching your search." });
+      return res.status(404).json({ success: false, message: "No properties found matching your search." });
     });
     
     
@@ -995,13 +940,13 @@ export const searchProperty = async (req, res) => {
     //   return res.json({ success: false, message: "No properties found matching your search." });
     // }
   } catch (error) {
-    return res.json({ success: false, message: error.message });
+    return res.status(500).json({ success: false, message: error.message });
   }
 };
 
-
-
-// Get Top auctioners
+// *******************************
+// TOP AUCTIONERS FUNCTIONALITY
+// *******************************
 export const topAuctioners = async (req, res) => {
   try {
     // const topAuctionUser = await bankUser.fin
@@ -1018,28 +963,30 @@ export const topAuctioners = async (req, res) => {
       const sortedArray = Object.entries(obj)
         .sort((a, b) => b[1] - a[1])
         .map((entry) => entry[0]);
-      res.json({ sortedArray });
+      res.status(200).json({ sortedArray });
     }
 
     topAuctionUser();
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: error.message });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
-// Check Auth
+// *******************************
+// CHECK AUTH FUNCTIONALITY
+// *******************************
 export const checkAuth = async (req, res) => {
   try {
     const userId = req.userId
     const user = await bankUser.findById(userId)
     if (!user){
-      return res.json({success: false, message: "Login first"})
+      return res.status(401).json({success: false, message: "Login first"})
     }
-    return res.json({success: true})
+    return res.status(200).json({success: true})
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: error.message });
+    res.status(500).json({ success: false, message: error.message });
   }
 }
 
@@ -1077,7 +1024,7 @@ export const changePassword = async (req, res) => {
     // Save the updated user document
     await user.save();
 
-    res.json({ message: "Password updated successfully." });
+    res.status(200).json({ message: "Password updated successfully." });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error." });
