@@ -1,12 +1,11 @@
-import passport from 'passport';
-import jwt from 'jsonwebtoken';
+// Required imports
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import validator from 'validator';
-import { User } from './models/User'; // Ensure this is the correct path for your User model
-import { propertyModel } from './models/Property'; // Ensure this is the correct path for your Property model
+import passport from 'passport';
+import { User } from '../models/User'; // Ensure you have your User model properly imported
+import { propertyModel } from '../models/Property'; // Ensure you have your Property model properly imported
 import cloudinary from 'cloudinary';
-import sendEmail from './utils/sendEmail'; // Ensure you have the correct sendEmail utility
-import { sendVerificationCode } from './utils/sendVerificationCode'; // Ensure you have the correct sendVerificationCode utility
 
 // *******************************
 // USER REGISTRATION FUNCTIONALITY
@@ -36,15 +35,6 @@ export const userRegister = async (req, res) => {
       });
     }
 
-    // Optional: Validate phone number format (Uncomment if needed)
-    function validatePhoneNumber(phone) {
-      const phoneRegex = /^\+91\d{10}$/;
-      return phoneRegex.test(phone);
-    }
-    // if (!validatePhoneNumber(phone)) {
-    //   return res.status(400).json({ success: false, message: "Enter valid Phone number" });
-    // }
-
     // Check if a verified user with this email or phone already exists
     const existingUser = await User.findOne({
       $or: [
@@ -53,7 +43,7 @@ export const userRegister = async (req, res) => {
       ],
     });
     if (existingUser) {
-      return res.status(409).json({ success: false, message: "User Already exist" });
+      return res.status(409).json({ success: false, message: "User Already exists" });
     }
 
     // Calculate time threshold for one hour ago
@@ -67,6 +57,7 @@ export const userRegister = async (req, res) => {
       ],
       attemptedAt: { $gte: oneHourAgo }
     });
+    console.log("Recent registration attempts:", registrationAttemptsByUser);
 
     // If more than or equal to 3 attempts have been made in the last hour, deny registration
     if (registrationAttemptsByUser.length >= 3) {
@@ -106,6 +97,7 @@ export const userRegister = async (req, res) => {
   }
 };
 
+// Helper function to send the verification code
 async function sendVerificationCode(
   verificationMethod,
   verificationCode,
@@ -175,7 +167,7 @@ export const verifyOTP = async function (req, res) {
     if (!userAllEntries || userAllEntries.length === 0) {
       return res.status(404).json({ success: false, message: "User does not exist" });
     }
-
+    
     let user;
 
     if (userAllEntries.length > 1) {
@@ -311,57 +303,90 @@ export const googleAuth = passport.authenticate("google", {
 });
 
 export const googleAuthCallback = (req, res) => {
-  passport.authenticate("google", { session: false }, (err, user) => {
+  passport.authenticate("google", (err, user) => {
     if (err || !user) {
-      console.error(err);
-      return res.redirect("/login?error=OAuth failed");
+      return res.status(400).json({
+        success: false,
+        message: "Authentication failed",
+      });
     }
 
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET_KEY, { expiresIn: "7d" });
-    
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: "7d" });
+
     // Set the token in an HTTP-only cookie
-    res.cookie("s8userToken", token, {
-      expires: new Date(
-        Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
-      ),
-      httpOnly: true,
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-      secure: process.env.NODE_ENV === 'production'
-    });
-    return res.redirect(process.env.CLIENT_LOCALHOST);
+    return res
+      .status(200)
+      .cookie("s8userToken", token, {
+        expires: new Date(
+          Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
+        ),
+        httpOnly: true,
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+        secure: process.env.NODE_ENV === 'production'
+      })
+      .json({
+        success: true,
+        message: "Logged in successfully with Google",
+      });
   })(req, res);
 };
 
 // *******************************
-// GET ALL PROPERTIES FUNCTIONALITY
+// ADD PROPERTY FUNCTIONALITY
 // *******************************
-export const getProperties = async (req, res) => {
+export const addProperty = async (req, res) => {
   try {
-    const properties = await propertyModel.find({});
-    return res.status(200).json({ success: true, properties });
+    const { title, description, price, location, images } = req.body;
+
+    if (!title || !description || !price || !location) {
+      return res.status(400).json({ success: false, message: "Missing property details" });
+    }
+
+    // Handle image upload to Cloudinary (example)
+    const uploadedImages = [];
+    if (images && images.length > 0) {
+      for (let img of images) {
+        const uploadResponse = await cloudinary.v2.uploader.upload(img);
+        uploadedImages.push(uploadResponse.secure_url);
+      }
+    }
+
+    // Create new property
+    const newProperty = new propertyModel({
+      title,
+      description,
+      price,
+      location,
+      images: uploadedImages,
+    });
+
+    await newProperty.save();
+
+    return res.status(200).json({ success: true, message: "Property added successfully" });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ success: false, message: error.message });
+    return res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
 
 // *******************************
-// ADD PROPERTY TO SAVED PROPERTIES FUNCTIONALITY
+// VIEW PROPERTY FUNCTIONALITY
 // *******************************
-export const addToSavedProperties = async (req, res) => {
+export const viewProperty = async (req, res) => {
   try {
-    const { userId, propertyId } = req.body;
-    const propertyExist = await propertyModel.findById(propertyId);
-    if (!propertyExist) {
-      return res.status(404).json({ success: false, message: "Property not Found" });
+    const { propertyId } = req.params;
+    const property = await propertyModel.findById(propertyId);
+
+    if (!property) {
+      return res.status(404).json({ success: false, message: "Property not found" });
     }
-    // Assuming savedProperties is a field on the User model
-    const user = await User.findById(userId);
-    user.savedProperties.push(propertyId);
-    await user.save();
-    return res.status(200).json({ success: true, message: "Property added to saved" });
+
+    return res.status(200).json({
+      success: true,
+      property,
+    });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ success: false, message: "Error adding property to saved" });
+    return res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
