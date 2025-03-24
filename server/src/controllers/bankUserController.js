@@ -1,6 +1,9 @@
 // *******************************
 // BANK USER REGISTRATION FUNCTIONALITY
 // *******************************
+
+import passport from "passport";
+
 export const bankUserRegister = async (req, res) => {
   try {
     const { 
