@@ -125,7 +125,7 @@ async function sendVerificationCode(
 
       return res.status(200).json({
         success: true,
-        message: Verification email successfully sent to ${name},
+        message: `Verification email successfully sent to ${name}`,
       });
     } else if (verificationMethod === "phone") {
       const verificationCodeWithSpace = verificationCode
