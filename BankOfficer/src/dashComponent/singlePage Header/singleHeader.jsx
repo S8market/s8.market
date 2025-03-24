@@ -10,7 +10,7 @@ const SingleHeader = ({ pageName, title }) => {
           <span className="separator">&gt; </span>
           <span className="title">{title}</span>
         </div>
-{/*         <div className="sub-title">Showing {title}</div> */}
+        {/* <div className="sub-title">Showing {title}</div> */}
       </div>
     </div>
   );
