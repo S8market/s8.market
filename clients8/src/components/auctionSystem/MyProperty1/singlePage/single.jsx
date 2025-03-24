@@ -12,7 +12,6 @@ const Single = () => {
   const { id } = useParams(); // Get ID from the URL
   const { serverUrl, formData, setFormData, editProperty, setEditProperty, setUploadedFiles, propertyId, setPropertyId ,userDetails, avatar } = useContext(AppContext);
   const [property, setProperty] = useState(null);
-  console.log(serverUrl)
   const navigate = useNavigate();
 
   useEffect(() => {

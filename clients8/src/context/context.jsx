@@ -57,7 +57,7 @@ const AppContextProvider = (props) => {
   };
   useEffect(() => {
     getProfile();
-  }, []);
+  }, [isAuthenticated]);
 
   const [avatar, setAvatar] = useState(false);
 

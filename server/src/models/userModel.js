@@ -18,15 +18,12 @@ const userSchema = new Schema(
     email: {
       type: String,
       required: true,
-      unique: true,
       lowercase: true,
       trim: true,
     },
     password: {
       type: String,
       // required: true,
-      minLength: [8, "Password must have at least 8 characters."],
-      maxLength: [32, "Password cannot have more than 32 characters."],
       select: false,
     },
     profileImage: {
@@ -53,6 +50,10 @@ const userSchema = new Schema(
       type: Date,
       default: null, ///////////////////////////////////////
     },
+    attemptedAt: {
+      type: Date,
+      default: Date.now,
+    },
     gender: {
       type: String,
       // required: true,
@@ -72,6 +73,12 @@ const userSchema = new Schema(
     resetPasswordExpire: Date,
   },
   { timestamps: true }
+);
+
+// Create a TTL index that will remove documents where verified is false after 3600 seconds (1 hour)
+userSchema.index(
+  { attemptedAt: 1 },
+  { expireAfterSeconds: 3600, partialFilterExpression: { verified: false } }
 );
 
 // Password Hashing

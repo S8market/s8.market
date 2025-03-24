@@ -17,6 +17,7 @@ import {
   checkAuth,
   getGuestProperties,
   searchProperty,
+  changePassword
 } from "../controllers/userController.js";
 import userAuth from "../middlewares/authUser.js";
 import upload from "../middlewares/multer.js";  
@@ -28,6 +29,7 @@ userRouter.post("/register", userRegister);
 userRouter.post("/otp-verification", verifyOTP);
 userRouter.post("/login", login);
 userRouter.get("/logout", userAuth, logout);
+userRouter.get("/change-password", userAuth, changePassword);
 
 userRouter.get("/auth/google", googleAuth);
 userRouter.get("/auth/google/callback", googleAuthCallback);
