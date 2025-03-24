@@ -1,5 +1,5 @@
 // Required imports
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import validator from 'validator';
 import passport from 'passport';
