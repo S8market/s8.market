@@ -1,3 +1,4 @@
+import passport from 'passport';
 // *******************************
 // USER REGISTRATION FUNCTIONALITY
 // *******************************
