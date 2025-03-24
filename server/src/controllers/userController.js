@@ -1,7 +1,17 @@
+// Required imports
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import validator from 'validator';
 import passport from 'passport';
+import User from "../models/userModel.js"; // Ensure you have your User model properly imported
+import propertyModel from "../models/PropertiesModel.js"; // Ensure you have your Property model properly imported
+import cloudinary from 'cloudinary';
+
 // *******************************
 // USER REGISTRATION FUNCTIONALITY
 // *******************************
+import passport from "passport";
+
 export const userRegister = async (req, res) => {
   try {
     const { name, email, phone, password, verificationMethod } = req.body;
@@ -117,7 +127,7 @@ async function sendVerificationCode(
 
       return res.status(200).json({
         success: true,
-        message: `Verification email successfully sent to ${name}`,
+        message: Verification email successfully sent to ${name},
       });
     } else if (verificationMethod === "phone") {
       const verificationCodeWithSpace = verificationCode
@@ -126,13 +136,13 @@ async function sendVerificationCode(
         .join(" ");
       // Uncomment and implement your SMS sending logic below if needed:
       // await client.calls.create({
-      //   twiml: `<Response><Say>Your verification code is ${verificationCodeWithSpace}. Your verification code is ${verificationCodeWithSpace}.</Say></Response>`,
+      //   twiml: <Response><Say>Your verification code is ${verificationCodeWithSpace}. Your verification code is ${verificationCodeWithSpace}.</Say></Response>,
       //   from: process.env.TWILIO_PHONE_NUMBER,
       //   to: phone,
       // });
       // return res.status(200).json({
       //   success: true,
-      //   message: `OTP sent.`,
+      //   message: OTP sent.,
       // });
       return res.status(501).json({
         success: false,
@@ -438,7 +448,7 @@ export const getPropertyById = async (req, res) => {
 export const getProfile = async (req, res) => {
   try {
     const userId = req.userId;
-    const user = await User.findById(userId).select("-_id -verificationCode -verificationCodeExpire -verified -createdAt -updatedAt -__v");
+    const user = await User.findById(userId).select("-id -verificationCode -verificationCodeExpire -verified -createdAt -updatedAt -_v");
     return res.status(200).json({ success: true, user });
   } catch (error) {
     console.error(error);
