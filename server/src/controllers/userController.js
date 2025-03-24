@@ -10,10 +10,6 @@ import cloudinary from 'cloudinary';
 // *******************************
 // USER REGISTRATION FUNCTIONALITY
 // *******************************
-
-import passport from "passport";
-
-
 export const userRegister = async (req, res) => {
   try {
     const { name, email, phone, password, verificationMethod } = req.body;
