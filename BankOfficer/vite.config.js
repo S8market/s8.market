@@ -5,7 +5,6 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: '0.0.0.0',
-    port: process.env.PORT || 5173,
-    allowedHosts: ['s8-client.onrender.com', 's8market.com', 'www.s8market.com', 'https://s8-bank-officer.onrender.com', 'https://s8test.onrender.com'],
+    port: process.env.PORT || 4000,
   }
 });
