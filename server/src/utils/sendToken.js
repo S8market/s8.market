@@ -1,4 +1,4 @@
-  export const sendToken = (user, message, res) => {
+const sendToken = (user, message, res) => {
     const token = user.generateToken();
     res
       .cookie("s8Token", token, {
