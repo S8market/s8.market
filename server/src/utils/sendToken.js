@@ -16,3 +16,5 @@
         user,
       });
   };
+
+export default sendToken;
