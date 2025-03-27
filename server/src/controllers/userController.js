@@ -3,7 +3,6 @@
 import validator from "validator";
 import User from "../models/userModel.js";
 import { sendEmail } from "../utils/sendEmail.js";
-import { sendToken } from "../utils/sendToken.js";
 import passport from "passport";
 import propertyModel from "../models/PropertiesModel.js";
 import jwt from "jsonwebtoken"

@@ -4,7 +4,7 @@
 
 import validator from "validator";
 import { sendEmail } from "../utils/sendEmail.js";
-import { sendToken } from "../utils/sendToken.js";
+import  sendToken  from "../utils/sendToken.js";
 import passport from "passport";
 import bankUser from "../models/bankUserModel.js";
 import propertyModel from "../models/PropertiesModel.js";
