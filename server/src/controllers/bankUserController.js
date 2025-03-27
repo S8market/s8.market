@@ -306,7 +306,7 @@ export const login = async function (req, res) {
     //   .findOne({ email, verified: true })
     //   .select("+password");
 
-    const user = await BankUserModel.findOne({ email, verified: true }).select("+password");
+    const user = await bankUser.findOne({ email, verified: true }).select("+password");
 
     if (!user) {
       return res.status(401).json({ success: false, message: "Invalid email or password" });
