@@ -1,18 +1,15 @@
 
-// *******************************
-// USER REGISTRATION FUNCTIONALITY
-// *******************************
-// import passport from "passport";
-// import propertyModel from '../models/PropertiesModel.js'; // Add .js if needed
-
 // Required imports
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import validator from 'validator';
-import passport from 'passport';
-import User from "../models/userModel.js"; // Ensure you have your User model properly imported
-import propertyModel from "../models/PropertiesModel.js"; // Ensure you have your Property model properly imported
-import cloudinary from 'cloudinary';
+import validator from "validator";
+import User from "../models/userModel.js";
+import { sendEmail } from "../utils/sendEmail.js";
+import { sendToken } from "../utils/sendToken.js";
+import passport from "passport";
+import propertyModel from "../models/PropertiesModel.js";
+import jwt from "jsonwebtoken"
+import cloudinary from "cloudinary";
+import bcrypt from "bcrypt";
+
 
 // *******************************
 // USER REGISTRATION FUNCTIONALITY

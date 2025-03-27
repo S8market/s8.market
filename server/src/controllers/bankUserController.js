@@ -2,9 +2,13 @@
 // BANK USER REGISTRATION FUNCTIONALITY
 // *******************************
 
-import BankUserModel from "../models/bankUserModel.js"; // Adjust the path if necessary
+import validator from "validator";
+import { sendEmail } from "../utils/sendEmail.js";
+import { sendToken } from "../utils/sendToken.js";
 import passport from "passport";
-import sendToken from "../utils/sendToken.js"; // Adjust path if needed
+import bankUser from "../models/bankUserModel.js";
+import propertyModel from "../models/PropertiesModel.js";
+import cloudinary from "cloudinary";
 
 
 export const bankUserRegister = async (req, res) => {
