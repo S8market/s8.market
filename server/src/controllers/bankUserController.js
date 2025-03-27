@@ -1,7 +1,10 @@
 // *******************************
 // BANK USER REGISTRATION FUNCTIONALITY
 // *******************************
+
+import BankUserModel from "../models/bankUserModel.js"; // Adjust the path if necessary
 import passport from "passport";
+import sendToken from "../utils/sendToken.js"; // Adjust path if needed
 
 
 export const bankUserRegister = async (req, res) => {
@@ -295,8 +298,11 @@ export const login = async function (req, res) {
       });
     }
 
-    // const user = await BankUserModel.findOne({ email, verified: true }).select("+password");
+    // const user = await bankUser
+    //   .findOne({ email, verified: true })
+    //   .select("+password");
 
+    const user = await BankUserModel.findOne({ email, verified: true }).select("+password");
 
     if (!user) {
       return res.status(401).json({ success: false, message: "Invalid email or password" });
