@@ -1,8 +1,8 @@
 // *******************************
 // BANK USER REGISTRATION FUNCTIONALITY
 // *******************************
-
 import passport from "passport";
+
 
 export const bankUserRegister = async (req, res) => {
   try {
@@ -295,9 +295,8 @@ export const login = async function (req, res) {
       });
     }
 
-    const user = await bankUser
-      .findOne({ email, verified: true })
-      .select("+password");
+    // const user = await BankUserModel.findOne({ email, verified: true }).select("+password");
+
 
     if (!user) {
       return res.status(401).json({ success: false, message: "Invalid email or password" });
