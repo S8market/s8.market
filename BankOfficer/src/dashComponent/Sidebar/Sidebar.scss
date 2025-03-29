@@ -1,4 +1,4 @@
-@import "../../responsive.scss";
+@use "../../responsive.scss" as res;
 
 .sidebar {
   font-family: "Poppins", sans-serif;
@@ -13,12 +13,12 @@
   z-index: 1000;
 
   // @media (max-width: 1024px) {
-  @include lg {
+  @include res.lg {
     min-width: 200px; // Reduce sidebar width
   }
 
   // @media (max-width: 768px) {
-  @include md {
+  @include res.md {
     max-width: 80px;
     min-width: 40px; // Compact width
     padding: 10px; 
@@ -36,7 +36,7 @@
 
 
 // @media (max-width: 480px) {
-@include sm {
+@include res.sm {
   transform: translateX(-100%); // Hide sidebar on mobile
   min-width: 200px;
   // min-height: 100hv;
@@ -67,7 +67,7 @@
   margin-bottom: 10px;
   min-height: 68px;
 
-  @include sm {
+  @include res.sm {
    min-height: 78px; // Reduce gap for mobile view
   }
 }
@@ -89,7 +89,7 @@
   position: relative;
   margin-top: -20px;
 
-@include sm {
+@include res.sm {
   width: 55px;
   height: 55px;
 }
@@ -100,7 +100,7 @@
   font-size: 24px;
   font-weight: bold;
 
-  @include sm {
+  @include res.sm {
     font-size: 18px;
 }
 }
@@ -116,7 +116,7 @@
 //   margin-top: -40px;
 // margin-left: 14px;
 //   // @media (max-width: 480px) {
-//   @include sm {
+//   @include res.sm {
 //     display: block; /* Show only in mobile view */
 //   }
 // }
@@ -210,7 +210,7 @@
   z-index: 1000;
 
   // @media (max-width: 480px) {
-  // @include sm {
+  // @include res.sm {
   //   display: block;
   // }
 }

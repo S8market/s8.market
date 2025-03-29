@@ -1,4 +1,4 @@
-@import "../../../responsive.scss";
+@use "../../responsive.scss" as res;
 
 .headerContainer {
   font-family: "Poppins", sans-serif;
@@ -14,7 +14,7 @@
   width: 100%;
   // border-bottom: 2px solid gray; /* Adjust color and thickness */
 
-  @include md {
+  @include res.md {
     // gap: 20px;
     width: 100%;
   }
@@ -42,7 +42,7 @@
   margin-left: 10px;
 
 
-  @include md {
+  @include res.md {
    gap:45px;
    width: 100%;
   }

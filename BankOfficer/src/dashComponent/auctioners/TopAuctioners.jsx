@@ -1,3 +1,5 @@
+//not in use (idea drop)
+
 import "./topAuctioners.scss";
 
 const auctionersData = [

@@ -1,3 +1,5 @@
+//not in use
+
 import { Marker, InfoWindow } from "@react-google-maps/api";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
