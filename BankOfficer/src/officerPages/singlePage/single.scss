@@ -1,0 +1,312 @@
+.singlePage {
+  font-family: "Poppins", sans-serif;
+
+  display: flex;
+  min-height: 100vh;
+
+  .sideContainerS {
+    flex: 1;
+    min-width: 245px;
+    // background: #f8f9fa; // Light background for distinction
+  }
+
+  .mainSContainer {
+    border: 1px solid gray; // Add border width, style, and color
+    border-radius: 20px;
+    margin: 20px;
+    padding: 10px; // Optional: Add padding for better spacing
+  }
+  
+  .singlePageContainer {
+    flex: 8;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mainSinglePage {
+    display: flex;
+    gap: 20px; // Adds spacing between left and right sections
+    width: 100%;
+    padding: 20px;
+  }
+
+  .leftSide {
+    flex: 4;
+      }
+
+    
+    .details {
+      .info {
+  width: 100%;
+  margin-top: 15px;
+
+  .info-column {
+    display: flex;
+    flex-direction: column; // Stacks all items vertically
+    gap: 15px; // Adds spacing between items
+  }
+
+  h1 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    .info-icon {
+      width: 20px;  
+      height: 20px;
+    }
+
+    .info-label {
+      font-weight: bold;
+      color: #34495e;
+      min-width: 100px;
+    }
+
+    .info-value {
+      color: gray;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .info-link {
+      color: #0466c8;
+      text-decoration: none;
+      font-weight: bold;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .description {
+    align-items: flex-start; // Ensures the icon stays on top-left
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+
+    // p {
+    //   margin: 0;
+    //   color: #2d6a4f;
+    //   line-height: 1.4;
+    // }
+  }
+ }
+}
+
+
+  .rightSide {
+    width: 100%;
+    border-left: 2.5px solid #bbb; /* Add right border */
+    min-height: 100px; /* Set a minimum height */
+    height: 1200px; /* Keep it flexible and adjustable */
+    padding-left: 20px; /* Add spacing for better visibility */
+
+
+    flex: 3;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+
+
+  .auctionDetails {
+    width: 100%;
+    margin-top: 15px;
+
+    .auction-column {
+      display: flex;
+      flex-direction: column; // Stacks all auction details vertically
+      gap: 10px; // Adds spacing between items
+    }
+  
+    .auctionItem {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+  
+      .label {
+        font-weight: bold;
+        color: #34495e;
+        min-width: 120px; // Ensures proper alignment
+      }
+  
+      .value {
+        color: gray;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .value.highlight {
+        background-color: rgb(233, 233, 166); /* Highlight color */
+        padding: 2px 5px;
+        border-radius: 4px;
+      }
+    }
+  }
+
+    h3 {
+      font-size: 20px;
+      color: #34495e;
+      font-weight: bold;
+    }
+  }
+}
+
+ /* Action Buttons */
+ .actionButtons {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+
+  button {
+    display: flex;
+    align-items: center;
+    gap: 8px; // Spacing between icon and text
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    background: transparent; // No background by default
+  }
+
+  .button-icon {
+    width: 16px; // Adjust icon size
+    height: 16px;
+  }
+
+  .edit,.delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90px; // Adjust as needed
+    height: 100%; // Adjust to match button size
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid #004f6e;
+    cursor: pointer;
+    background-color: transparent;
+    color: #004f6e;
+    transition: background-color 0.3s ease, color 0.3s ease, filter 0.3s ease;
+    
+    img {
+      width: 16px;
+      height: 16px;
+      transition: filter 0.3s ease;
+    }
+  
+    &:hover {
+      background-color: #004f6e;
+      color: white;
+  
+      img {
+        filter: brightness(0) invert(1); // Turns icon white
+      }
+    }
+  }
+
+  .done {
+    background-color: #004663;
+    color: white;
+    border: none;
+
+    &:hover {
+      background-color: #0353a4;
+    }
+  }
+}
+
+
+//bank-officer-card
+.bank-officer-card {
+  width: 635px;
+  background: #004663;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
+  font-family: "Arial", sans-serif;
+  color: #7d8597;
+
+  /* Top Section - Image + Name */
+  .top-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+
+  .profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #d8d8d8;
+    justify-content: center;
+    // align-items: center;
+    overflow: hidden;
+    border: 1px solid white; // Optional: Add a border to make it stand out
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      overflow: hidden;
+      background-color: #fff; 
+    }
+  }
+
+  .officer-info {
+    h2 {
+      font-size: 18px;
+      color: white;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .designation {
+      font-size: 16px;
+      color: white;
+    }
+  }
+
+  /* Bank Details */
+  .bank-details {
+    width: 100%;
+  }
+  
+  .bank-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 10px 25px; /* Row gap and column gap */
+    max-width: 600px; /* Adjust width as needed */
+  }
+  
+  .row {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .label {
+    font-weight: 500;
+    color: black;
+    min-width: 120px;
+  }
+  
+  .value {
+    font-size: 16px;
+    color: white;
+    font-weight: 400;
+    word-break: break-word;
+  }
+  
+}

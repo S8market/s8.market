@@ -1,0 +1,164 @@
+.slider {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+
+  .fullSlider {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+
+    .arrow {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+
+      img {
+        width: 50px;
+        opacity: 0.8;
+
+        &:hover {
+          opacity: 1;
+          transform: scale(0.8);
+        }
+
+        &.right {
+          transform: rotate(180deg);
+        }
+      }
+    }
+
+    .mediaContainer {
+      flex: 10;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%; /* Ensure the height is 100% to align with the screen */
+     
+      img,
+      video {
+        width: 100%;
+  height: auto; /* Prevent video from distorting */
+  object-fit: contain;
+      }
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 36px;
+      cursor: pointer;
+      transition: color 0.2s ease-in-out;
+
+      &:hover {
+        color: red;
+      }
+    }
+  }
+
+  .bigMedia {
+    width: 90%;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+
+    img,
+    video {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+
+      &:hover {
+        transform: scale(1.05);
+        opacity: 0.8;
+      }
+    }
+  }
+
+  /* Scrollable Thumbnails (Always Visible Scrollbar) */
+  .smallMediaContainer {
+    width: 85%;
+    overflow-x: auto;
+    white-space: nowrap;
+    display: flex;
+    padding-bottom: 10px;
+    scrollbar-width: thin; /* Show scrollbar */
+    scrollbar-color: #4c6f7b #f5f5f5;
+  }
+
+  .smallMediaContainer::-webkit-scrollbar {
+    height: 4px; /* Always visible */
+  }
+
+  .smallMediaContainer::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+  }
+
+  .smallMediaContainer::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+  }
+
+  .smallMedia {
+    display: flex;
+    gap: 10px;
+    width: 600px;
+  }
+
+  .thumbnail {
+    position: relative;
+    flex: 0 0 calc(100% / 3.5); /* Adjust to show 4.5 items */
+    max-width: calc(100% / 3.5); /* Limit to 4.5 thumbnails */
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+
+    img,
+    video {
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      position: relative;  /* Ensure the video stays within bounds */
+    }
+
+    /* Play icon overlay */
+    .videoWrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .videoWrapper .playOverlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40px; /* Adjust size of the play icon */
+      height: 40px;
+      z-index: 10;
+      background: url('/path/to/videoThmbnail.svg') no-repeat center center;
+      background-size: contain;
+      display: block;
+    }
+    
+    &:hover {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }  
+  }
+}

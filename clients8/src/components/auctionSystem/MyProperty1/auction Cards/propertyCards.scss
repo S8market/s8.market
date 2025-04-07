@@ -1,0 +1,196 @@
+.propertyCard {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensures content and button are spaced */
+  height: 100%; /* Ensures card fills its height */
+  position: relative; /* Allows absolute positioning inside */
+  font-family: "Poppins", sans-serif;
+  border-radius: 20px;
+  min-width: 260px;
+  width: 360px;
+  height: 520px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.propertyCard:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
+// .propertyCard:focus-within {
+//   outline: 2px solid #0066cc;
+//   outline-offset: 2px;
+// }
+
+.imageContainer {
+  background: #dedede;
+  overflow: hidden;
+  height: 300px;
+}
+
+.propertyImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center; 
+  transition: transform 0.3s ease;
+}
+
+// .propertyImage:hover {
+//   transform: scale(1.05);
+// }
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensures content is evenly spaced */
+  height: 100%; /* Makes the container take full height */
+  padding: 23px 21px 20px; /* Add bottom padding for spacing */
+}
+
+.propertyTitle {
+  color: #4b4b4b;
+  font-size: 16px;
+  font-weight: bolder;
+  margin-top: -5px;
+}
+
+.propertyDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Adds space between each row */
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.propertyDetail {
+  display: grid;
+  grid-template-columns: auto 1fr; /* Ensures proper alignment */
+  gap: 4px; /* Space between label and value */
+  align-items: start;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  min-width: 120px; /* Ensures consistent label width */
+  text-align: left;
+}
+
+.value {
+  font-size: 14px;
+  font-weight: 300;
+  color: #787486;
+  // white-space: pre-wrap; /* Ensures long text wraps properly */
+  word-break: break-word; /* Prevents overflow */
+}
+
+/* Special styling for Address field */
+.addressValue {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limit to 2 lines */
+  line-clamp: 2; /* Standard property for compatibility */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  white-space: normal; /* Ensures proper wrapping */
+}
+
+/* Align Bank, Area, and Date just like Address, Price, Category */
+.bankInfo,
+.areaInfo,
+.dateInfo {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px 2px;
+  align-items: start;
+  margin-top: 10px;
+}
+
+.bankLabel,
+.areaLabel,
+.dateLabel {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  min-width: 120px; /* Ensures alignment */
+  text-align: left;
+}
+
+.bankValue,
+.areaValue,
+.dateValue {
+  font-size: 14px;
+  font-weight: 300;
+  color: #787486;
+  white-space: pre-line;
+}
+
+.viewButton {
+  align-self: flex-start; /* Aligns the button to the left */
+  margin-top: 10px; /* Pushes the button to the bottom */
+  padding: 10px 16px;
+  background-color:  #00334a;
+  color: #fff;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  max-width: 120px;
+  text-align: center;
+  display: inline-block;
+
+  &:hover {
+    background-color: #004f6e;
+  }
+}
+
+
+// .viewButton {
+//   // position: absolute;
+//   border-radius: 12px;
+//   background: #004663;
+//   color: #fff;
+//   font-size: 12px;
+//   font-weight: 400;
+//   padding: 8px 16px;
+//   border: none;
+//   margin-top: 10px;
+//   margin-left: -5px;
+//   cursor: pointer;
+//   transition: background-color 0.2s ease;
+// }
+
+// .viewButton:hover {
+//   background: #003349;
+// }
+
+// .viewButton:focus {
+//   outline: 2px solid #0066cc;
+//   outline-offset: 2px;
+// }
+
+// .viewButton:active {
+//   transform: translateY(1px);
+// }
+
+
+
+@media (max-width: 991px) {
+  .contentContainer {
+    padding: 23px 20px 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .propertyCard,
+  .propertyImage,
+  .viewButton {
+    transition: none;
+  }
+}

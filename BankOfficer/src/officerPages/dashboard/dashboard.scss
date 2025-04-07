@@ -1,0 +1,41 @@
+@use "../../responsive.scss" as res;
+
+.dashboard {
+font-family: "Poppins", sans-serif;
+display: flex;
+}
+
+.sideContainerdash {
+    flex: 1; // Sidebar takes 1 part of the total flex space
+    min-width: 245px;
+    transition: transform 0.3s ease-in-out;
+
+    @include res.md {
+      min-width: 80px;
+    }
+  }
+
+  .dashContainer {
+    flex: 8; // Main content takes remaining space
+    display: flex;
+    flex-direction: column;
+  
+   @include res.md {
+    display: flex;
+    width: 70%;
+    margin-top: -9px;
+   } 
+  }
+
+  //{Top header}
+  .mainDashboard {
+    margin: 10px;  
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+  
+  @include res.md {
+    display: flex;
+    width: 100%;
+  }
+  }

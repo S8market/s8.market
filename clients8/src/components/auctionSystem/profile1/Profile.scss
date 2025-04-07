@@ -1,0 +1,325 @@
+.profile {
+    display: flex;
+    height: 100vh;
+    background-color: #f9f9f9;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+      font-style: normal;
+    
+  
+    .sideContainer2 {
+      flex: 1;
+      min-width: 250px;
+    }
+  
+    .mainContent {
+      flex: 8;
+      display: flex;
+      flex-direction: column;
+    
+      .profile-container {
+        display: flex;
+        align-items: center; /* Ensure vertical alignment */
+        gap: 20px;
+        padding: 20px;
+        border-radius: 10px;
+        background: white;
+        // border: 1px solid #ddd;
+        margin-top: 20px;
+      }
+  
+      /* Avatar Section */
+      .avatar-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        width: 250px;
+        height: 300px;
+        text-align: center;
+      }
+  
+      .avatar {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        border:2px solid #004663;
+        object-fit: cover;
+      }
+  
+      .upload-btn {
+        background-color: #004663;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        font-size: 14px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 25px;
+        width: 100%;
+      }
+  
+      .upload-btn:hover {
+        background-color: #00324a;
+      }
+  
+      /* Details Section */
+      .details-section {
+        flex: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Two equal columns */
+        gap: 10px;
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        width: 100%;
+        height: 300px;
+        min-height: 260px; /* Ensures minimum height */
+        max-height: 300px; /* Prevents height increase */
+        overflow-y: auto; /* Allows scrolling within the section */
+      }
+  
+      .info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        overflow: hidden;
+        white-space: nowrap; /* Prevents content from wrapping */
+        text-overflow: ellipsis; /* Adds "..." if content overflows */
+      margin-left: 10px;
+      }
+  
+      .info2 {
+        // flex: 1;
+        font-size: 16px;
+        // color: #333;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        overflow: hidden;
+        overflow-wrap: break-word; // Ensures text wraps correctly
+        white-space: normal; // Allows text to break into multiple lines
+        word-break: break-word; // Ensures words break properly if too long
+        max-width: 100%; // Ensures it doesn't exceed container width
+        line-height: 1.5; // Improves readability
+        margin-left: -20px;
+      }
+
+      .info h4 , .info2 h4 {
+        font-size: 18px;
+        color: gray;
+        margin-bottom: 10px;
+        font-weight: 600;
+      }
+  
+      .info p {
+        margin: 0;
+        font-size: 16px;
+        color: #333;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 100%;
+      }
+  
+      .info strong {
+        font-weight: 600;
+      }
+
+
+       /* User Settings Form */
+       .form-container {
+        flex: 1;
+        width:97%;
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        background: white;
+        // margin:30px;
+        margin-left: 20px;
+        margin-right: 40px;
+        margin-bottom: 20px;
+    }
+
+    .form-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #555;
+        margin-bottom: 15px;
+        text-decoration: underline; // Adds underline
+        text-underline-offset: 6px; // Adjusts spacing from text
+        text-decoration-thickness: 2px; // Controls thickness of underline
+    }
+
+    .form-section {
+        margin-bottom: 20px;
+        margin-left: 60px;
+    }
+
+    .form-section h4 {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        margin-left: -30px;
+    }
+
+    .form-row {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 15px;
+    }
+
+    .form-group {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group label{
+        font-size: 14px;
+        font-weight: bold;
+        color: #555;
+        margin-bottom: 5px;
+        width: 150px;
+        min-width: 150px; /* Ensures consistency */
+    }
+
+    .form-group input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        font-size: 14px;
+        background-color: #f0f0f0;
+        width: 70%;
+      }
+    }
+
+    .mobile-input {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        width: 480px;
+    }
+
+    .country-code {
+        background-color: #f0f0f0;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        // border-right: none;
+     }
+    }
+
+//Button
+.save-btn {
+  display: block;
+  background-color: #004663;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 30px;
+  margin-left: auto;  // Pushes button to the right
+  display: flex;  // Ensures proper alignment
+  justify-content: flex-end; // Aligns button to the right inside a flex container
+  margin-right: 180px;
+
+        &:hover {
+          background-color: #00324a;
+        }
+      }
+.popupMessage {
+  position: fixed;
+  top: 20px;
+  left: 55%;
+  transform: translateX(-50%);
+  background: #52b788;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+  font-weight: bold;
+  animation: fadeInOut 2s ease-in-out;
+}
+
+//For Bank Address input fox
+.form-address {
+  width: 100%; // Ensures it takes full container width
+  display: flex;
+
+  .form-group {
+    width: 100%; // Takes full available space
+
+    label {
+      font-size: 14px;
+      font-weight: bold;
+      color: #555;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+     textarea{
+      width: 100%; // Makes the input field stretch fully
+      max-width: 400px; // Ensures it doesn't get too wide
+      min-width: 400px; // Prevents it from becoming too small
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 14px;
+      background-color: #f0f0f0;
+
+      &:focus {
+        border-color:2px #004663;
+      }
+    }
+  }
+}
+
+// Conform new pass
+.form-pass {
+  display: flex;
+  flex-direction: column;
+  width:388px; // Match other input widths
+  gap: 5px; // Consistent spacing
+
+  label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+  }
+
+  input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px; // Matches other inputs
+    font-size: 14px;
+    background-color: #f0f0f0;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+
+    &:focus {
+      border-color:2px #004663;
+    
+    }
+  }
+}
+
+//line style
+.custom-hr {
+  width: 95%;  // Adjust width as needed
+  border: none;
+  height: 1px;
+  background-color: #ccc;  // Change color if needed
+  margin: 20px auto;  // Center the line
+}

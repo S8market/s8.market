@@ -1,0 +1,33 @@
+.profileContainer {
+  font-family: "Poppins", sans-serif;
+    align-self: start;
+    display: flex;
+    gap: 40px 68px;
+    text-align: right;
+  }
+  
+  .userInfo {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .userName {
+    color: rgba(13, 6, 45, 1);
+    font-size: 16px;
+  }
+  
+  .userLocation {
+    color: rgba(120, 116, 134, 1);
+    font-size: 14px;
+    align-self: end;
+  }
+  
+  .settingsIcon {
+    aspect-ratio: 1;
+    object-fit: contain;
+    object-position: center;
+    width: 18px;
+    margin: auto 0;
+  }
+
+  

@@ -1,0 +1,88 @@
+.topAuctionersContainer {
+  font-family: "Poppins", sans-serif;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 1);
+    display: flex;
+    flex-direction: column;
+    padding: 18px 23px 47px;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    width: 459px;
+    height: 479px;
+    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    // margin-left: 700px; // tempo 
+  }
+  
+  .topAuctionersHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 31px;
+  }
+  
+  .topAuctionersTitle {
+    color: rgba(0, 0, 0, 1);
+    font-size: 24px;
+    font-weight: 600;
+  }
+  
+  .seeMoreLink {
+    color: rgba(13, 79, 107, 1);
+    font-size: 15px;
+    font-weight: 500;
+  }
+  
+  .auctionerList {
+    display: flex;
+    margin-top: 16px;
+    flex-direction: column;
+    gap: 25px;
+  }
+  
+  .auctionerItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 21px;
+    position: relative;
+  }
+  
+  .auctionerAvatar {
+    aspect-ratio: 1;
+    object-fit: contain;
+    object-position: center;
+    width: 60px;
+    border-radius: 50%;
+  }
+  
+  .auctionerName {
+    align-self: center;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--Gray-1, #333);
+    // flex-grow: 1; /* Allows the name to take up available space */
+  }
+
+  .viewAuctionButton {
+    padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #0466c8; /* Blue text color */
+  border: 1px solid #0466c8; /* Blue border */
+  background-color: transparent; /* Transparent background */
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-left: auto; /* Push the button to the right */
+  }
+  
+  .viewAuctionButton:hover {
+    background-color: #0466c8; /* Blue background on hover */
+    color: #fff; /* White text on hover */
+  }
+  
+  @media (max-width: 991px) {
+    .topAuctionersContainer {
+      max-width: 100%;
+      padding: 0 20px;
+    }
+  }
