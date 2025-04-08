@@ -56,6 +56,10 @@ const AuctionDetailsForm = ({ prevStep }) => {
       newFormData.append("reservPrice", formData.reservPrice);
       newFormData.append("message", formData.message);
       
+      for (let pair of newFormData.entries()) {
+        console.log(`${pair[0]}: ${pair[1]}`);
+      }
+      
       if (!editProperty) {
         uploadedFiles.forEach((file) => newFormData.append("files", file));
 

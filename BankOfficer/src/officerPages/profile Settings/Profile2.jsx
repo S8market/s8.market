@@ -147,6 +147,21 @@ const Profile2 = () => {
       }));
     };
 
+    const [showPasswordPopup, setShowPasswordPopup] = useState(false);
+      const [passwords, setPasswords] = useState({
+      oldPassword: '',
+      newPassword: '',
+      confirmPassword: ''
+    });
+
+    const handlePasswordChange = (e) => {
+      const { name, value } = e.target;
+      setPasswords((prev) => ({
+        ...prev,
+        [name]: value
+      }));
+    };
+
     return userDetails.firstName && (
     <div className="profile">
       <div className="sideContainer2">
@@ -269,34 +284,58 @@ const Profile2 = () => {
                   {/* horrizontal line */}
                   <hr className="custom-hr" /> 
 
-            {/* Password Settings*/}
-            {/* <div className="form-section">
-              <h4>Password Settings</h4>
-              <div className="form-row">
-                <div className="form-group">
-                  <label>Old Password</label>
-                  <input type="password" placeholder="Enter your old password..." />
-                </div>
-                <div className="form-group">
-                  <label>New Password</label>
-                  <input type="password" placeholder="Enter your new password..." />
-                </div>
-              </div>
-              <div className="form-row">
-                <div className="form-pass">
-                  <label>Confirm New Password</label>
-                  <input type="password" placeholder="Re-enter your new password..." />
-                </div>
-              </div>
-            </div>  }
-
-            {/* Change button */}
-            
-            {<button className="save-btn" onClick={() => setShowForm(true)}>Change Password</button> }
-              
-            
+           
 
             <button className="save-btn" onClick={handleSave}>Save changes</button>
+
+ {/* Password Settings*/}
+           
+            {showPasswordPopup && (
+  <div className="password-popup-overlay">
+    <div className="password-popup">
+      <h2 className="a1"><b>Change Password</b></h2>
+      <div className="popup-input-group">
+        <label>Old Password</label>
+        <input
+          type="password"
+          name="oldPassword"
+          value={passwords.oldPassword}
+          onChange={handlePasswordChange}
+          placeholder="Enter old password"
+        />
+      </div>
+      <div className="popup-input-group">
+        <label>New Password</label>
+        <input
+          type="password"
+          name="newPassword"
+          value={passwords.newPassword}
+          onChange={handlePasswordChange}
+          placeholder="Enter new password"
+        />
+      </div>
+      <div className="popup-input-group">
+        <label>Confirm New Password</label>
+        <input
+          type="password"
+          name="confirmPassword"
+          value={passwords.confirmPassword}
+          onChange={handlePasswordChange}
+          placeholder="Re-enter new password"
+        />
+      </div>
+      <div className="popup-buttons">
+        <button onClick={() => setShowPasswordPopup(false)}>Cancel</button>
+        <button onClick={() => {
+          // You can add API call here to submit
+          console.log(passwords);
+          setShowPasswordPopup(false);
+        }}>Submit</button>
+      </div>
+    </div>
+  </div>
+)}
+<button className="save-btn" onClick={() => setShowPasswordPopup(true)}>Change Password</button>
 
            </div>
            )}
