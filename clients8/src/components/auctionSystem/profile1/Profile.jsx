@@ -139,6 +139,21 @@ const Profile = () => {
     }
   };
 
+  const [showPasswordPopup, setShowPasswordPopup] = useState(false);
+  const [passwords, setPasswords] = useState({
+  oldPassword: '',
+  newPassword: '',
+  confirmPassword: ''
+});
+
+const handlePasswordChange = (e) => {
+  const { name, value } = e.target;
+  setPasswords((prev) => ({
+    ...prev,
+    [name]: value
+  }));
+};
+
   return (
     isAuthenticated && (
       <div className="profile">
@@ -303,7 +318,8 @@ const Profile = () => {
               <hr className="custom-hr" />
 
               {/* Password Settings */}
-              <div className="form-section">
+              
+              {/* <div className="form-section">
                 <h4>Password Settings</h4>
                 <div className="form-row">
                   <div className="form-group">
@@ -330,15 +346,65 @@ const Profile = () => {
                     />
                   </div>
                 </div>
-              </div>
+              </div> */}
+
+              
 
               <button className="save-btn" onClick={handleSave}>
                 Save changes
               </button>
+              <button className="save-btn" onClick={() => setShowPasswordPopup(true)}>Change Password</button>
             </div>
           </div>
         </div>
-
+        {showPasswordPopup && (
+  <div className="password-popup-overlay">
+    <div className="password-popup">
+      <h2 className="a1"><b>Change Password</b></h2>
+      <div className="popup-input-group">
+        <label>Old Password</label>
+        <input
+          className="a2"
+          type="password"
+          name="oldPassword"
+          value={passwords.oldPassword}
+          onChange={handlePasswordChange}
+          placeholder="Enter old password"
+        />
+      </div>
+      <div className="popup-input-group">
+        <label>New Password</label>
+        <input
+          className="a2"
+          type="password"
+          name="newPassword"
+          value={passwords.newPassword}
+          onChange={handlePasswordChange}
+          placeholder="Enter new password"
+        />
+      </div>
+      <div className="popup-input-group">
+        <label>Confirm New Password</label>
+        <input
+          className="a2"
+          type="password"
+          name="confirmPassword"
+          value={passwords.confirmPassword}
+          onChange={handlePasswordChange}
+          placeholder="Re-enter new password"
+        />
+      </div>
+      <div className="popup-buttons a3">
+        <button onClick={() => setShowPasswordPopup(false)}>Cancel</button>
+        <button onClick={() => {
+  
+          console.log(passwords);
+          setShowPasswordPopup(false);
+        }}>Submit</button>
+      </div>
+    </div>
+  </div>
+  )}
         {showPopup && (
           <div className="popupMessage">
             <p>Profile saved successfully!</p>
