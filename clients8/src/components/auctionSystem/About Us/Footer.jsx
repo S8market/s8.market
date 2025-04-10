@@ -26,15 +26,15 @@ function Footer() {
             s8contact.us@gmail.com
           </div>
           
-          <div className="flex flex-wrap gap-4 items-end mt-6 ml-px min-h-[70px] max-md:max-w-full">
+          {/* <div className="flex flex-wrap gap-4 items-end mt-6 ml-px min-h-[70px] max-md:max-w-full">
             <button className="flex flex-col grow shrink justify-center px-3 py-2 text-base font-semibold text-white w-[130px]">
-              <div className="gap-0 self-stretch">Terms &amp; Conditions</div>
+              <div className="gap-0 self-stretch">Terms &amp; Conditions</div> */}
 
-            </button>
-            <button className="flex flex-col grow shrink justify-center items-start px-3 py-2 text-base font-semibold text-white w-[130px] max-md:pr-4">
+            {/* </button> */}
+            {/* <button className="flex flex-col grow shrink justify-center items-start px-3 py-2 text-base font-semibold text-white w-[130px] max-md:pr-4">
               <div className="gap-0 self-stretch">Privacy Policy</div>
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="flex flex-wrap gap-6 mt-8 text-sm leading-relaxed text-white max-w-[1160px] max-md:mt-6 max-md:max-w-full">

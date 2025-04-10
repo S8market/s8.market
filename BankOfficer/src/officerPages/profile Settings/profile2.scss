@@ -542,7 +542,7 @@
 }
 
 .password-popup {
-  background: rgb(219, 215, 215);
+  background: #E3F3FF;
   padding: 2rem;
   border-radius: 10px;
   width: 350px;
@@ -561,15 +561,42 @@
 }
 
 .popup-buttons {
-  display: flex;
-  justify-content: space-between;
+  display: flex; 
+  justify-content: space-between; 
+  gap: 80px;
+  padding: 0;
+  margin-top: 1rem; 
 }
+
 
 .popup-buttons button {
   padding: 0.5rem 1rem;
   cursor: pointer;
 }
 
+.popup-buttons button {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  flex: 1; 
+  text-align: center; 
+  background-color: #004663;
+  color: white;
+  border-radius: 5px;
+}
+
 .a1{
   text-align: center;
+  color: #1A4C74;
+  padding-bottom: 15px;
+}
+
+.a2{
+  padding: 10px;
+  border: 2px solid #004663; 
+  border-radius: 10px; 
+  font-size: 14px;
+  background-color: #f0f0f0;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+
 }

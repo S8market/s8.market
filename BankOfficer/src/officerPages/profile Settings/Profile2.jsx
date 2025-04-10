@@ -297,6 +297,7 @@ const Profile2 = () => {
       <div className="popup-input-group">
         <label>Old Password</label>
         <input
+          className="a2"
           type="password"
           name="oldPassword"
           value={passwords.oldPassword}
@@ -307,6 +308,7 @@ const Profile2 = () => {
       <div className="popup-input-group">
         <label>New Password</label>
         <input
+          className="a2"
           type="password"
           name="newPassword"
           value={passwords.newPassword}
@@ -317,6 +319,7 @@ const Profile2 = () => {
       <div className="popup-input-group">
         <label>Confirm New Password</label>
         <input
+          className="a2"
           type="password"
           name="confirmPassword"
           value={passwords.confirmPassword}
@@ -324,10 +327,10 @@ const Profile2 = () => {
           placeholder="Re-enter new password"
         />
       </div>
-      <div className="popup-buttons">
+      <div className="popup-buttons a3">
         <button onClick={() => setShowPasswordPopup(false)}>Cancel</button>
         <button onClick={() => {
-          // You can add API call here to submit
+  
           console.log(passwords);
           setShowPasswordPopup(false);
         }}>Submit</button>
