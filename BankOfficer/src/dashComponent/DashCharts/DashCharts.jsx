@@ -100,12 +100,12 @@ const DashCharts = () => {
 
   // **User Interactions Line Chart Data (Placeholder)**
   const userData = [
-    { month: "Jan", views: 20 },
-    { month: "Feb", views: 15 },
-    { month: "Mar", views: 18 },
-    { month: "Apr", views: 25 },
-    { month: "May", views: 30 },
-    { month: "Jun", views: 27 },
+    { month: "Jan", views: 28 },
+    { month: "Feb", views: 18 },
+    { month: "Mar", views: 25 },
+    { month: "Apr", views: 50 },
+    // { month: "May", views: 30 },
+    // { month: "Jun", views: 27 },
   ];
 
   // **Price Range Analysis**
