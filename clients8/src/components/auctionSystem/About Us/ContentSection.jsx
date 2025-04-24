@@ -4,14 +4,7 @@ function ContentSection() {
   return (
     <section 
       className="flex z-10 flex-col pl-16 pr-16 mt-0 w-full max-md:pl-5 max-md:pr-5 max-md:max-w-full pb-24"
-      aria-labelledby="content-heading"
-    >
-      <img
-        loading="lazy"
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/df192b26d58b7bf2032821a18822751aa88e0af9f8b2fb06f6c2405135c82008?placeholderIfAbsent=true&apiKey=2b64ceff962d4ae184f534c4b0acd108"
-        alt="Content section illustration"
-        className="object-contain w-full aspect-[2.02] max-w-[1312px] max-md:max-w-full"
-      />
+      aria-labelledby="content-heading">
      <h2  
   id="content-heading"
   className="self-center mx-auto mt-28 text-5xl font-bold leading-none text-black text-center max-md:mt-10 max-md:text-4xl"

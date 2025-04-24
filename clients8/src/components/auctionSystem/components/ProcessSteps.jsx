@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import ProcessStep from "./ProcessStep";
-import { ChevronLeft, ChevronRight } from "lucide-react"; // Modern icons
+// import { ChevronLeft, ChevronRight } from "lucide-react"; // Modern icons
 
 const steps = [
   {
