@@ -1,0 +1,186 @@
+@import "../../responsive.scss";
+
+.cardContainer {
+  font-family: "Poppins", sans-serif;
+  // font-family: Inter, sans-serif;
+  flex: 2;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 1);
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  height: 459px;
+  width: 459px;
+  // -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+  // box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+
+@include md {
+  width: 650px;
+  height: 100%;
+  border-radius: 0px;
+  border: none;
+  padding: 5px;
+  margin: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+margin-left: 50px; }
+}
+
+.cardImageContainer {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  position: relative;
+  margin: 24px;
+  height: 300px;
+  overflow: hidden;
+
+  @include md{
+    height: 650px;
+  }
+
+  @include sm {
+    height: 600px;
+  }
+}
+
+.cardImage {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  // margin-top: 14px;
+  border-radius: inherit;
+
+  @include md {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  @include sm {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+}
+
+.cardTitle {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  color: white;
+  background-color: rgba(0, 70, 99, 1);
+  z-index: 10;
+  margin-top: -5px;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 7px 70px;
+  text-align: center;
+  width: 70%;
+
+  @include sm {
+    font-size: 16px;
+    padding: 5px 50px;
+  }
+}
+
+.cardDaysLeft {
+  position: absolute;
+  border-radius: 0px 20px;
+  color: white;
+  background: var(--use, linear-gradient(198deg, #000 12.42%, rgba(255, 255, 255, 0) 179.16%));
+  width: 240px;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 5px 32px;
+  bottom: 0px;
+  // left: 10px;
+
+  @include md {
+    padding: 5px 20px;
+    font-size: 22px;
+    height: 38px;
+  }
+
+  @include sm {
+    padding: 5px 20px;
+    font-size: 22px;
+    height: 38px;
+    
+  }
+}
+
+.cardDescription {
+  color: rgba(0, 0, 0, 1);
+  font-size: 20px;
+  font-weight: 400;
+margin-top: -5px;
+  margin-left: 25px;
+
+  @include sm {
+    font-size: 20px;
+  }
+}
+
+.cardDetails {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  margin-top: 6px;
+  gap: 20px;
+  width: 100%;
+  margin-left: 25px;
+}
+
+.detailAddress {
+  color: rgba(129, 129, 129, 1);
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+}
+
+.detailDate {
+  color: var(--Blue-1, #2f80ed);
+}
+
+.detailButton {
+  align-self: start;
+  border-radius: 5px;
+  margin-top: 17px;
+  gap: 10px;
+  color: rgba(0, 70, 99, 1);
+  font-weight: 400;
+  padding: 5px 7px;
+  border: 1px solid rgba(0, 70, 99, 1);
+  margin-right: 50px;
+  width: 80px;
+  text-align: center;
+
+  &:hover {
+    background-color: #00334a;
+    color: white;
+    cursor: pointer;}
+
+    @include md {
+      margin-right: 50px;
+      margin-bottom: 20px;
+      padding: 5px 5px;
+      font-size: 12px;
+    }
+}
+
+@media (max-width: 991px) {
+  .cardDaysLeft {
+    margin-top: 40px;
+    padding: 0 20px;
+  }
+}

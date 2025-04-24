@@ -1,0 +1,308 @@
+@use "../../responsive.scss" as res;
+
+.auction-container {
+  font-family: "Poppins", sans-serif;
+  padding: 24px;
+  background: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-height: 100vh;
+width: 1230px;
+
+@include res.md{
+  width: 100%;
+}
+}
+
+// .auction-box {
+//   background: #fff;
+//   padding: 16px;
+//   border-radius: 8px;
+//   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+// }
+
+.auction-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.auction-header h2 {
+  font-size: 24px; /* Set the desired font size */
+  font-weight: 600; /* Adjust the weight for a bolder look */
+  color: black; 
+}
+
+.auction-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.table-options {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.table-options label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.table-options select {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-box input {
+  padding: 8px 32px;
+  border: 1px solid #ccc;
+  border-radius: 999px;
+  font-size: 14px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  color: #888;
+}
+
+.add-button {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  background-color: #00334a;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  margin-top: 11px;
+  margin-left:-7px;
+  
+  &:hover {
+    background-color: #004f6e;
+  }
+}
+
+//table section
+.table-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Space between table and pagination */
+  width: 100%; /* Ensures table container uses full width */
+  overflow-x: auto; /* Enables horizontal scrolling */
+}
+
+  .table-wrapper {
+    width: 100%; /* Ensures it takes full space */
+    overflow-x: auto; /* Enables horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
+    border: 1px solid #ccc; /* Ensures a proper border around the table */
+    padding-bottom: 16px; // Space for scrollbar
+
+    /* Scrollbar Styling */
+    &::-webkit-scrollbar {
+      height: 12px; /* Height of horizontal scrollbar */
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background-color: #888; // Scrollbar thumb color
+      border-radius: 10px; /* Rounded edges */
+      margin-right: 2px;
+
+    }
+  
+    &::-webkit-scrollbar-track {
+      background-color: #dddbdb; /* Background of scrollbar */
+      border-radius: 10px; /* Rounded edges */
+    }
+  
+    /* Firefox Scrollbar */
+    // scrollbar-width: thin; /* Makes scrollbar thinner */
+    // scrollbar-color: #004f6e #f1f1f1; /* Thumb color | Track color */
+  }
+  
+
+
+table {
+  width: 100%;
+  border-collapse: collapse; /* Ensures borders touch properly */
+  min-width: 1200px; /* Ensures scrolling when needed */
+  table-layout: fixed; // Ensures columns respect defined widths
+}
+
+thead {
+  background-color: #99B5C1;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ccc; /* Ensures all table cells have borders */
+  text-align: center;
+  white-space: nowrap; /* Prevents text wrapping */
+}
+
+th:nth-child(1), td:nth-child(1) { width: 50px; word-wrap: break-word;white-space: normal; overflow-wrap: break-word;}
+th:nth-child(2), td:nth-child(2) { width: 200px; word-wrap: break-word;white-space: normal; overflow-wrap: break-word;}
+th:nth-child(3), td:nth-child(3) { width: 150px;white-space: normal; overflow-wrap: break-word; }
+th:nth-child(4), td:nth-child(4) { width: 100px; }
+th:nth-child(5), td:nth-child(5) { width: 110px; }
+th:nth-child(6), td:nth-child(6) { width: 150px; }
+// th:nth-child(7), td:nth-child(7) { width: 250px; }
+th:nth-child(8), td:nth-child(8) { width: 120px; }
+th:nth-child(9), td:nth-child(9) { width: 120px; }
+th:nth-child(10), td:nth-child(10) { width: 120px; }
+th:nth-child(11) , td:nth-child(11) { width: 180px;}
+
+// td:nth-child(11):last-child {
+//   border-bottom: 1px solid #ccc;
+// }
+
+.date-column {
+  width: 100px;
+}
+
+.address-column {
+  width: 350px; // Adjust as needed
+  max-width: 350px;
+  word-wrap: break-word;
+  white-space: normal; 
+  overflow-wrap: break-word;
+}
+
+td span.status {
+  &.ongoing {color:  #4caf50;}
+
+  &.upcoming {color: #0040ff;}
+
+  &.closed {color: #dc3545;}
+}
+
+.highlight {
+  background-color: yellow; /* Highlight color */
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px; // Maintain spacing between buttons
+  height: 100%; // Make buttons adapt to the row height
+  position: relative; // Ensures tooltips position correctly inside the column
+  flex-wrap: wrap; // Ensure buttons adjust if the row expands
+  border-bottom: #fff;
+}
+
+.view-button, .edit-button, .delete-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px; // Adjust as needed
+  height: 100%; // Adjust to match button size
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #004f6e;
+  cursor: pointer;
+  background-color: transparent;
+  color: #004f6e;
+  transition: background-color 0.3s ease, color 0.3s ease, filter 0.3s ease;
+  
+  img {
+    width: 16px;
+    height: 16px;
+    transition: filter 0.3s ease;
+  }
+
+  &:hover {
+    background-color: #004f6e;
+    color: white;
+
+    img {
+      filter: brightness(0) invert(1); // Turns icon white
+    }
+    .tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+.tooltip {
+  position: absolute;
+  top: 100%; /* Position below button */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #004f6e;
+  color: white;
+  padding: 4px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+ }
+
+
+.download-button1{
+  font-size: 16px; /* Ensure font size is consistent */
+  padding: 10px 20px; /* Adds padding around the text */
+  border-radius: 4px;
+  border: 1px solid #004f6e;
+  cursor: pointer;
+  background-color: transparent;
+  color: #004f6e;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  @include res.md{
+  margin-top: 20px;
+  width: 200px;
+ }
+}
+
+.pagination-container {
+  display: flex;
+  flex-direction: column; /* Arrange items in a column */
+  gap: 8px; /* Space between "Showing entries" and pagination */
+}
+
+.showing-entries {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: gray;
+}
+
+// .pagination-controls {
+//   justify-content: center; /* Center pagination buttons */
+// }
+
+.pagination-container button {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+  justify-content: center; /* Center pagination buttons */
+}
+
+.pagination-container .active {
+  background-color: #004f6e;
+  color: white;
+}

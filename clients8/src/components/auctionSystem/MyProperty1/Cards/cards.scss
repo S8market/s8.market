@@ -1,0 +1,209 @@
+.CardContainer {
+  font-family: "Poppins", sans-serif;
+  flex: 4;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 1);
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  height: 479px;
+  width: 459px;
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+    margin-left: 10px;
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 20px;
+    margin-left: 10px;
+  }
+
+  .cardsScrollContainer {
+    margin-top: -18px;
+    margin-left: 10px;
+    width: calc(100% - 20px);
+    overflow-x: auto;
+    overflow-y: hidden; // Hides vertical scrollbar
+    padding-bottom: 20px; // Extra padding so the scrollbar doesn't overlap content
+    position: relative;
+    // white-space: nowrap; // Ensures cards are in one line
+
+    &::-webkit-scrollbar {
+      height: 5px; // Scrollbar height
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #888; // Scrollbar thumb color
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: #f1f1f1; // Scrollbar track color
+    }
+  }
+
+      /*message*/
+      .noDataMessage {
+        font-size: 34px; /* Increase font size */
+        font-weight: 600;
+        color: rgba(119, 119, 119, 0.5); /* Make text a little transparent */
+        text-align: center;
+        margin-top: 20px;
+        white-space: normal; /* Allow line breaks */
+        margin-top: 150px;
+      }
+
+  .assetsList {
+    display: flex;
+    gap: 10px;
+    padding-bottom: 10px; // Space for scrollbar
+    min-width: 100%; // Ensures scrolling activates when needed
+  }
+
+  .assetCard {
+    background-color: #ffffff;
+    border: 1.5px solid #a5a4a4;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-width: 250px;
+    // min-height: 350px; // Ensure there's enough height for content
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .cardHeader {
+      position: relative;
+      width: 100%;
+      height: 150px; // Set a fixed height for the header section
+
+      .propertyImage {
+        width: 100%; // Ensure the image covers the entire width
+        height: 100%; // Ensure the image covers the entire height
+        object-fit: cover; // Ensure the image does not distort
+        object-position: center; // Center the image inside the container
+      }
+
+      .userImageContainer {
+        position: absolute;
+        bottom: -20px; // Position the user image outside the card
+        left: 10px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 3px solid white; // Optional: Add a border to make the image stand out
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+        .userImage {
+          width: 100%; // Ensure the user image fills the container
+          height: 100%;
+          object-fit: contain; // Maintain aspect ratio without distortion
+          overflow: hidden;
+          background-color: white;
+        }
+      }
+    }
+
+    .cardBody {
+      padding: 15px;
+      flex-grow: 1;  // Allow the body to grow and take up remaining space
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;  // Ensure content is spaced out, and button stays at the bottom
+    }
+
+    h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin: 0 0 10px 0;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2; /* Limit to 2 lines */
+      line-clamp: 2; /* Standard property for compatibility */
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    p {
+      font-size: 13px;
+      color: #555;
+      margin: 0 0 10px 0;
+    }
+
+    .propertyAddress {
+      font-size: 13px;
+      color: #555;
+      margin: 0 0 10px 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2; /* Limit to 2 lines */
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: break-word;
+      white-space: normal; /* Ensures proper wrapping */
+    }
+  }
+
+  .viewButton {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #00334a ;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    margin-top: 5px; /* Adjust the gap between button and auction date */
+    width: 100%; /* Adjust the width of the "View now" button */
+    max-width: 100px; /* Set a max-width if you want to limit the button size */
+    z-index: 10;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #004f6e;
+    }
+  }
+
+  .viewAllContainer {
+    display: flex;
+    justify-content: space-between; /* Places h3 on the left & button on the right */
+    align-items: center; /* Ensures vertical alignment */
+    width: 100%;
+    margin-bottom: 15px;
+    }
+
+  .viewAllButton {
+    background-color: transparent;
+    color: #807d7d;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      color: #000;
+    }
+  }
+}
+

@@ -1,0 +1,170 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+$primary-color: #004663;
+$input-bg-color: rgba(176, 186, 195, 0.4);
+$button-bg-color: #004663;
+$button-hover-bg-color: darken($button-bg-color, 10%);
+$border-radius: 10px;
+$input-padding: 12px 20px;
+
+.auctionFormContainer {
+  display: flex;
+  flex-direction: column;
+  width: 90%;  // Allow it to take full space
+  max-width: 750px; // Increase width for better alignment
+  margin: 20px ; // Center the form properly
+  font-family: "Poppins", sans-serif;
+}
+
+.formContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    color: #425466;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+
+  .inputWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    input,select {
+      width: 100%;
+      border: none;
+      border-radius: $border-radius;
+      background-color: $input-bg-color;
+      padding: $input-padding;
+      font-size: 15px;
+      color: rgba(0, 0, 0, 0.7);
+      outline: none;
+      padding-right: 40px; // Space for icon
+
+      &:focus {
+        border: 2px solid $primary-color;
+      }
+    }
+
+    .inputIcon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 20px;
+
+  .cancelButton,
+  .nextButton {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: $border-radius;
+    cursor: pointer;
+
+    .buttonIcon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .cancelButton {
+    border: 1px solid $primary-color;
+    color: $primary-color;
+    background: none;
+
+    &:hover {
+      background: rgba(0, 70, 99, 0.1);
+    }
+  }
+
+  .nextButton {
+    background-color: $button-bg-color;
+    color: white;
+    border: none;
+
+    &:hover {
+      background-color: $button-hover-bg-color;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .auctionFormContainer {
+    max-width: 100%;
+    margin: 20px;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+}
+
+//pop up
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  z-index: 1000;
+
+  .popupContent {
+    text-align: center;
+
+    p {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background-color: #023e7d;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #001845;
+      }
+    }
+  }
+}
+
+.popupMessage {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #004f6e;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  animation: fadeInOut 2s ease-in-out;
+}

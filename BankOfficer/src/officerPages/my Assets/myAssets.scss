@@ -1,0 +1,52 @@
+@use "../../responsive.scss" as res;
+
+.myAssets{
+  font-family: "Poppins", sans-serif;
+  background-color: white;
+  display: flex;
+}
+
+
+
+
+  .myAssetsContainer {
+    flex: 8; /* Main content takes the remaining space */
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+  
+  @include res.md {
+    display: flex;
+    width: 70%;
+    margin-top: -9px;
+   }
+  }
+
+  .myLikedAssetsContainer {
+    display: flex;
+    justify-content: space-between; /* Space between child components */
+    align-items: flex-start; /* Aligns items at the top */
+    gap: 30px; /* Space between child components */
+    padding: 20px;
+    margin-top: 20px;
+
+    @include res.md {
+      // flex-direction: column;
+      gap: 20px;
+      margin-top: 10px;
+      margin-left: -75px;
+    }
+  }  
+
+
+  /* Ensure the card container takes full width and allows horizontal scrolling */
+  .card2Container {
+    flex: 1;
+    padding: 20px;
+    overflow-x: auto; /* Allows horizontal scrolling */
+  
+  @include res.md {
+    padding: 10px;
+   }
+  }
+
+  

@@ -1,0 +1,48 @@
+@use "../../responsive.scss" as res;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+.propertyCardsWrapper {
+  font-family: "Poppins", sans-serif;
+
+    position: relative;
+    padding: 16px;
+    width: 100%;
+  }
+  
+  .sectionTitle {
+    display: flex;
+    justify-content: space-between; /* Pushes elements to opposite sides */
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+    margin-left: 10px;
+  }
+  
+  .sectionTitle h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  .sectionTitle h3 {
+    font-size: 18px;
+    font-weight: 500;
+    color: #787878;
+    white-space: nowrap; /* Prevents line breaks */
+    margin-right: 10px;
+  }
+
+  .cardsContainer2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+    width: 100%;
+    margin-top: -10px;
+    padding: 20px 0;
+    margin-left: 50px;
+  
+  @include res.md{
+    grid-template-columns: repeat(2, 1fr); // Only 2 cards in a row
+  }
+  
+  }

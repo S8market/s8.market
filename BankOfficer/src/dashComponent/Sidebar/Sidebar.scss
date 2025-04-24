@@ -1,0 +1,216 @@
+@use "../../responsive.scss" as res;
+
+.sidebar {
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+  background-color: #D9D9D9;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  left:0; // Initially hidden  min-width: 245px;
+  border-radius: 0px 20px 20px 0px;
+  transition: left 0.3s ease-in-out;
+  z-index: 1000;
+
+  // @media (max-width: 1024px) {
+  @include res.lg {
+    min-width: 200px; // Reduce sidebar width
+  }
+
+  // @media (max-width: 768px) {
+  @include res.md {
+    max-width: 80px;
+    min-width: 40px; // Compact width
+    padding: 10px; 
+    border-radius: 0px 20px 20px 0px;
+
+    .text {
+      display: none; // Hide text for medium and mobile view
+    }
+    .menu-item {
+      justify-content: center;
+      width: calc(100% + 10px); /* Extend width beyond original to touch the right side*/
+
+    }
+  }
+
+
+// @media (max-width: 480px) {
+@include res.sm {
+  transform: translateX(-100%); // Hide sidebar on mobile
+  min-width: 200px;
+  // min-height: 100hv;
+
+  &.open {
+    transform: translateX(0); // Show when toggled
+    // min-width: 80px; // Compact width
+  
+   .text {
+    display: block !important; // Ensure text is shown when sidebar is open  }
+  }
+ }
+}
+
+}
+/* Header with Logo and Close Button */
+// .header {
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+// }
+
+.logo-container {
+  display: flex;
+  justify-content: start;
+  gap: 80px; 
+  align-items: center;
+  margin-bottom: 10px;
+  min-height: 68px;
+
+  @include res.sm {
+   min-height: 78px; // Reduce gap for mobile view
+  }
+}
+
+// .logo-container {
+//   display: flex;
+//   align-items: center;
+//   min-height: 56px;
+// }
+
+.logo-circle {
+  width: 60px;
+  height: 60px;
+  background-color: #A7B5BE;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-top: -20px;
+
+@include res.sm {
+  width: 55px;
+  height: 55px;
+}
+}
+
+.logo-text {
+  color: #004663;
+  font-size: 24px;
+  font-weight: bold;
+
+  @include res.sm {
+    font-size: 18px;
+}
+}
+
+/* Close Button - Hidden by default, shown only on mobile */
+// .close-button {
+//   background: none;
+//   border: none;
+//   font-size: 22px;
+//   cursor: pointer;
+//   color: #333;
+//   display: none; /* Hide by default */
+//   margin-top: -40px;
+// margin-left: 14px;
+//   // @media (max-width: 480px) {
+//   @include res.sm {
+//     display: block; /* Show only in mobile view */
+//   }
+// }
+
+.separator {
+  width: 95%;
+  height: 2px;
+  background-color: gray;
+  margin-top: -14px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 10px;
+  width: 100%;
+  gap: 10px;
+  font-weight: 500;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  width: calc(100% + 20px); /* Extend width beyond original to touch the right side*/
+  margin-right: -20px; /* Adjust alignment */
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 10px 0px 0px 10px;
+  transition: background-color 0.3s ease, font-weight 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background-color: #3E5663; // Slightly lighter shade on hover
+    .icon {
+      filter: brightness(0) invert(1); // Change icon to white
+      transition: transform 0.3s ease, filter 0.3s ease;
+      transform: scale(1.1); // Slightly enlarges icon
+    }
+    .text {
+      color: white; // Change text color to white
+    }
+  }
+
+  &.active {
+    background-color: #34495E; // Dark blue for active item
+    .icon {
+      filter: brightness(0) invert(1); // Change icon to white
+      transform: scale(1.1); // Keep icon size consistent for active state
+    }
+    .text {
+      font-weight: bold;
+      color: white; // Change text color to white
+    }
+  }
+}
+
+.menu-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+  transition: filter 0.3s ease;
+}
+
+.text {
+  margin-left: 10px;
+  transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+// Mobile Menu Button
+.toggle-button {
+  display: none;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+
+  // @media (max-width: 480px) {
+  // @include res.sm {
+  //   display: block;
+  // }
+}

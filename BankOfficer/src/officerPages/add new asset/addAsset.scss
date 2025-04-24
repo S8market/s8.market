@@ -1,0 +1,165 @@
+@use "../../responsive.scss" as res;
+
+.addAsset {
+  font-family: "Poppins", sans-serif;
+    display: flex;
+    // height: 100vh;
+  
+    .sideContainerAdd {
+      flex: 1; // Sidebar takes 1 part of the total flex space
+      min-width: 245px;
+
+      @include res.md{
+        min-width: 80px;
+      }
+    }
+  
+    .addAssetContainer {
+      flex: 8; // Main content takes remaining space
+      display: flex;
+      flex-direction: column;
+   
+   @include res.md{
+    display: flex;
+    width: 70%;
+    margin-top: -9px;
+   }
+    }
+  
+    //{Top header}
+    .mainAddAsset {
+      margin: 20px;  
+      display: flex;
+      flex-direction: column;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.25);
+
+      .container-header {
+        font-size: 16px;
+        color: #555;
+        padding: 10px 20px;
+        font-weight: 500;
+        width: 97%;
+        margin: auto;
+        position: relative;
+    
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 1.8px;
+          background-color: #bbb;
+        }
+    
+        span {
+          font-size: 20px;
+        }
+    
+        .active {
+          font-weight: 600;
+          color: #000;
+        }
+      }
+    }
+  
+    //{Left Side ImageUpload Style}
+    .imaegFormContainer {
+      display: flex;
+      width: 100%; // Ensures it takes full width of parent
+      justify-content: space-between; // Space between ImageUpload & AssetForm
+      align-items: flex-start;
+      gap: 20px; // Space between components
+      padding: 20px;
+  
+      // Ensure both components take equal space
+      .image-upload-container {
+        flex: 1;
+        min-width: 50%; // Ensure equal width
+      }
+
+
+      //{Right Side AssetForm Style}
+      .formWrapper {
+        flex: 1;
+        min-width: 50%; // Ensure equal width
+      
+        border-left: 2.5px solid #bbb; /* Add right border */
+        min-height: 900px; /* Set a minimum height */
+        height: auto; /* Keep it flexible and adjustable */
+        padding-left: 30px; /* Add spacing for better visibility */
+        margin-left: -20px;
+      
+      @include res.md{
+        border-left: none;
+        height: auto;
+      }
+      }
+
+      @include res.md { 
+        flex-direction: column; // Stack items in a column on medium screens
+        align-items: center; // Center align for better UI
+      }
+
+        .formContent {
+          .formSection {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+      
+            h3 {
+              font-size: 18px;
+              color: #333;
+              margin-bottom: 10px;
+            }
+      
+            input,
+            select,
+            textarea {
+              width: 100%;
+              padding: 10px;
+              border: 1px solid #ccc;
+              border-radius: 5px;
+            }
+      
+            textarea {
+              resize: none;
+              height: 80px;
+            }
+          }
+        }
+      
+        // .buttonContainer {
+        //   display: flex;
+        //   justify-content: space-between;
+        //   margin-top: 20px;
+      
+        //   .btn {
+        //     background-color: #0466c8;
+        //     color: #fff;
+        //     padding: 10px 15px;
+        //     border: none;
+        //     border-radius: 5px;
+        //     cursor: pointer;
+        //     font-weight: 600;
+        //     transition: 0.3s;
+      
+        //     &:hover {
+        //       background-color: #0353a4;
+        //     }
+        //   }
+      
+        //   .submit {
+        //     background-color: #2d6a4f;
+      
+        //     &:hover {
+        //       background-color: #1b4332;
+        //     }
+        //   }
+        // }
+
+    
+    }
+  }
+  

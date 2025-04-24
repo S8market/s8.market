@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+$primary-color: #004663;
+$input-bg-color: rgba(176, 186, 195, 0.4);
+$button-bg-color: #004663;
+$button-hover-bg-color: darken($button-bg-color, 10%);
+$border-radius: 10px;
+$input-padding: 12px 20px;
+
+.addressFormContainer {
+  display: flex;
+  flex-direction: column;
+  width: 90%;  // Allow it to take full space
+  max-width: 750px; // Increase width for better alignment
+  margin: 20px ; // Center the form properly
+  font-family: "Poppins", sans-serif;
+}
+
+.formContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    color: #425466;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+
+  .inputWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    select,
+    input {
+      width: 100%;
+      border: none;
+      border-radius: $border-radius;
+      background-color: $input-bg-color;
+      padding: $input-padding;
+      font-size: 15px;
+      color: rgba(0, 0, 0, 0.7);
+      outline: none;
+      padding-right: 40px; // Space for icon
+
+      &:focus {
+        border: 2px solid $primary-color;
+      }
+    }
+
+    .inputIcon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 20px;
+
+  .cancelButton,
+  .nextButton {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: $border-radius;
+    cursor: pointer;
+
+    .buttonIcon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .cancelButton {
+    border: 1px solid $primary-color;
+    color: $primary-color;
+    background: none;
+
+    &:hover {
+      background: rgba(0, 70, 99, 0.1);
+    }
+  }
+
+  .nextButton {
+    background-color: $button-bg-color;
+    color: white;
+    border: none;
+
+    &:hover {
+      background-color: $button-hover-bg-color;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .addressFormContainer {
+    max-width: 100%;
+    margin: 20px;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+}
