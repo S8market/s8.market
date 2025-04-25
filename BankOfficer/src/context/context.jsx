@@ -94,7 +94,7 @@ const AppContextProvider = (props) => {
     designation: ""
   });
 
-  const [avatar, setAvatar] = useState(false)
+  const [avatar, setAvatar] = useState("/user.png" )
   
   const [properties, setProperties] = useState([]); // State to store properties
 
