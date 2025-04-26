@@ -4,9 +4,24 @@ import axios from "axios";
 export const AppContext = createContext();
 
 const AppContextProvider = (props) => {
-  const serverUrl = import.meta.env.VITE_SERVER_URL;
+
+  var serverUrl;
+
+  if(import.meta.env.MODE === "development"){
+    serverUrl = import.meta.env.VITE_SERVER_URL_DEV;
+    console.log("Development server URL: ", serverUrl);
+  }
+  else if(import.meta.env.MODE === "production"){
+    serverUrl = import.meta.env.VITE_SERVER_URL;
+    console.log("Production server URL: ", serverUrl);
+  }
+  else{
+    serverUrl = import.meta.env.VITE_SERVER_URL_DEV;
+    console.log("Unknown environment, using development server URL: ", serverUrl);
+  }
+
   const [editProperty, setEditProperty] = useState(false);
-  const [propertyId, setPropertyId] = useState(null);
+  const [propertyId, setPropertyId] = useState('');
   const [searchString, setSearchString] = useState('');
 
   // New state for tracking added and removed images

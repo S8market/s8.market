@@ -109,10 +109,10 @@ export default function SignUpPage() {
             setIsAuthenticated(true);
             navigate("/");
           } else {
-            if(import.meta.env.NODE_ENV = 'development'){
+            if(import.meta.env.MODE = 'development'){
             window.location.href = import.meta.env.VITE_BANKSIDE_URL_DEV;
             }
-            else if (import.meta.env.NODE_ENV = 'production'){
+            else if (import.meta.env.MODE = 'production'){
               window.location.href = import.meta.env.VITE_BANKSIDE_URL;
             }
           }

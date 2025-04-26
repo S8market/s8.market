@@ -6,8 +6,8 @@ const sendToken = (user, message, res) => {
           Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
         ), 
         httpOnly: true,
-        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-        secure: process.env.NODE_ENV === 'production'
+        sameSite: process.env.MODE === 'production' ? 'none' : 'lax',
+        secure: process.env.MODE === 'production'
       })
       .json({
         success: true,

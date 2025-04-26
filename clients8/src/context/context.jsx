@@ -5,7 +5,21 @@ export const AppContext = createContext();
 
 const AppContextProvider = (props) => {
   // const serverUrl = 'http://localhost:4000';
-  const serverUrl = import.meta.env.VITE_SERVER_URL;
+  var serverUrl;
+
+  if(import.meta.env.MODE === "development"){
+    serverUrl = import.meta.env.VITE_SERVER_URL_DEV;
+    console.log("Development server URL: ", serverUrl);
+  }
+  else if(import.meta.env.MODE === "production"){
+    serverUrl = import.meta.env.VITE_SERVER_URL;
+    console.log("Production server URL: ", serverUrl);
+  }
+  else{
+    serverUrl = import.meta.env.VITE_SERVER_URL_DEV;
+    console.log("Unknown environment, using development server URL: ", serverUrl);
+  }
+
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [searchString, setSearchString] = useState("");
   const [authChecked, setAuthChecked] = useState(false);

@@ -240,8 +240,8 @@ export const verifyOTP = async function (req, res) {
           Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
         ),
         httpOnly: true,
-        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-        secure: process.env.NODE_ENV === 'production'
+        sameSite: process.env.MODE === 'production' ? 'none' : 'lax',
+        secure: process.env.MODE === 'production'
       })
       .json({
         success: true,
@@ -292,8 +292,8 @@ export const login = async function (req, res) {
           Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
         ),
         httpOnly: true,
-        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-        secure: process.env.NODE_ENV === 'production'
+        sameSite: process.env.MODE === 'production' ? 'none' : 'lax',
+        secure: process.env.MODE === 'production'
       })
       .json({
         success: true,
@@ -317,8 +317,8 @@ export const logout = (req, res) => {
     .cookie("s8userToken", "", {
       expires: new Date(0),
       httpOnly: true,
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-      secure: process.env.NODE_ENV === 'production'
+      sameSite: process.env.MODE === 'production' ? 'none' : 'lax',
+      secure: process.env.MODE === 'production'
     })
     .json({
       success: true,
@@ -348,8 +348,8 @@ export const googleAuthCallback = (req, res) => {
         Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
       ),
       httpOnly: true,
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-      secure: process.env.NODE_ENV === 'production'
+      sameSite: process.env.MODE === 'production' ? 'none' : 'lax',
+      secure: process.env.MODE === 'production'
     });
     return res.redirect(process.env.CLIENT_LOCALHOST);
   })(req, res);

@@ -3,9 +3,18 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import userRouter from "./routes/userRouter.js";
 import connectDB from "./db/index.js";
-import passport from "./middlewares/googleAuth.js"; ////////////////
+import passport from "./middlewares/googleAuth.js";
 import bankUserRouter from "./routes/bankUserRouter.js";
 import connectCloudinary from "./config/cloudinary.js";
+import "dotenv/config";
+
+const port = process.env.PORT;
+
+// app.get("/", (req, res) => {
+//   res.send("Api is Working");
+// });
+
+// app.listen(port, () => console.log("Server Started at ", port));
 
 const app = express();
 
@@ -31,6 +40,12 @@ app.use(passport.initialize());
 // app.get("/auth/google", googleAuth);
 // app.get("/auth/google/callback", googleAuthCallback);
 
+app.get("/", (req, res) => {
+  res.send("Api is Working");
+});
+
+// app.listen(port, () => console.log("Server Started at ", port));
+
 // api endpoints
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/bank-user", bankUserRouter);
@@ -43,5 +58,7 @@ app.use("/api/v1/bank-user", bankUserRouter);
 //     res.json({ authenticated: false });
 //   }
 // });
+
+app.listen(port, () => console.log("Server Started at ", port));
 
 export { app }

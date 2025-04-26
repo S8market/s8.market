@@ -24,7 +24,7 @@ const AuctionHistory = () => {
 
   const getPropertyById = async () => {
     try {
-      const { data } = await axios.post(serverUrl + "/api/v1/bank-user/get-property-by-id", { id }, {
+      const { data } = await axios.post(`${serverUrl}/api/v1/bank-user/get-property-by-id`, { id }, {
         withCredentials: true,
       });
 
@@ -159,7 +159,7 @@ const AuctionHistory = () => {
 //Edit
 const handleEdit = async (propertyId) => {
   try {
-    const { data } = await axios.post(serverUrl + "/api/v1/bank-user/get-property-by-id", { id: propertyId }, {
+    const { data } = await axios.post(`${serverUrl}/api/v1/bank-user/get-property-by-id`, { id: propertyId }, {
       withCredentials: true,
     });
 
@@ -238,7 +238,7 @@ const handleDelete = async (propertyId) => {
   if (!isConfirmed) return;
   
   try {
-    const { data } = await axios.post(serverUrl + "/api/v1/bank-user/delete-property", {propertyId }, {
+    const { data } = await axios.post(`${serverUrl}/api/v1/bank-user/delete-property`, {propertyId }, {
       withCredentials: true,
     });
     console.log(data)
