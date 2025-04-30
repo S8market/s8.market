@@ -1,0 +1,101 @@
+import React, { useState, useContext } from "react";
+import { AppContext } from "../../context/context";
+
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+
+const BankSignInForm = ({ onSubmit }) => {
+
+    const navigate = useNavigate();
+
+    const [formData, setFormData] = useState({
+        email: "",
+        password: "",
+    });
+    const [error, setError] = useState("");
+
+    const { serverUrl } = useContext(AppContext);
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError("");
+
+        try {
+            const { email, password } = formData;
+
+            const res = await axios.post(
+                `${serverUrl}/api/v1/bank-user/login`,
+                { email, password },
+                { withCredentials: true } // IMPORTANT: so browser accepts the cookie
+            );
+
+            if (res.data.success) {
+                navigate("/"); // or wherever the Bank officer should go
+            }
+        } catch (err) {
+            setError(err?.response?.data?.message || "Something went wrong");
+        }
+    };
+
+
+
+    return (
+        <form
+            onSubmit={handleSubmit}
+            className="bg-white p-6 rounded-lg shadow-md w-full max-w-md mx-auto"
+        >
+            <h2 className="text-2xl text-[#004663]  font-bold mb-4 text-center">Bank Sign In</h2>
+            {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
+
+            <div className="mb-4">
+                <label htmlFor="email" className="block font-medium mb-1">Email</label>
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    className="w-full border px-3 py-2 rounded"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                />
+            </div>
+
+            <div className="mb-4">
+                <label htmlFor="password" className="block font-medium mb-1">Password</label>
+                <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    className="w-full border px-3 py-2 rounded"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                />
+            </div>
+
+            <button
+                type="submit"
+                className="bg-[#004663] text-white shadow-lg w-full py-2 rounded hover:bg-blue-700 transition"
+            >
+                Sign In
+            </button>
+            <div className="text-center mt-6">
+                <span className="text-gray-600">
+                    Don't have an account?
+                </span>
+                <a href="/sign-up"
+                    className="text-[#004663] font-semibold hover:text-sky-900"
+                > &nbsp;
+                    Sign Up
+                </a>
+            </div>
+        </form>
+    );
+};
+
+export default BankSignInForm;
