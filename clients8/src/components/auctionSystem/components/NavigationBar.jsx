@@ -56,7 +56,7 @@ export default function NavigationBar() {
 
   const handleSubmit = async (e) => {
     if (!isAuthenticated) {
-      navigate('/sign-up');
+      navigate('/sign-in');
       toast.error("Login First");
     } else {
       e.preventDefault();
@@ -97,7 +97,7 @@ export default function NavigationBar() {
               placeholder="Search for auctions near you ...."
               value={searchString}
               onChange={isAuthenticated ? (e) => setSearchString(e.target.value) : () => {
-                navigate('/sign-up');
+                navigate('/sign-in');
                 toast.error("Login First");
               }}
             />
@@ -128,7 +128,7 @@ export default function NavigationBar() {
               />
             </div>
           ) : (
-            <NavLink to='/sign-up' className="gap-2.5 px-6 py-2.5 font-semibold text-white bg-sky-900 rounded-[55px]">
+            <NavLink to='/sign-in' className="gap-2.5 px-6 py-2.5 font-semibold text-white bg-sky-900 rounded-[55px]">
               Sign in
             </NavLink>
           )}
@@ -191,7 +191,7 @@ export default function NavigationBar() {
               />
             </div>
           ) : (
-            <NavLink to='/sign-up' className="gap-2.5 px-6 py-2.5 font-semibold text-white bg-sky-900 rounded-[55px]">
+            <NavLink to='/sign-in' className="gap-2.5 px-6 py-2.5 font-semibold text-white bg-sky-900 rounded-[55px]">
               Sign in
             </NavLink>
           )}

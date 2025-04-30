@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { FormInput } from "../components/auctionSystem/SignInUser/FormInput";
 import { SocialSignInButton } from "../components/auctionSystem/SignInUser/SocialSignInButton";
+import UserSignInForm from "../components/forms/UserSignInForm";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../context/context";
 import axios from "axios";
@@ -76,6 +77,13 @@ export default function SignUpPage() {
       serverApi: `${serverUrl}/api/v1/user/auth/google`,
     },
   ];
+  
+  const getRedirectUrl = () => {
+    const env = import.meta.env.MODE;
+    return env === "development"
+      ? import.meta.env.VITE_BANKSIDE_URL_DEV
+      : import.meta.env.VITE_BANKSIDE_URL;
+  };
 
   const handleOtpSuccess = () => {
     setShowOtpPopup(false);
@@ -85,6 +93,15 @@ export default function SignUpPage() {
       toast.success("Login Successfully");
     } else {
       window.location.href = import.meta.env.VITE_BANKSIDE_URL;
+    }
+  };
+  const handleSubmit = () => {
+    if (isSignIn) {
+      handleSignInSubmit();
+    } else if (userType === "Bank Officer" && currentStep < bankOfficerSteps.length - 1) {
+      setCurrentStep(currentStep + 1);
+    } else {
+      handleSignUpSubmit();
     }
   };
 
@@ -109,10 +126,12 @@ export default function SignUpPage() {
             setIsAuthenticated(true);
             navigate("/");
           } else {
-            if(import.meta.env.MODE = 'development'){
+            if (import.meta.env.MODE = 'development') {
+              console.log("Development mode detected. Redirecting to BankSide URL.");
             window.location.href = import.meta.env.VITE_BANKSIDE_URL_DEV;
             }
-            else if (import.meta.env.MODE = 'production'){
+            else if (import.meta.env.MODE = 'production') {
+              console.log("Production mode detected. Redirecting to BankSide URL.");
               window.location.href = import.meta.env.VITE_BANKSIDE_URL;
             }
           }

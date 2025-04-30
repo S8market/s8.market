@@ -37,7 +37,7 @@ function PropertyCard({ category }) {
     if (isAuthenticated) {
       navigate(`/property/${propertyId}`);
     } else {
-      navigate("/sign-up");
+      navigate("/sign-in");
       toast.error("Login First");
     }
   };

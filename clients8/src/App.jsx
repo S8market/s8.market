@@ -6,7 +6,7 @@ import About from './pages/About'
 import NavigationBar from './components/auctionSystem/components/NavigationBar'
 import Footer from './components/auctionSystem/About Us/Footer'
 import SignUpPage from './pages/SignUp'
-import { SignupForm } from './pages/SignupForm'
+import SignInPage from './pages/SignIn'
 import Assets from './pages/Assets'
 import Property from './components/auctionSystem/MyProperty/AuctionLayout'
 import UserSideP from './components/auctionSystem/UsersidePrime/AuctionLayout'
@@ -23,7 +23,7 @@ import PrivateRoute from './components/PrivateRoute'
 
 function App() {
   const location = useLocation(); // Get current route path
-  const hideFooterRoutes = ["/profile1"]; // Routes where the footer should be hidden
+  const hideFooterRoutes = ["/profile1", "/sign-up", "/sign-in"]; // Routes where the footer should be hidden
 
   const {serverUrl, isAuthenticated, setIsAuthenticated, setAuthChecked} = useContext(AppContext)
   useEffect(() => {
@@ -32,7 +32,7 @@ function App() {
 
   const checkAuth = async () => {
     try {
-      const response = await axios.get(serverUrl + "/api/v1/user/check-auth", {
+      const response = await axios.get(`${serverUrl}/api/v1/user/check-auth`, {
         withCredentials: true,
       });
       setIsAuthenticated(response.data.success);
@@ -55,15 +55,16 @@ function App() {
       <ToastContainer position="top-right" autoClose={3000} />
       <NavigationBar />
       <Routes>
-        <Route path="/" element={isAuthenticated ? <UserSideP /> :<AuctionLanding />} />
+        <Route path="/" element={isAuthenticated ? <UserSideP /> : <AuctionLanding />} />
         <Route path="/about" element={<About />} />
         <Route path="/properties" element={<Assets />} />
         <Route path="/sign-up" element={<SignUpPage />} />
+        <Route path="/sign-in" element={<SignInPage />} />
         {/* <Route path="/property" element={<Property />} /> */}
         {/* <Route path="/usersideprime" element={<UserSideP />} /> */}
         <Route path="/contact" element={<Contact />} />
         {/* <Route path="/profile" element={<Profile />} /> */}
-        <Route path="/property/:id" element={<PrivateRoute><Single /></PrivateRoute>} />
+        <Route path="/property/:id" element={<PrivateRoute><Single/></PrivateRoute>} />
         <Route path="/profile1" element={<Profile1 />} />
         
       </Routes>
