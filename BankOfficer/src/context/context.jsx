@@ -113,7 +113,8 @@ const AppContextProvider = (props) => {
   
   const [properties, setProperties] = useState([]); // State to store properties
 
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authChecked, setAuthChecked] = useState(false);
   
   // Get Profile Details
   const handleProfile = async () => {
@@ -206,7 +207,8 @@ const AppContextProvider = (props) => {
     setRemovedImages,
     propertyId,
     setPropertyId,
-    userDetails,searchString, setSearchString, getProperties,latestProperty,isAuthenticated, setIsAuthenticated,
+    userDetails, searchString, setSearchString, getProperties, latestProperty, isAuthenticated, setIsAuthenticated,
+    authChecked, setAuthChecked, 
     setUserDetails,avatar, setAvatar, properties, setProperties, handleProfile, userUpdateDetails, setUserUpdateDetails
   };
   return (

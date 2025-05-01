@@ -22,7 +22,7 @@ import BankSignUpPage from './officerPages/signUpPage/SignUp';
 
 
 function App() {
-  const { serverUrl, isAuthenticated, setIsAuthenticated } = useContext(AppContext)
+  const { serverUrl, isAuthenticated, setIsAuthenticated, setAuthChecked } = useContext(AppContext)
   const navigate = useNavigate()
 
 

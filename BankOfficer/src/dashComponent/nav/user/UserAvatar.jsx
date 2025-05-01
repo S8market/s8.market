@@ -22,14 +22,17 @@ export const UserAvatar = ({ imageSrc, name, address, size = 'small' }) => {
       
       // Clear local authentication state
       setIsAuthenticated(false);
-      window.location.href = import.meta.env.VITE_CLIENT_URL
+      navigate("/sign-in");
+      // window.location.href = import.meta.env.VITE_CLIENT_URL
       // setUserInfo({});
       // setAvatar(null);
     } catch (error) {
       console.error("Error logging out:", error);
     } finally {
       // Always redirect to the specified URL
-      window.location.href = "https://s8market.com"    }
+      navigate("/sign-in");
+      // window.location.href = "https://s8market.com"
+    }
   }
 
 //   const handleLogout = async () => {

@@ -160,7 +160,7 @@ export default function NavigationBar() {
               placeholder="Search for auctions near you ...."
               value={searchString}
               onChange={isAuthenticated ? (e) => setSearchString(e.target.value) : () => {
-                navigate('/sign-up');
+                navigate('/sign-in');
                 toast.error("Login First");
               }}
             />
