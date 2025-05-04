@@ -23,70 +23,13 @@ export const UserAvatar = ({ imageSrc, name, address, size = 'small' }) => {
       // Clear local authentication state
       setIsAuthenticated(false);
       navigate("/sign-in");
-      // window.location.href = import.meta.env.VITE_CLIENT_URL
-      // setUserInfo({});
-      // setAvatar(null);
     } catch (error) {
       console.error("Error logging out:", error);
     } finally {
       // Always redirect to the specified URL
       navigate("/sign-in");
-      // window.location.href = "https://s8market.com"
     }
   }
-
-//   const handleLogout = async () => {
-//     try {
-//         // Send logout request to backend
-//         await axios.get(serverUrl + "/api/v1/user/logout", {
-//             withCredentials: true,  // Ensures cookies are sent
-//         });
-
-//         // Remove JWT from localStorage (if stored there)
-//         localStorage.removeItem("s8Token");  
-//         sessionStorage.removeItem("s8Token");  
-
-//         // Clear user authentication state
-//         setIsAuthenticated(false);
-//         setUserFormValues({
-//             name: "",
-//             email: "",
-//             password: "",
-//             phone: "",
-//             verificationMethod: "email",
-//         });
-//         setBankOfficerFormValues({
-//             "first-name": "",
-//             "last-name": "",
-//             email: "",
-//             password: "",
-//             phone: "",
-//             address: "",
-//             city: "",
-//             state: "",
-//             pincode: "",
-//             bankName: "",
-//             bankbranch: "",
-//             bankIFSC: "",
-//             branchZone: "",
-//             employeeID: "",
-//             designation: "",
-//             verificationMethod: "email",
-//         });
-
-//         setAvatar(null);
-
-//     } catch (error) {
-//         console.error("Error logging out:", error);
-//     } finally {
-//         // Redirect to external homepage AFTER clearing authentication state
-//         setTimeout(() => {
-//             window.location.href = "https://s8market.com";
-//         }, 500);  // Small delay to ensure everything clears before redirecting
-//     }
-// };
-
-
 
   return (
     <div className="avatarContainer">

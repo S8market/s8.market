@@ -5,6 +5,8 @@
   position: relative;
   align-self: center;
   display: flex;
+flex: 1;
+
   // gap: 20px;
   font-family: Inter, sans-serif;
   font-weight: 400;
@@ -39,12 +41,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-left: 10px;
 
 
   @include res.md {
    gap:45px;
    width: 100%;
+  }
+
+  @include res.xs {
+   gap:10px;
+   width: 100%;
+padding: 10px;
   }
 }
 
