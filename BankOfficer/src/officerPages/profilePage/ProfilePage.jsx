@@ -64,45 +64,24 @@ const Profilepage = () => {
   };
 
   return (
-//     <div className="home">
-//       {isSmallScreen && (
-//         <button className="toggle-btn" onClick={() => setSidebarOpen(!isSidebarOpen)}>
-//           ☰
-//         </button>
-//       )}
-//       <div className={`sideContainer ${isSidebarOpen ? "open" : ""}`}>
-//         <Sidebar isSidebarOpen={isSidebarOpen} />
-//       </div>
-//       <div className={`homeContainer ${isSidebarOpen && isSmallScreen ? "shifted" : ""}`}>
-//         <Header />
-//         <div className="latestAssetContainer">
-//           {latestAsset ? <Latest /> : <AddNewAsset />}
-//           <News />
-//         </div>
-//         <div className="auctionersContainer">
-//           <CardsContainer />
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-<div className="home">
-<div className="sideContainer">
-  <Sidebar />
-</div>
-<div className="homeContainer">
-  <Header />
-  <div className="latestAssetContainer">
-  {latestAsset ? <Latest /> : <AddNewAsset />}
-  <News />
-  </div>
-  <div className="auctionersContainer">
-    <CardsContainer />
-  </div>
-</div>
-</div>
-);
+    <div className="home">
+      <div className="sideContainer">
+        <Sidebar />
+      </div>
+      <div className="homeContainer">
+        <Header />
+        <div className="mainProfile">
+          <div className="latestAssetContainer">
+            {latestAsset ? <Latest /> : <AddNewAsset />}
+            <News />
+          </div>
+          <div className="auctionersContainer">
+            <CardsContainer />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Profilepage;

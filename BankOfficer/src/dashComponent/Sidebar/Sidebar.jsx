@@ -34,7 +34,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
   ];
 
   return (
-    <>
+    <div className='sideContainer'>
       <button className="toggle-button" onClick={() => setIsOpen(!isOpen)}>
         ☰
       </button>
@@ -56,7 +56,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           ))}
         </ul>
       </div>
-    </>
+    </div>
   );
 };
 

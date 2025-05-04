@@ -43,8 +43,6 @@ h3 {
 }
 
 .cardsScrollContainer {
-  margin-top: -18px;
-  margin-left: -71px;
   width: calc(100% - 20px);
   overflow-x: auto;
   overflow-y: hidden;
@@ -197,7 +195,6 @@ h3 {
   border: none;
   padding: 10px 20px;
   font-size: 14px;
-  margin-left: -151px;
   cursor: pointer;
   transition: background-color 0.2s ease;
 
