@@ -9,46 +9,46 @@ import Otp from "../components/Otp";
 import { toast } from "react-toastify";
 
 const userInputs = [
-  { label: "Name", placeholder: "Enter your Full Name here", type: "text" },
-  { label: "Email", placeholder: "Enter your Email here", type: "email" },
-  { label: "Phone", placeholder: "Enter your Phone Number", type: "tel" },
-  { label: "Password", placeholder: "Enter your Password", type: "password" },
+  { label: "Name", name: "name", placeholder: "Enter your Full Name here", type: "text" },
+  { label: "Email", name: "email", placeholder: "Enter your Email here", type: "email" },
+  { label: "Phone", name: "phone", placeholder: "Enter your Phone Number", type: "tel" },
+  { label: "Password", name: "password", placeholder: "Enter your Password", type: "password" },
 ];
 
 const bankOfficerSteps = [
   {
     title: "Personal Information",
     inputs: [
-      { label: "First Name", placeholder: "Enter your First Name here", type: "text" },
-      { label: "Last Name", placeholder: "Enter your Last Name here", type: "text" },
-      { label: "Email", placeholder: "Enter your Email here", type: "email" },
-      { label: "Password", placeholder: "Create your Password", type: "password" },
-      { label: "Phone", placeholder: "Enter your Phone Number", type: "tel" },
+      { label: "First Name", name: "firstName", placeholder: "Enter your First Name here", type: "text" },
+      { label: "Last Name", name: "lastName", placeholder: "Enter your Last Name here", type: "text" },
+      { label: "Email", name: "email", placeholder: "Enter your Email here", type: "email" },
+      { label: "Password", name: "password", placeholder: "Create your Password", type: "password" },
+      { label: "Phone", name: "phone", placeholder: "Enter your Phone Number", type: "tel" },
     ],
   },
   {
     title: "Bank Address",
     inputs: [
-      { label: "Address", placeholder: "Enter your Address", type: "text" },
-      { label: "City", placeholder: "Enter your City", type: "text" },
-      { label: "State", placeholder: "Enter your State", type: "text" },
-      { label: "Pincode", placeholder: "Enter your Pincode", type: "text" },
+      { label: "Address", name: "address", placeholder: "Enter your Address", type: "text" },
+      { label: "City", name: "city", placeholder: "Enter your City", type: "text" },
+      { label: "State", name: "state", placeholder: "Enter your State", type: "text" },
+      { label: "Pincode", name: "pincode", placeholder: "Enter your Pincode", type: "text" },
     ],
   },
   {
     title: "Bank Details",
     inputs: [
-      { label: "bankName", placeholder: "Enter Bank Name" },
-      { label: "bankbranch", placeholder: "Enter your Bank Branch" },
-      { label: "employeeID", placeholder: "Enter your Employee ID" },
-      { label: "designation", placeholder: "Enter your Position" },
+      { label: "Bank Name", name: "bankName", placeholder: "Enter Bank Name" },
+      { label: "Bank Branch", name: "bankBranch", placeholder: "Enter your Bank Branch" },
+      { label: "Employee ID", name: "employeeID", placeholder: "Enter your Employee ID" },
+      { label: "Designation", name: "designation", placeholder: "Enter your Position" },
     ],
   },
 ];
 
 const signInInputs = [
-  { label: "Email", placeholder: "Enter your Email here", type: "email" },
-  { label: "Password", placeholder: "Enter your Password", type: "password" },
+  { label: "Email", name: "email", placeholder: "Enter your Email here", type: "email" },
+  { label: "Password", name: "password", placeholder: "Enter your Password", type: "password" },
 ];
 
 export default function SignUpPage() {
@@ -77,12 +77,31 @@ export default function SignUpPage() {
       serverApi: `${serverUrl}/api/v1/user/auth/google`,
     },
   ];
-  
+
   const getRedirectUrl = () => {
     const env = import.meta.env.MODE;
     return env === "development"
       ? import.meta.env.VITE_BANKSIDE_URL_DEV
       : import.meta.env.VITE_BANKSIDE_URL;
+  };
+
+  const validateCurrentStep = () => {
+    const currentInputs = bankOfficerSteps[currentStep].inputs;
+    const errors = {};
+    let isValid = true;
+
+    currentInputs.forEach((input) => {
+      const key = input.name;
+      const value = bankOfficerFormValues[key];
+
+      if (!value || value.trim() === "") {
+        errors[key] = `${input.label} is required`;
+        isValid = false;
+      }
+    });
+
+    setFormErrors(errors);
+    return isValid;
   };
 
   const handleOtpSuccess = () => {
@@ -93,15 +112,6 @@ export default function SignUpPage() {
       toast.success("Login Successfully");
     } else {
       window.location.href = import.meta.env.VITE_BANKSIDE_URL;
-    }
-  };
-  const handleSubmit = () => {
-    if (isSignIn) {
-      handleSignInSubmit();
-    } else if (userType === "Bank Officer" && currentStep < bankOfficerSteps.length - 1) {
-      setCurrentStep(currentStep + 1);
-    } else {
-      handleSignUpSubmit();
     }
   };
 
@@ -126,12 +136,9 @@ export default function SignUpPage() {
             setIsAuthenticated(true);
             navigate("/");
           } else {
-            if (import.meta.env.MODE = 'development') {
-              console.log("Development mode detected. Redirecting to BankSide URL.");
-            window.location.href = import.meta.env.VITE_BANKSIDE_URL_DEV;
-            }
-            else if (import.meta.env.MODE = 'production') {
-              console.log("Production mode detected. Redirecting to BankSide URL.");
+            if (import.meta.env.MODE === 'development') {
+              window.location.href = import.meta.env.VITE_BANKSIDE_URL_DEV;
+            } else {
               window.location.href = import.meta.env.VITE_BANKSIDE_URL;
             }
           }
@@ -143,10 +150,8 @@ export default function SignUpPage() {
           ? userFormValues
           : {
               ...bankOfficerFormValues,
-              firstName: bankOfficerFormValues["first-name"],
-              lastName: bankOfficerFormValues["last-name"],
-              bankName: bankOfficerFormValues.bankname,
-              employeeID: bankOfficerFormValues.employeeid,
+              firstName: bankOfficerFormValues.firstName,
+              lastName: bankOfficerFormValues.lastName,
             };
 
         endpoint = userType === "User"
@@ -172,6 +177,8 @@ export default function SignUpPage() {
   };
 
   const handleNextStep = () => {
+    if (!validateCurrentStep()) return;
+
     if (currentStep < bankOfficerSteps.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
@@ -261,11 +268,7 @@ export default function SignUpPage() {
                 key={index}
                 {...input}
                 isBankOfficer={userType === "Bank Officer"}
-                error={
-                  formErrors[
-                    input.label.toLowerCase().replace(/\s+/g, "")
-                  ]
-                }
+                error={formErrors[input.name]}
               />
             ))}
           </div>

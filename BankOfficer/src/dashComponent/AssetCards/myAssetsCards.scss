@@ -12,6 +12,7 @@
   border: 1px solid rgba(0, 0, 0, 0.25);
   height: 460px;
   width: 400px;
+  margin-left: -11px;
   // -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
   // box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
 
@@ -20,6 +21,7 @@
   width: 370px;
   max-width: 370px;
 }
+
 
   .headerContainer2 {
     display: flex;
@@ -105,14 +107,14 @@
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     // min-width: 240px; // Minimum width for each card
-    max-width: 320px;
+    max-width: 279px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 355px; // Set a larger fixed height for uniformity
     padding-bottom: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-
+    
 
     &:hover {
       transform: translateY(-5px);
@@ -257,7 +259,7 @@
 
   .viewAllButton {
     position: relative;
-    padding: 10px 20px;
+    padding: 33px 20px;
     font-size: 14px;
     color: #807d7d;
     border: none;
