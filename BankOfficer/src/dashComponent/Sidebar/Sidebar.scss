@@ -3,11 +3,13 @@
 .sidebar {
   font-family: "Poppins", sans-serif;
   min-height: 100vh;
+  max-width: 250px;
+  overflow-x: scroll;
   background-color: #D9D9D9;
   padding: 20px;
   position: fixed;
   top: 0;
-  left:0; // Initially hidden  min-width: 245px;
+  left: 0; // Initially hidden  min-width: 245px;
   border-radius: 0px 20px 20px 0px;
   transition: left 0.3s ease-in-out;
   z-index: 1000;
@@ -21,37 +23,40 @@
   @include res.md {
     max-width: 80px;
     min-width: 40px; // Compact width
-    padding: 10px; 
+    padding: 10px;
     border-radius: 0px 20px 20px 0px;
 
     .text {
       display: none; // Hide text for medium and mobile view
     }
+
     .menu-item {
       justify-content: center;
-      width: calc(100% + 10px); /* Extend width beyond original to touch the right side*/
+      width: calc(100% + 10px);
+      /* Extend width beyond original to touch the right side*/
 
     }
   }
 
 
-// @media (max-width: 480px) {
-@include res.sm {
-  transform: translateX(-100%); // Hide sidebar on mobile
-  min-width: 200px;
-  // min-height: 100hv;
+  // @media (max-width: 480px) {
+  @include res.sm {
+    transform: translateX(-100%); // Hide sidebar on mobile
+    min-width: 200px;
+    // min-height: 100hv;
 
-  &.open {
-    transform: translateX(0); // Show when toggled
-    // min-width: 80px; // Compact width
-  
-   .text {
-    display: block !important; // Ensure text is shown when sidebar is open  }
+    &.open {
+      transform: translateX(0); // Show when toggled
+      // min-width: 80px; // Compact width
+
+      .text {
+        display: block !important; // Ensure text is shown when sidebar is open  }
+      }
+    }
   }
- }
-}
 
 }
+
 /* Header with Logo and Close Button */
 // .header {
 //   display: flex;
@@ -62,13 +67,13 @@
 .logo-container {
   display: flex;
   justify-content: start;
-  gap: 80px; 
+  gap: 80px;
   align-items: center;
   margin-bottom: 10px;
   min-height: 68px;
 
   @include res.sm {
-   min-height: 78px; // Reduce gap for mobile view
+    min-height: 78px; // Reduce gap for mobile view
   }
 }
 
@@ -89,10 +94,10 @@
   position: relative;
   margin-top: -20px;
 
-@include res.sm {
-  width: 55px;
-  height: 55px;
-}
+  @include res.sm {
+    width: 55px;
+    height: 55px;
+  }
 }
 
 .logo-text {
@@ -102,7 +107,7 @@
 
   @include res.sm {
     font-size: 18px;
-}
+  }
 }
 
 /* Close Button - Hidden by default, shown only on mobile */
@@ -144,8 +149,10 @@
   display: flex;
   align-items: center;
   padding: 10px 20px;
-  width: calc(100% + 20px); /* Extend width beyond original to touch the right side*/
-  margin-right: -20px; /* Adjust alignment */
+  width: calc(100% + 20px);
+  /* Extend width beyond original to touch the right side*/
+  margin-right: -20px;
+  /* Adjust alignment */
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
@@ -155,11 +162,13 @@
 
   &:hover {
     background-color: #3E5663; // Slightly lighter shade on hover
+
     .icon {
       filter: brightness(0) invert(1); // Change icon to white
       transition: transform 0.3s ease, filter 0.3s ease;
       transform: scale(1.1); // Slightly enlarges icon
     }
+
     .text {
       color: white; // Change text color to white
     }
@@ -167,10 +176,12 @@
 
   &.active {
     background-color: #34495E; // Dark blue for active item
+
     .icon {
       filter: brightness(0) invert(1); // Change icon to white
       transform: scale(1.1); // Keep icon size consistent for active state
     }
+
     .text {
       font-weight: bold;
       color: white; // Change text color to white

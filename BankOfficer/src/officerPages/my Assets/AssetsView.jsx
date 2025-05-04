@@ -5,18 +5,18 @@ import "./assetsView.scss";
 
 const AssetsView = () => {
   return (
-        <div className="myAssetsView">
-          <div className="sideContainerV">
-            <Sidebar />
-          </div>
-           <div className="AssetsViewCards">
-           <Header />
-           <div className="myAssetVCard">
-           <MyAssetList/>
-           </div>
-          </div>
+    <div className="myAssetsView">
+      <div className="sideContainerV">
+        <Sidebar />
+      </div>
+      <div className="AssetsViewCards">
+        <Header />
+        <div className="myAssetVCard">
+          <MyAssetList />
         </div>
-       )
-     }
+      </div>
+    </div>
+  )
+}
 
 export default AssetsView

@@ -11,17 +11,19 @@ const MyAssets = () => {
     <div className="myAssets">
       <div className="sideContainer2">
         <Sidebar />
+      </div>
+      <div className="myAssetsContainer">
+        <Header />
+        <div className="mainAssets">
+          <div className="myLikedAssetsContainer">
+            <AddNewAsset />
+            <MyAssetsCards />
+          </div>
+          <div className="card2Container">
+            <AuctionHistory />
+          </div>
         </div>
-       <div className="myAssetsContainer">
-       <Header />
-       <div className="myLikedAssetsContainer">
-       <AddNewAsset/>
-       <MyAssetsCards/>
-       </div>
-       <div className="card2Container">
-        <AuctionHistory/>
-       </div>
-     </div>
+      </div>
     </div>
   )
 }

@@ -1,31 +1,37 @@
 @use "../../responsive.scss" as res;
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
-.myAssetsView{
+.myAssetsView {
   font-family: "Poppins", sans-serif;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
 
+.sideContainerV {
+  min-width: 245px;
+  transition: transform 0.3s ease-in-out;
+
+  @include res.md {
+    min-width: 80px;
+  }
+
+  @include res.sm {
+    display: none !important; // Hide sidebar on small screens
+  }
+}
+
+.AssetsViewCards {
+  flex: 1;
+  /* Main content takes the remaining space */
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  /* Stack items vertically */
+
+  @include res.md {
     display: flex;
-    
-    .sideContainerV {
-        flex: 1; /* Sidebar takes 1 parts of the total flex space */
-        min-width: 245px; /* Optional: Minimum width for sidebar */
-        background-color: white; /* Example styling for visibility */
-      
-      @include res.md{
-        min-width: 80px;
-      }
-      }
-    
-      .AssetsViewCards{
-        flex: 8; /* Main content takes the remaining space */
-        display: flex;
-        flex-direction: column; /* Stack items vertically */
-      
-        @include res.md{
-          display: flex;
-          width: 70%;
-          margin-top: -9px;
-        }
-      }
-      
-} 
+    width: 70%;
+    margin-top: -9px;
+  }
+}
