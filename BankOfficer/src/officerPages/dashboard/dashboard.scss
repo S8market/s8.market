@@ -3,10 +3,11 @@
 .dashboard {
   font-family: "Poppins", sans-serif;
   display: flex;
+  height: 100vh;
+  width: 100vw;
 }
 
 .sideContainerdash {
-  flex: 1;
   min-width: 245px;
   transition: transform 0.3s ease-in-out;
 
@@ -18,32 +19,29 @@
     display: none !important; // Hide sidebar on small screens
   }
 }
-
 .dashContainer {
-  flex: 8;
+  flex: 1;
+  min-width: 0; // allows flex children to shrink properly
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 
   @include res.md {
-    display: flex;
-    width: 70%;
     margin-top: -9px;
   }
 
   @include res.sm {
-    width: 100%; // Expand content when sidebar is hidden
+    width: 100%;
     margin-left: 0;
   }
 }
 
+
 // Top header
 .mainDashboard {
-  margin: 10px;  
   display: flex;
   flex-direction: column;
   border-radius: 20px;
-
-  @include res.md {
-    width: 100%;
-  }
+  padding: 20px;
+  overflow-x: hidden;
 }

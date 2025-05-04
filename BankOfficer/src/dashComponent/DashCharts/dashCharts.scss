@@ -1,11 +1,13 @@
 @import "../../responsive.scss"; 
 
 .dashboard-charts {
+// flex: 1;
   display: grid;
+max-width: 100%;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto auto; // Three rows
-  gap: 20px;
-  padding: 10px;
+  // gap: 20px;
+  // padding: 10px;
   font-family: "Poppins", sans-serif;
 
 @include md {
