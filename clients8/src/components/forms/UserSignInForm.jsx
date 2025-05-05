@@ -35,7 +35,7 @@
                 );
 
                 if (res.data.success) {
-                    navigate("/"); // or wherever the user should go
+                    navigate("/properties"); // or wherever the user should go
                 }
             } catch (err) {
                 setError(err?.response?.data?.message || "Something went wrong");
