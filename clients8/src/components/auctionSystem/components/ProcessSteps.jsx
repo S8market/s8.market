@@ -44,6 +44,8 @@ export default function ProcessSteps() {
   };
 
   return (
+    <>
+   
     <div className="relative w-full py-20 px-8 overflow-hidden">
       {/* Arrows only on small screens */}
       <button
@@ -52,6 +54,10 @@ export default function ProcessSteps() {
       >
         <ChevronLeft size={24} />
       </button>
+
+      <div className="text-center text-4xl font-bold mb-11 text-[#004663]">
+        Options for Bank Officers:  
+      </div>
 
       <div className="max-w-[1800px] mx-auto">
         <div
@@ -77,5 +83,6 @@ export default function ProcessSteps() {
         <ChevronRight size={24} />
       </button>
     </div>
+    </>
   );
 }

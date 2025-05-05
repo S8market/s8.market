@@ -15,6 +15,7 @@
     "@mui/icons-material": "^6.4.0",
     "@react-google-maps/api": "^2.20.6",
     "axios": "^1.7.9",
+    "js-cookie": "^3.0.5",
     "lucide-react": "^0.474.0",
     "prop-types": "^15.8.1",
     "react": "^19.0.0-rc.1",
