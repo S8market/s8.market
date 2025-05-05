@@ -8,7 +8,7 @@ const AppContextProvider = (props) => {
   var serverUrl;
 
   if(import.meta.env.MODE === "development"){
-    serverUrl = import.meta.env.VITE_SERVER_URL_DEV;
+    serverUrl = import.meta.env.VITE_SERVER_URL;
     console.log("Development server URL: ", serverUrl);
   }
   else if(import.meta.env.MODE === "production"){

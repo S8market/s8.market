@@ -54,6 +54,7 @@
   /* Space between child components */
   align-items: flex-start;
   /* Aligns items at the top */
+  flex-wrap: wrap;
   gap: 30px;
 
   @include res.md {

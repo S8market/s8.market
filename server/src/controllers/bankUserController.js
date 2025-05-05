@@ -19,6 +19,10 @@ export const bankUserRegister = async (req, res) => {
       employeeID, designation 
     } = req.body;
     
+    console.log (firstName, email, phone, password, verificationMethod, 
+      bankName, lastName, address, city, state, pincode, bankbranch, 
+      employeeID, designation)
+      
     // Log bankName and lastName for debugging if needed
     console.log(bankName, lastName);
 

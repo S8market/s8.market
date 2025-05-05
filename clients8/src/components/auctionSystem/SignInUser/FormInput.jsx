@@ -38,7 +38,7 @@ export const FormInput = ({ label, placeholder, isTextArea, isBankOfficer, error
           placeholder={placeholder}
           onChange={handleChange}
           value={currentValue}
-          required
+        
           className={`px-6 pt-2 pb-24 rounded-3xl bg-gray-400 bg-opacity-40 text-black text-opacity-50 max-md:px-5 max-md:pb-28 max-md:max-w-full ${
             error ? 'border-2 border-red-500' : ''
           }`}
@@ -51,7 +51,7 @@ export const FormInput = ({ label, placeholder, isTextArea, isBankOfficer, error
           placeholder={placeholder}
           onChange={handleChange}
           value={currentValue}
-          required
+          
           className={`h-9 px-6 mt-2 rounded-3xl bg-gray-400 bg-opacity-40 text-black text-opacity-50 max-md:px-2 max-md:max-w-full ${
             error ? 'border-2 border-red-500' : ''
           }`}

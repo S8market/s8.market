@@ -12,6 +12,7 @@
   border: 1px solid rgba(0, 0, 0, 0.25);
   height: 479px;
   width: 459px;
+  margin-top: 21px;
 
   @include md {
     width: 650px;
@@ -197,6 +198,7 @@ h3 {
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  margin-top: -35px;
 
   &:hover {
     color: #000;
@@ -208,12 +210,14 @@ h3 {
     width: 100%;
     height: auto;
     padding: 10px;
+  
   }
 
   h2,
   h3 {
     margin-left: 10px;
     font-size: 18px;
+    
   }
 
   .viewAllContainer {

@@ -10,6 +10,7 @@
   // min-height:;
   width: 100%;  // Set for large screens initially
   margin-right: auto;
+  margin-top: 11px;
 
   // Responsive for medium screens (desktops)
   @include res.md {
@@ -79,6 +80,7 @@
   display: flex;
   align-items: center;
   width: 100%;
+  margin-left: 61px;
 }
 
 .search-box input {
@@ -93,6 +95,7 @@
   position: absolute;
   left: 12px;
   color: #888;
+  
 }
 
 .add-button {

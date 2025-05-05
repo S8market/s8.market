@@ -318,11 +318,19 @@ const DashCharts = () => {
          )}
       </div>
       <input
-                type="date"
-                value={selectedDate}
-                onChange={(e) => setSelectedDate(e.target.value)}
-                placeholder="Select Date"
-              />
+  type="date"
+  value={selectedDate}
+  onChange={(e) => setSelectedDate(e.target.value)}
+  style={{
+    padding: '2px 8px',
+    fontSize: '16px',
+    border: '1px solid #ccc',
+    borderRadius: '6px',
+    backgroundColor: '#fff',
+    marginTop: '15px',
+    color: '#333'
+  }}
+/>
 
 
           {/* Table (3rd Row) */}

@@ -94,10 +94,7 @@ export default function SignUpPage() {
       const key = input.name;
       const value = bankOfficerFormValues[key];
 
-      if (!value || value.trim() === "") {
-        errors[key] = `${input.label} is required`;
-        isValid = false;
-      }
+     
     });
 
     setFormErrors(errors);

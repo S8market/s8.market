@@ -13,15 +13,12 @@
   height: 460px;
   width: 400px;
   margin-left: -11px;
-  // -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-  // box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
 
-@include res.md {
-  height: 436px;
-  width: 370px;
-  max-width: 370px;
-}
-
+  @include res.md {
+    height: 436px;
+    width: 370px;
+    max-width: 370px;
+  }
 
   .headerContainer2 {
     display: flex;
@@ -35,7 +32,7 @@
       font-size: 24px;
       font-weight: 600;
       color: #333;
-      margin: 0; // Remove left margin
+      margin: 0;
 
       @include res.md {
         font-size: 20px;
@@ -46,58 +43,47 @@
       font-size: 16px;
       font-weight: 500;
       color: #555;
-      margin: 0; // Remove left margin
-      margin-left: auto; // Push to right
-      padding-left: 20px; // Add spacing between h2 and h3
-    
-      @include res.md{
-      font-size: 14px;
+      margin: 0;
+      margin-left: auto;
+      padding-left: 20px;
+
+      @include res.md {
+        font-size: 14px;
+      }
     }
-   }
   }
 
   .cardsScrollContainer {
-    margin-left: 10px;
     width: 100%;
-    overflow-x: auto; // Enable horizontal scrolling
-    padding-bottom: 10px; // Space for scrollbar
-    position: relative; // For positioning the "View All" button
+    height: 100%;
+    overflow-y: auto; // Vertical scroll
+    overflow-x: hidden;
+    padding-right: 8px;
     margin-top: -10px;
-    
-    @include res.md{
-     margin-bottom: -13px;
-    }
 
     &::-webkit-scrollbar {
-      height: 8px; // Scrollbar height
+      width: 6px;
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: #888; // Scrollbar thumb color
+      background-color: #888;
       border-radius: 6px;
-      margin-right: 2px;
     }
 
     &::-webkit-scrollbar-track {
-      background-color: #f1f1f1; // Scrollbar track color
+      background-color: #f1f1f1;
     }
-  }
 
-  //message
-  .noDataMessage {
-    font-size: 34px; /* Increase font size */
-    font-weight: 600;
-    color: rgba(119, 119, 119, 0.5); /* Make text a little transparent */
-    text-align: center;
-    white-space: normal; /* Allow line breaks */
-    margin-top: 120px;
+    @include res.md {
+      margin-bottom: -13px;
+    }
   }
 
   .assetsList {
     display: flex;
-    gap: 20px;
-    padding-bottom: 10px; // Space for scrollbar
-    min-width: 100%; // Ensures scrolling activates when needed
+    flex-direction: column; // Vertical stacking
+    gap: 16px;
+    width: 100%;
   }
 
   .assetCard {
@@ -106,76 +92,70 @@
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    // min-width: 240px; // Minimum width for each card
-    max-width: 279px;
+    height: 355px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 355px; // Set a larger fixed height for uniformity
     padding-bottom: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    
 
     &:hover {
       transform: translateY(-5px);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    @include res.md{
-      max-width: 310px;
+    @include res.md {
       height: 340px;
     }
-  }
 
     .cardHeader {
       position: relative;
-      // flex: 1; // Allow the header to take up remaining space
       max-height: 200px;
 
       .propertyImage {
         width: 100%;
-        height: 100%; // Make the image fill the header
-        object-fit: cover; // Ensure the image covers the area without distortion
-        object-position: center; // Center the image inside the container
-      
-        @include res.md{
-        height: 90%;
-       }
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+
+        @include res.md {
+          height: 90%;
+        }
       }
 
       .userImageContainer {
         position: absolute;
-        bottom: -20px; // Half outside the image
+        bottom: -20px;
         left: 10px;
         width: 60px;
         height: 60px;
         border-radius: 50%;
         overflow: hidden;
-        border: 3px solid white; // Optional: Add a border to make it stand out
+        border: 3px solid white;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-        @include res.md{
-        height: 50px;
-        width: 50px;
-       }
-      }
+        @include res.md {
+          height: 50px;
+          width: 50px;
+        }
+
         .userImage {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          overflow: hidden;
-          background-color: #fff; 
+          background-color: #fff;
         }
+      }
     }
 
     .cardBody {
       padding: 15px;
-      flex-grow: 1;  // Allow the body to grow and take up remaining space
-      position: relative;
+      flex-grow: 1;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;  // Ensure content is spaced out, and button stays at the bottom
-     
+      justify-content: space-between;
+
       h4 {
         font-size: 15px;
         font-weight: 600;
@@ -183,14 +163,30 @@
         margin: 0 0 10px 0;
         text-overflow: ellipsis;
         display: -webkit-box;
-        -webkit-line-clamp: 2; /* Limit to 2 lines */
-        line-clamp: 2; /* Standard property for compatibility */
+        -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
-      
-        @include res.md{
-        font-size: 14px;
-       }
+
+        @include res.md {
+          font-size: 14px;
+        }
+      }
+
+      .propertyAddress {
+        font-size: 13px;
+        color: #555;
+        margin: 0 0 8px 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: break-word;
+        white-space: normal;
+
+        @include res.md {
+          font-size: 12.5px;
+        }
       }
 
       p {
@@ -198,63 +194,41 @@
         color: #555;
         margin: 0 0 10px 0;
 
-        @include res.md{
+        @include res.md {
           font-size: 12px;
         }
       }
 
-      /*  Address Styling to Limit to 2 Lines  */
-    .propertyAddress {
-      font-size: 13px;
-      color: #555;
-      margin: 0 0 8px 0;
-      display: -webkit-box;
-      -webkit-line-clamp: 2; /* Limit to 2 lines */
-      line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      word-break: break-word;
-      white-space: normal; /* Ensures proper wrapping */
-   
-      @include res.md {
-    font-size: 12.5px;
-    }
-   }
-  }
-     
       .viewButton {
         display: inline-block;
-    padding: 8px 16px;
-    background-color: #00334a;
-    color: #fff;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-    margin-top: 10px; /* Adjust the gap between button and auction date */
-    width: 100%; /* Adjust the width of the "View now" button */
-    max-width: 100px; /* Set a max-width if you want to limit the button size */
-    z-index: 10;
-    transition: background-color 0.3s ease;
+        padding: 8px 16px;
+        background-color: #00334a;
+        color: #fff;
+        border-radius: 5px;
+        font-size: 14px;
+        margin-top: 10px;
+        width: 100%;
+        max-width: 100px;
+        text-align: center;
+        cursor: pointer;
+        text-decoration: none;
 
         &:hover {
           background-color: #004f6e;
         }
 
-        @include res.md{
+        @include res.md {
           margin-top: -5px;
         }
+      }
     }
-  
-
-  // Styles for the "View All" button
+  }
 
   .viewAllCont {
     position: absolute;
     right: 10px;
-    bottom: 20px; // Adjust position relative to cards
-    z-index: 1; // Ensure it's above scroll content
+    bottom: 20px;
+    z-index: 1;
   }
 
   .viewAllButton {
@@ -265,7 +239,6 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
-    transition: color 0.2s ease;
     margin-top: -10px;
 
     &:hover {
@@ -279,4 +252,12 @@
     }
   }
 
+  .noDataMessage {
+    font-size: 34px;
+    font-weight: 600;
+    color: rgba(119, 119, 119, 0.5);
+    text-align: center;
+    white-space: normal;
+    margin-top: 120px;
+  }
 }
