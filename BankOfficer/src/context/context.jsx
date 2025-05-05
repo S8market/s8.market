@@ -7,15 +7,15 @@ const AppContextProvider = (props) => {
 
   var serverUrl;
 
-  if(import.meta.env.MODE === "development"){
+  if (import.meta.env.MODE === "development") {
     serverUrl = import.meta.env.VITE_SERVER_URL_DEV;
     console.log("Development server URL: ", serverUrl);
   }
-  else if(import.meta.env.MODE === "production"){
+  else if (import.meta.env.MODE === "production") {
     serverUrl = import.meta.env.VITE_SERVER_URL;
     console.log("Production server URL: ", serverUrl);
   }
-  else{
+  else {
     serverUrl = import.meta.env.VITE_SERVER_URL_DEV;
     console.log("Unknown environment, using development server URL: ", serverUrl);
   }
@@ -109,17 +109,17 @@ const AppContextProvider = (props) => {
     designation: ""
   });
 
-  const [avatar, setAvatar] = useState("/user.png" )
-  
+  const [avatar, setAvatar] = useState("/user.png")
+
   const [properties, setProperties] = useState([]); // State to store properties
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [authChecked, setAuthChecked] = useState(false);
-  
+
   // Get Profile Details
   const handleProfile = async () => {
     try {
-      const { data } = await axios.get(serverUrl + "/api/v1/bank-user/get-profile", 
+      const { data } = await axios.get(serverUrl + "/api/v1/bank-user/get-profile",
         { withCredentials: true }
       );
       if (data.success) {
@@ -136,7 +136,7 @@ const AppContextProvider = (props) => {
           designation: data.user.designation
         });
         setAvatar(data.user.bankProfileImage.url)
-      }else{
+      } else {
         console.log(data.message)
       }
     } catch (error) {
@@ -173,25 +173,25 @@ const AppContextProvider = (props) => {
 
   // Function to get properties
   const getProperties = async () => {
-      try {
-        const { data } = await axios.get( serverUrl + "/api/v1/bank-user/get-property", {
-          withCredentials: true,
-        });
-        if (data.success) {
-          setProperties(data.properties);
-        }else{
-          console.log(data.message);
-        }
-      } catch (error) {
-        console.log(error);
+    try {
+      const { data } = await axios.get(serverUrl + "/api/v1/bank-user/get-property", {
+        withCredentials: true,
+      });
+      if (data.success) {
+        setProperties(data.properties);
+      } else {
+        console.log(data.message);
       }
+    } catch (error) {
+      console.log(error);
     }
+  }
 
 
 
 
-    // Latest Property
-    const latestProperty = properties[properties.length - 1]
+  // Latest Property
+  const latestProperty = properties[properties.length - 1]
 
   const value = {
     serverUrl,
@@ -208,8 +208,8 @@ const AppContextProvider = (props) => {
     propertyId,
     setPropertyId,
     userDetails, searchString, setSearchString, getProperties, latestProperty, isAuthenticated, setIsAuthenticated,
-    authChecked, setAuthChecked, 
-    setUserDetails,avatar, setAvatar, properties, setProperties, handleProfile, userUpdateDetails, setUserUpdateDetails
+    authChecked, setAuthChecked,
+    setUserDetails, avatar, setAvatar, properties, setProperties, handleProfile, userUpdateDetails, setUserUpdateDetails
   };
   return (
     <AppContext.Provider value={value}>{props.children}</AppContext.Provider>

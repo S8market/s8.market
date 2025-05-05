@@ -1,41 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
+import  Spinner from '../Common/Spinner.jsx';
+import { AppContext } from '../../context/context.jsx';
 
 const PrivateRoute = ({ children }) => {
-  const [authChecked, setAuthChecked] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  const handleAuthSuccess = (value) => {
-    setIsAuthenticated(value);
-  };
+  const { serverUrl, authChecked, setAuthChecked, isAuthenticated, setIsAuthenticated } = useContext(AppContext);
 
   useEffect(() => {
-    axios.get('/api/v1/bank-user/verify-token', {
+    axios.get(`${serverUrl}/api/v1/bank-user/verify-token`, {
       withCredentials: true,
-      validateStatus: status => (status >= 200 && status < 300) || status === 304 
+      validateStatus: status => status < 400,
     })
-    .then((res) => {
-      // if(res.data.success) {
-        console.log(res);
-        handleAuthSuccess(true);
-  
-      // }
-    })
-    .catch(() => {
-      handleAuthSuccess(false);
-    })
-    .finally(() => {
-      setAuthChecked(true);
-      console.log("Auth check completed");
-    });
+      .then((res) => {
+        console.log("Auth API response:", res);
+        if (res.data?.success) {
+          setIsAuthenticated(true);
+        } else {
+          setIsAuthenticated(false);
+        }
+      })
+      .catch((err) => {
+        console.error("Auth failed:", err?.response?.data || err.message);
+        setIsAuthenticated(false);
+      })
+      .finally(() => {
+        console.log("Auth check completed");
+        setAuthChecked(true);
+      });
   }, []);
 
   if (!authChecked) {
-    return <div>Checking authentication...</div>;
+    return <Spinner />;
   }
 
   return isAuthenticated ? children : <Navigate to="/sign-in" />;
 };
 
 export default PrivateRoute;
+
