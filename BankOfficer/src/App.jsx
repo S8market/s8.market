@@ -15,6 +15,7 @@ import axios from 'axios';
 // import ChangePassword from './officerPages/ChangePassword';
 import BankSignInPage from './officerPages/signInPage/SignIn';
 import BankSignUpPage from './officerPages/signUpPage/SignUp';
+import PrivateRoute from './dashComponent/PrivateRoute/privateRoute';
 
 // import PropertyDetailsForm from './dashComponent/nAsset Forms/PropertyDetailForm';
 // import AddressDetailsForm from './dashComponent/nAsset Forms/AddressForm';
@@ -58,7 +59,13 @@ function App() {
         <Route path="/view" element={<AssetsView />} />
         <Route path="/property/:id" element={<Single />} />
         <Route path="/addNew" element={<AddAsset />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+
+        <Route path="/dashboard" element={
+          <PrivateRoute>
+          <Dashboard />
+          </PrivateRoute>
+        } 
+        />
 
 
          {/* <Route path="/property-details" element={<PropertyDetailsForm />} />

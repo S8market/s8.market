@@ -15,10 +15,12 @@ import {
   updateProfileImage,
   updateProperties,
   verifyOTP,
-  changePassword
+  changePassword,
+  checkCookieToken
 } from "../controllers/bankUserController.js";
 import bankUserAuth from "../middlewares/bankUser.js";
 import upload from "../middlewares/multer.js";  
+
 
 const bankUserRouter = express.Router();
 
@@ -38,5 +40,5 @@ bankUserRouter.post("/update-profile",bankUserAuth, updateProfile)
 bankUserRouter.post("/update-profile-image",bankUserAuth, upload.single('image'), updateProfileImage)
 bankUserRouter.post("/searchProperties",bankUserAuth, searchProperty)
 bankUserRouter.get("/check-auth",bankUserAuth, checkAuth)
-
+bankUserRouter.get("/verify-token", bankUserAuth, checkCookieToken)
 export default bankUserRouter;
