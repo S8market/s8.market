@@ -15,7 +15,7 @@ const BankSignInForm = ({ onSubmit }) => {
     });
     const [error, setError] = useState("");
 
-    const { serverUrl } = useContext(AppContext);
+    const { serverUrl, setIsAuthenticated } = useContext(AppContext);
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
@@ -35,6 +35,7 @@ const BankSignInForm = ({ onSubmit }) => {
             );
 
             if (res.data.success) {
+                setIsAuthenticated(true); // Set authentication status to true
                 navigate("/"); // or wherever the Bank officer should go
             }
         } catch (err) {

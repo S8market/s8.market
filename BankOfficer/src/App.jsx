@@ -9,13 +9,13 @@ import AddAsset from './officerPages/add new asset/AddAsset';
 import Profilepage from './officerPages/profilePage/ProfilePage';
 import Profile2 from './officerPages/profile Settings/Profile2';
 import Dashboard from './officerPages/dashboard/dashboard';
-import { useContext, useEffect} from 'react';
+import { useContext, useEffect } from 'react';
 import { AppContext } from './context/context';
 import axios from 'axios';
 // import ChangePassword from './officerPages/ChangePassword';
 import BankSignInPage from './officerPages/signInPage/SignIn';
 import BankSignUpPage from './officerPages/signUpPage/SignUp';
-import PrivateRoute from './dashComponent/PrivateRoute/privateRoute';
+import PrivateRoute from './dashComponent/PrivateRoute/PrivateRoute';
 
 // import PropertyDetailsForm from './dashComponent/nAsset Forms/PropertyDetailForm';
 // import AddressDetailsForm from './dashComponent/nAsset Forms/AddressForm';
@@ -49,35 +49,20 @@ function App() {
     return <div className="flex items-center justify-center h-screen">Loading...</div>;
   }
   return (
+    <>
+      <Routes>
+        <Route path="/sign-in" element={<BankSignInPage />} />
+        <Route path="/sign-up" element={<BankSignUpPage />} />
+        <Route path="/dashboard" element={<PrivateRoute> <Dashboard /></PrivateRoute>} />
+        <Route path="/myAssets" element={<PrivateRoute><MyAssets /></PrivateRoute>} />
+        <Route path="/profile" element={<PrivateRoute><Profile2 /></PrivateRoute>} />
+        <Route path="/view" element={<PrivateRoute><AssetsView /></PrivateRoute>} />
+        <Route path="/property/:id" element={<PrivateRoute><Single /></PrivateRoute>} />
+        <Route path="/addNew" element={<PrivateRoute><AddAsset /></PrivateRoute>} />
+        <Route path="/" element={<Profilepage />} />
+      </Routes>
 
-    <Routes>
-      <Route path="/" element={<Profilepage />} />
-      <Route path="/sign-in" element={<BankSignInPage />} />
-      <Route path="/sign-up" element={<BankSignUpPage />} />
-        <Route path="/myAssets" element={<MyAssets />} />
-        <Route path="/profile" element={<Profile2 />} />
-        <Route path="/view" element={<AssetsView />} />
-        <Route path="/property/:id" element={<Single />} />
-        <Route path="/addNew" element={<AddAsset />} />
-
-        <Route path="/dashboard" element={
-          <PrivateRoute>
-          <Dashboard />
-          </PrivateRoute>
-        } 
-        />
-
-
-         {/* <Route path="/property-details" element={<PropertyDetailsForm />} />
-    //    <Route path="/address-details" element={<AddressDetailsForm/> } />
-    //   <Route path="/auction-details" element={<AuctionDetailsForm />} />  
-      </>
-       ) : (
-          <>
-            {window.location.href = import.meta.env.VITE_CLIENT_URL + '/sign-up'}
-          </>
-        )}  */}
-    </Routes>
+    </>
   )
 }
 

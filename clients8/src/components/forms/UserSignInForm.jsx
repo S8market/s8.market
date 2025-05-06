@@ -15,7 +15,7 @@
         });
         const [error, setError] = useState("");
 
-        const { serverUrl } = useContext(AppContext);
+        const { serverUrl, setIsAuthenticated } = useContext(AppContext);
         const handleChange = (e) => {
             const { name, value } = e.target;
             setFormData(prev => ({ ...prev, [name]: value }));
@@ -35,6 +35,7 @@
                 );
 
                 if (res.data.success) {
+                    setIsAuthenticated(true);
                     navigate("/properties"); // or wherever the user should go
                 }
             } catch (err) {

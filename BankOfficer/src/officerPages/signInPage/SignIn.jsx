@@ -1,9 +1,14 @@
-import React, { useContext } from "react";
-
+import React, { useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import BankSignInForm from "../../components/forms/BankSignInForm";
+
+import { AppContext } from "../../context/context.jsx";
 
 
 const BankSignInPage = () => {
+      const { serverUrl, authChecked, setAuthChecked, isAuthenticated, setIsAuthenticated } = useContext(AppContext);
+
+    
     return (
         <div className="min-h-screen bg-[#004663] flex flex-col sm:flex-row items-stretch">
 

@@ -10,12 +10,6 @@ import "dotenv/config";
 
 const port = process.env.PORT;
 
-// app.get("/", (req, res) => {
-//   res.send("Api is Working");
-// });
-
-// app.listen(port, () => console.log("Server Started at ", port));
-
 const app = express();
 
 app.set('trust proxy', 1);
