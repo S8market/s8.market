@@ -46,7 +46,16 @@
        }
       }
   
-      /* Avatar Section */
+      .profile-container {
+        display: flex;
+        gap: 10px;
+      
+        @include res.md {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+      
       .avatar-section {
         display: flex;
         flex-direction: column;
@@ -57,16 +66,40 @@
         width: 250px;
         height: 310px;
         text-align: center;
-
+      
         @include res.md {
           width: 200px;
           height: 300px;
           object-fit: cover;
           margin-left: -5px;
-          border-radius: 10px;
         }
       }
-  
+      
+      .details-section {
+        flex: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        width: 100%;
+        height: 310px;
+        min-height: 260px;
+        max-height: 310px;
+        overflow-y: auto;
+      
+        @include res.md {
+          padding: 10px;
+          height: 100%;
+          gap: 10px;
+          grid-template-columns: 1fr;
+          min-height: 300px;
+          max-height: 910px;
+          min-width: 300px;
+        }
+      }
+      
       .avatar {
         margin-top: 20px;
         width: 140px;
@@ -108,30 +141,8 @@
         background-color:#004663;
       }
   
-      /* Details Section */
-      .details-section {
-        flex: 1;
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* Two equal columns */
-        gap: 10px;
-        padding: 20px;
-        border-radius: 10px;
-        border: 1px solid #ddd;
-        width: 100%;
-        height: 310px;
-        min-height: 260px; /* Ensures minimum height */
-        max-height: 310px; /* Prevents height increase */
-        overflow-y: auto; /* Allows scrolling within the section */
+    
       
-      @include res.md {
-        padding: 10px;
-        height: 100%;
-        gap:0px;
-        min-height: 300px; /* Ensures minimum height */
-        max-height: 310px; /* Prevents height increase */
-        overflow-y: auto; /* Allows scrolling within the section */
-       }
-      }
   
       .info {
         flex: 1;
