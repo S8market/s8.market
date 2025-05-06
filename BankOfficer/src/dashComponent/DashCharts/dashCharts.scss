@@ -9,118 +9,171 @@ max-width: 100%;
   // gap: 20px;
   // padding: 10px;
   font-family: "Poppins", sans-serif;
+  flex-wrap: wrap;
 
 @include md {
   display: flex;
  flex-direction: column;
-}
-
-}
-
-  .total-assets {
-    display: flex;
-    background: white;
-    border-radius: 10px;
-    padding: 20px;
-    // box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-    align-items: center;
-    
-
-    .asset-card {
-     display: flex;
-     flex-direction: column;
-      // padding: 20px;
-      border-radius: 20px;
-      text-align: center;
-      border: 1px solid #DCD6FA;
-      width: 270px;
-      height: 200px;
-      margin-bottom: 20px;
-      margin-left: 40px;
-     }
-      .total-card {
-        background: #e9d5ff;
-        font-size: 18px;
-        border-radius: 20px 20px 0 0;
-        color: #5a4b8c;
-        height: 80px;
-        align-content: center;
-      }
-
-      .total-value {
-        font-size: 30px;
-        color: #3f3d56;
-        background: white;
-        align-content: center;
-        overflow: hidden;
-        margin-top: 25px;
-      }
-
-      p {
-        font-size: 14px;
-        color: #777;
-      }
-    
-
-    .asset-list {
-      display: flex;
-      flex-direction: column;
-      margin-left: 20px;
-      width: 100%;
-    }
-    
-      .asset-item {
-        display: flex;
-        align-items: center;
-        position: relative;
-        justify-content: space-between;
-        margin-bottom: 20px;
-        width: 250px;
-        height: 40px;
-        border-radius: 5px;
-        background: #e1e0e0;
-        // border-left: 5px solid transparent;
-        border-radius: 5px;
-        overflow: hidden;
-      }
-
-        .fill-bar {
-          position: absolute;
-          left: 0;
-          height: 100%;
-          transition: width 0.3s ease-in-out;
-        }
-    
-        .text-content {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          width: 100%;
-          padding: 0 10px;
-          position: relative;
-          z-index: 1;
-        }
-    
-        h3 {
-          font-size: 18px;
-          margin: 0;
-        }
-    
-        p {
-          font-size: 14px;
-          color: #555;
-        } 
+ flex-wrap: wrap;
   }
+
+}
+
+.total-assets {
+  display: flex;
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  
+  flex-wrap: wrap; /* Allows the child elements to wrap if needed */
+  justify-content: center;
+  width: 100%; /* Ensure the container takes up full width */
+}
+
+.asset-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  text-align: center;
+  flex-wrap: wrap;
+  align-content: center;
+  border: 1px solid #DCD6FA;
+  width: 270px;
+  height: 200px;
+  margin-bottom: 20px;
+  margin-left: 40px;
+  box-sizing: border-box; /* Prevents overflow */
+}
+
+.total-card {
+  background: #e9d5ff;
+  font-size: 18px;
+  border-radius: 20px 20px 0 0;
+  color: #5a4b8c;
+  height: 80px;
+  align-content: center;
+  flex-wrap: wrap ;
+}
+
+.total-value {
+  font-size: 30px;
+  color: #3f3d56;
+  background: white;
+  align-content: center;
+  overflow: hidden;
+  margin-top: 25px;
+  flex-wrap: wrap;
+}
+
+p {
+  font-size: 14px;
+  color: #777;
+}
+
+.asset-list {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.asset-item {
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  width: 250px;
+  height: 40px;
+  border-radius: 5px;
+  background: #e1e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  flex-wrap: wrap;
+}
+
+.fill-bar {
+  position: absolute;
+  left: 0;
+  height: 100%;
+  transition: width 0.3s ease-in-out;
+  flex-wrap: wrap;
+}
+
+.text-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 10px;
+  position: relative;
+  z-index: 1;
+}
+
+h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+p {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Media Query for Small Screens */
+@media (max-width: 768px) {
+  .total-assets {
+    flex-direction: column; /* Stack the content vertically */
+    gap: 20px; /* Adjust spacing between stacked elements */
+    padding: 15px; /* Adjust padding for smaller screens */
+  }
+
+  .asset-card {
+    width: 100%; /* Make asset cards take up full width on smaller screens */
+    
+    flex-wrap: wrap;
+    margin-left: 0; /* Remove margin on smaller screens */
+    margin-bottom: 20px; /* Ensure some space between stacked asset cards */
+  }
+
+  .asset-item {
+    flex-wrap: wrap;
+    width: 100%; /* Make asset items take up full width */
+    margin-bottom: 10px; /* Adjust the margin to avoid overflow */
+  }
+}
+
+/* Additional adjustment for very small screens (e.g., mobile phones) */
+@media (max-width: 480px) {
+  .asset-card {
+    width: 100%; /* Ensure asset cards are full width */
+    margin-left: 0;
+  }
+
+  .total-value {
+    font-size: 24px; /* Reduce font size for very small screens */
+  }
+
+  .asset-item {
+    width: 100%; /* Ensure asset items take up full width */
+  }
+}
+
 
   .asset-analytics {
     background: white;
+    flex-wrap: wrap;
     padding: 20px;
     border-radius: 10px;
     // box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
     position: relative;
-    width: 600px;
+    width: 100%;
 @include md {
   width: 100%;
 }
@@ -150,10 +203,12 @@ max-width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     .donut-center {
       position: absolute;
+      flex-wrap: wrap;
       top: 43%;
       left: 50%;
       transform: translate(-50%, -50%);
@@ -181,6 +236,7 @@ max-width: 100%;
     background: white;
     border-radius: 10px;
     padding: 20px;
+    flex-wrap: wrap;
     margin-left: 1px;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
     margin-top: 11px;
@@ -191,6 +247,7 @@ max-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    flex-wrap: wrap;
     h4 {
       font-size: 18px;
       font-weight: bold;
@@ -201,7 +258,7 @@ max-width: 100%;
       flex-wrap: wrap; // Allows filters to wrap if they overflow
       gap: 15px; // Increased gap for better separation
       margin-bottom: 20px; // More space below filters for clarity
-      
+      flex-wrap: wrap;
       select {
         padding: 8px; // Slightly increased padding for better UI
         border: 1px solid #ddd;
@@ -233,6 +290,7 @@ max-width: 100%;
   //price-range-analysis
   .price-range-analysis {
     text-align: start;
+    flex-wrap: wrap;
 
     h4 {
       font-size: 18px;
@@ -245,6 +303,7 @@ max-width: 100%;
       justify-items: start;
       gap: 10px;
       margin-bottom: 10px;
+      flex-wrap: wrap;
 
       input {
         padding: 5px;
@@ -252,6 +311,7 @@ max-width: 100%;
         border: 1px solid #ccc;
         border-radius: 5px;
         text-align: center;
+        flex-wrap: wrap;
       }
 
       select {
@@ -267,7 +327,10 @@ max-width: 100%;
     font-size: 16px; /* Ensure font size is consistent */
     padding: 8px 15px; /* Adds padding around the text */
     border-radius: 4px;
-    margin-left: 350px;
+    //margin-left: 1%;
+    right: 0%;
+    flex-wrap: wrap;
+    
    
  
     border: 1px solid #004f6e;
@@ -280,10 +343,11 @@ max-width: 100%;
   @include md {
     font-size: 14px;
     padding: 8px 30px;
-    margin-left: -409px;
-    margin-top: -85px;
+    //-left: 289px;
+    //margin-top: 85px;
     margin-bottom: 20px;
     width: 400px;
+    flex-wrap: wrap;
   }
   }
 
@@ -295,6 +359,8 @@ max-width: 100%;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    flex-wrap: wrap;
 
     @include md {
    max-width: 700px;
@@ -306,6 +372,7 @@ max-width: 100%;
       color: black;
       font-weight: bold;
       margin-bottom: 15px;
+      flex-wrap: wrap;
 
       @include md {
         margin-bottom: 20px;
@@ -318,6 +385,8 @@ max-width: 100%;
       gap: -1px;
       margin-bottom: 15px;
       margin-left: 1px;
+      width: 100%;
+      flex-wrap: wrap;
       
 
       @include md{

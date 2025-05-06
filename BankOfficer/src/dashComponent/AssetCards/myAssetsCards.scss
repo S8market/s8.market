@@ -13,12 +13,23 @@
   height: 460px;
   width: 400px;
   margin-left: -11px;
+  min-width: 250px;
 
   @include res.md {
     height: 436px;
     width: 370px;
     max-width: 370px;
   }
+
+  // Prevent image stretch and maintain aspect ratio
+  img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 12px; // Optional: makes images look more elegant
+  }
+
+
 
   .headerContainer2 {
     display: flex;
