@@ -6,7 +6,7 @@ const OtpPopup = ({ onSuccess, onClose, email, phone }) => {
     const [otp, setOtp] = useState('');
     const [error, setError] = useState(null);
     const [verificationMessage, setVerificationMessage] = useState('');
-    const { serverUrl } = useContext(AppContext);
+    const { serverUrl,  } = useContext(AppContext);
 
     const handleOtpSubmit = async (e) => {
         e.preventDefault();

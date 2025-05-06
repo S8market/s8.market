@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Otp from "../../components/Otp";
 
+import axios from "axios";
 const steps = ["Personal Info", "Bank Address", "Bank Details"];
+import { useNavigate } from "react-router-dom";
+
+import { AppContext } from "../../context/context";
 
 const BankSignUpForm = ({ onSubmit }) => {
     const [step, setStep] = useState(1);
@@ -25,14 +29,15 @@ const BankSignUpForm = ({ onSubmit }) => {
     const [showOtpPopup, setShowOtpPopup] = useState(false);
 
 
+    const navigate = useNavigate();
+
+    const { serverUrl, setIsAuthenticated } = useContext(AppContext);
+    
     const handleOtpSuccess = () => {
-        // Handle OTP success here, e.g., redirect to another page or show a success message
-        // For now, let's just log it to the console
         console.log("OTP verified successfully!");
-        // You can also call the onSubmit function passed as a prop if needed
-        // onSubmit(formData); // Uncomment this if you want to call the onSubmit function
+        setIsAuthenticated(true);
         setShowOtpPopup(false);
-        window.location.href = import.meta.env.VITE_BANKSIDE_URL;
+        navigate("/"); 
 
     };
 
@@ -71,6 +76,7 @@ const BankSignUpForm = ({ onSubmit }) => {
                 formData,
                 { withCredentials: true } // IMPORTANT: so browser accepts the cookie
             );
+            console.log(res);
 
             if (res.data.success) {
                 setShowOtpPopup(true); // or wherever the Bank officer should go
@@ -86,7 +92,7 @@ const BankSignUpForm = ({ onSubmit }) => {
                 return (
                     <>
                         <Input label="First Name" name="firstName" value={formData.firstName} onChange={handleChange} />
-                        <Input label="Last Code" name="lastName" value={formData.lastName} onChange={handleChange} />
+                        <Input label="Last Name" name="lastName" value={formData.lastName} onChange={handleChange} />
                         <Input label="Email" name="email" type="email" value={formData.email} onChange={handleChange} />
                         <Input label="Password" name="password" type="password" value={formData.password} onChange={handleChange} />
                         <Input label="Phone" name="phone" value={formData.phone} onChange={handleChange} />

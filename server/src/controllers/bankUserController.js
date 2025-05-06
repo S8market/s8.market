@@ -77,7 +77,17 @@ export const bankUserRegister = async (req, res) => {
     });
 
     if (existingUser) {
-      return res.status(409).json({ success: false, message: "User Already exist" });
+      return res.status(409).json({ success: false, message: "User already exists and is verified." });
+    }
+    // Check for unverified user and reuse or delete it
+    const existingUnverifiedUser = await bankUser.findOne({
+      $or: [
+        { email, verified: false },
+        { phone, verified: false },
+      ],
+    });
+    if (existingUnverifiedUser && existingUnverifiedUser._id) {
+      await bankUser.deleteOne({ _id: existingUnverifiedUser._id });
     }
 
     // Calculate time threshold for one hour ago
