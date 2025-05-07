@@ -32,12 +32,12 @@ const BankSignUpForm = ({ onSubmit }) => {
     const navigate = useNavigate();
 
     const { serverUrl, setIsAuthenticated } = useContext(AppContext);
-    
+
     const handleOtpSuccess = () => {
         console.log("OTP verified successfully!");
         setIsAuthenticated(true);
         setShowOtpPopup(false);
-        navigate("/"); 
+        navigate("/");
 
     };
 
@@ -136,24 +136,24 @@ const BankSignUpForm = ({ onSubmit }) => {
 
     return (
         <>
-        
+
             <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-full max-w-md mx-auto">
-            <div className="flex justify-end mb-4">
-                <a
-                href={
-                    import.meta.env.MODE === 'development'
-                    ? 'http://localhost:5173/sign-up'
-                    : 'http://localhost:5173/sign-up'
-                }
-                className="text-[#004663] underline hover:text-blue-700 transition"
-                >
-                User Registration <span>→</span>
-                </a>
-                </div>  
+                <div className="flex justify-end mb-4">
+                    <a
+                        href={
+                            import.meta.env.MODE === 'development'
+                                ? `${import.meta.env.VITE_CLIENT_URL_DEV}/sign-up`
+                                : `${import.meta.env.VITE_CLIENT_URL}/sign-up`
+                        }
+                        className="text-[#004663] underline hover:text-blue-700 transition"
+                    >
+                        User Registration <span>→</span>
+                    </a>
+                </div>
                 <h2 className="text-2xl text-[#004663] font-bold mb-4 text-center">
                     Bank Registration
                 </h2>
-                
+
                 <ProgressBar currentStep={step} setStep={setStep} />
                 {error && <p className="text-red-500 mb-4">{error}</p>}
                 {renderStepContent()}
