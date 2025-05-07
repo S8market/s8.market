@@ -1,24 +1,12 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useMemo } from "react";
 import axios from "axios";
+import { getServerUrl } from "../utils/getServerUrl";
 
 export const AppContext = createContext();
 
 const AppContextProvider = (props) => {
   // const serverUrl = 'http://localhost:4000';
-  var serverUrl;
-
-  if(import.meta.env.MODE === "development"){
-    serverUrl = import.meta.env.VITE_SERVER_URL;
-    console.log("Development server URL: ", serverUrl);
-  }
-  else if(import.meta.env.MODE === "production"){
-    serverUrl = import.meta.env.VITE_SERVER_URL;
-    console.log("Production server URL: ", serverUrl);
-  }
-  else{
-    serverUrl = import.meta.env.VITE_SERVER_URL_DEV;
-    console.log("Unknown environment, using development server URL: ", serverUrl);
-  }
+  const serverUrl = getServerUrl();
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [searchString, setSearchString] = useState("");
@@ -43,35 +31,39 @@ const AppContextProvider = (props) => {
   });
   const [isLoading, setIsLoading] = useState(true);
 
-  const getProfile = async () => {
-    try {
-      const response = await axios.get(serverUrl + "/api/v1/user/get-profile", {
-        withCredentials: true,
-      });
-      if (response.data.success) {
-        const profileData = response.data.user;
-        setUserInfo({
-          name: profileData.name || "",
-          email: profileData.email || "",
-          phone: profileData.phone || "",
-          address: profileData.address.address || "",
-          city: profileData.address.city || "",
-          state: profileData.address.state || "",
-          pincode: profileData.address.pincode || "",
-        });
-        setAvatar(profileData.profileImage?.url);
-        // Optionally update the avatar if the profile has one
-        // if (profileData.image) {
-        //   setImage(profileData.image);
-        // }
-      }
-    } catch (error) {
-      console.error("Error fetching profile:", error);
-    }
-  };
   useEffect(() => {
-    getProfile();
-  }, [isAuthenticated]);
+    const checkAuth = async () => {
+      try {
+        const res = await axios.get(`${serverUrl}/api/v1/user/get-profile`, {
+          withCredentials: true, // send cookies
+        });
+        console.log("Auth check response:", res.data);
+        if (res.data.success) {
+          setIsAuthenticated(true);
+          const profileData = res.data.user;
+          setUserInfo({
+            name: profileData.name || "",
+            email: profileData.email || "",
+            phone: profileData.phone || "",
+            address: profileData.address?.address || "",
+            city: profileData.address?.city || "",
+            state: profileData.address?.state || "",
+            pincode: profileData.address?.pincode || "",
+          });
+          setAvatar(profileData.profileImage?.url || "user.png");
+        } else {
+          setIsAuthenticated(false);
+        }
+      } catch (err) {
+        console.error("Auth check failed:", err);
+        setIsAuthenticated(false);
+      } finally {
+        setAuthChecked(true); // Always mark check complete
+      }
+    };
+
+    checkAuth();
+  }, []);
 
   const [avatar, setAvatar] = useState("user.png");
 
@@ -146,35 +138,42 @@ const AppContextProvider = (props) => {
     designation: "",
     verificationMethod: "email",
   });
+  const contextValue = useMemo(() => ({
+    serverUrl,
+    userDetails,
+    setUserDetails,
+    properties,
+    setProperties,
+    getProperties,
+    bankOfficerFormValues,
+    setBankOfficerFormValues,
+    userFormValues,
+    searchString,
+    setSearchString,
+    authChecked,
+    setAuthChecked,
+    setUserFormValues,
+    userInfo,
+    setUserInfo,
+    avatar,
+    setAvatar,
+    isAuthenticated,
+    setIsAuthenticated,
+  }), [
+    serverUrl,
+    userDetails,
+    properties,
+    bankOfficerFormValues,
+    userFormValues,
+    searchString,
+    authChecked,
+    userInfo,
+    avatar,
+    isAuthenticated,
+  ]);
 
-  return (
-    <AppContext.Provider
-      value={{
-        serverUrl,
-        userDetails,
-        setUserDetails,
-        properties,
-        setProperties,
-        getProperties,
-        bankOfficerFormValues,
-        setBankOfficerFormValues,
-        userFormValues,
-        searchString,
-        setSearchString,
-        authChecked,
-        setAuthChecked,
-        setUserFormValues,
-        userInfo,
-        setUserInfo,
-        avatar,
-        setAvatar,
-        isAuthenticated,
-        setIsAuthenticated,
-      }}
-    >
-      {props.children}
-    </AppContext.Provider>
-  );
+  return <AppContext.Provider value={contextValue}>{props.children}</AppContext.Provider>;
+
 };
 
 export default AppContextProvider;

@@ -1,6 +1,5 @@
 import * as React from "react";
-import { NavLink, useParams, useLocation, useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { NavLink, Link, useParams, useLocation, useNavigate } from "react-router-dom";
 import userIcon from "../../../assets/person_13924070.png";
 import { AppContext } from "../../../context/context";
 import { toast } from "react-toastify";
