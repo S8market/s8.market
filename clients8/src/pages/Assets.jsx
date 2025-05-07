@@ -8,7 +8,7 @@ const Assets = () => {
     <div className="flex overflow-hidden flex-col bg-white">
       <div className="flex overflow-hidden flex-col py-12 w-full bg-slate-50 max-md:max-w-full">
 
-        <div className="self-center w-full px-5 md:px-0">
+        <div className="w-full flex justify-center max-md:justify-start px-5">
           <div className="text-5xl font-medium leading-none text-sky-900 max-md:text-4xl">
             Explore our latest property Auctions :
           </div>
