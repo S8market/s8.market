@@ -4,26 +4,20 @@
   }
 }
 
-@mixin md {
-  @media (min-width: 768px) {
-    @content;
-  }
-}
-
 @mixin sm {
   @media (max-width: 738px) {
     @content;
   }
-}// for small screen size (Mobile)
+}
 
 @mixin md {
-  @media (max-width: 1024px) {
+  @media (min-width: 768px) and (max-width: 1024px) {
     @content;
   }
-}// for medium screen size (Tablet)
+}
 
 @mixin lg {
-  @media (max-width: 1366px) {
+  @media (min-width: 1025px) and (max-width: 1366px) {
     @content;
   }
-}// for large screen size (Desktop)
+}
