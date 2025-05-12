@@ -1,5 +1,10 @@
 @use "../../responsive.scss" as res;
 
+.card2Container {
+  align-items: center;
+  justify-content: center;
+}
+
 .auction-container {
   font-family: "Poppins", sans-serif;
   background: #fff;
@@ -8,14 +13,14 @@
   border: 1px solid rgba(0, 0, 0, 0.25);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   // min-height:;
-  width: 100%;  // Set for large screens initially
+  width: 100%; // Set for large screens initially
   margin-right: auto;
   margin-top: 11px;
 
   // Responsive for medium screens (desktops)
   @include res.md {
-    width: 80%;  // Reducing width for a clean desktop view
-    padding: 24px;  // Adding more padding
+    // width: 90%; // Reducing width for a clean desktop view
+    padding: 24px; // Adding more padding
   }
 
   // Small screens (Mobile)
@@ -38,7 +43,7 @@
   }
 
   @include res.md {
-    justify-content: space-between;  // Spread out for desktop
+    justify-content: space-between; // Spread out for desktop
   }
 }
 
@@ -53,7 +58,7 @@
   }
 
   @include res.md {
-    justify-content: flex-end;  // Align to the right for desktop
+    justify-content: flex-end; // Align to the right for desktop
   }
 }
 
@@ -71,7 +76,7 @@
   }
 
   @include res.md {
-    justify-content: flex-start;  // Adjust for desktop view
+    justify-content: flex-start; // Adjust for desktop view
   }
 }
 
@@ -95,7 +100,7 @@
   position: absolute;
   left: 12px;
   color: #888;
-  
+
 }
 
 .add-button {
@@ -119,7 +124,7 @@
   }
 
   @include res.md {
-    width: auto;  // Fix the button size on desktops
+    width: auto; // Fix the button size on desktops
   }
 }
 
@@ -141,10 +146,12 @@
   &::-webkit-scrollbar {
     height: 12px;
   }
+
   &::-webkit-scrollbar-thumb {
     background-color: #888;
     border-radius: 10px;
   }
+
   &::-webkit-scrollbar-track {
     background-color: #dddbdb;
     border-radius: 10px;
@@ -154,7 +161,7 @@
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 1000px;  // Ensure table does not stretch excessively
+  min-width: 1000px; // Ensure table does not stretch excessively
   table-layout: fixed;
 }
 
@@ -162,23 +169,63 @@ thead {
   background-color: #99B5C1;
 }
 
-th, td {
+th,
+td {
   padding: 10px;
   border: 1px solid #ccc;
   text-align: center;
   white-space: nowrap;
 }
 
-th:nth-child(1), td:nth-child(1) { width: 50px; }
-th:nth-child(2), td:nth-child(2) { width: 200px; }
-th:nth-child(3), td:nth-child(3) { width: 150px; }
-th:nth-child(4), td:nth-child(4) { width: 100px; }
-th:nth-child(5), td:nth-child(5) { width: 110px; }
-th:nth-child(6), td:nth-child(6) { width: 150px; }
-th:nth-child(8), td:nth-child(8) { width: 120px; }
-th:nth-child(9), td:nth-child(9) { width: 120px; }
-th:nth-child(10), td:nth-child(10) { width: 120px; }
-th:nth-child(11), td:nth-child(11) { width: 180px; }
+th:nth-child(1),
+td:nth-child(1) {
+  width: 50px;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  width: 200px;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  width: 150px;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+  width: 100px;
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+  width: 110px;
+}
+
+th:nth-child(6),
+td:nth-child(6) {
+  width: 150px;
+}
+
+th:nth-child(8),
+td:nth-child(8) {
+  width: 120px;
+}
+
+th:nth-child(9),
+td:nth-child(9) {
+  width: 120px;
+}
+
+th:nth-child(10),
+td:nth-child(10) {
+  width: 120px;
+}
+
+th:nth-child(11),
+td:nth-child(11) {
+  width: 180px;
+}
 
 .date-column {
   width: 100px;
@@ -192,9 +239,17 @@ th:nth-child(11), td:nth-child(11) { width: 180px; }
 }
 
 td span.status {
-  &.ongoing { color: #4caf50; }
-  &.upcoming { color: #0040ff; }
-  &.closed { color: #dc3545; }
+  &.ongoing {
+    color: #4caf50;
+  }
+
+  &.upcoming {
+    color: #0040ff;
+  }
+
+  &.closed {
+    color: #dc3545;
+  }
 }
 
 .highlight {
@@ -210,7 +265,9 @@ td span.status {
   position: relative;
 }
 
-.view-button, .edit-button, .delete-button {
+.view-button,
+.edit-button,
+.delete-button {
   display: flex;
   align-items: center;
   justify-content: center;

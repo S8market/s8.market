@@ -247,8 +247,7 @@ const handlePasswordChange = (e) => {
                       placeholder="Enter your email..."
                       onChange={handleInputChange}
                     />
-                  </div>
-                  <div className="form-group">
+                     <div className="form-group">
                     <label>Mobile Number</label>
                     <div className="mobile-input">
                       <span className="country-code">+91</span>
@@ -263,6 +262,8 @@ const handlePasswordChange = (e) => {
                   </div>
                 </div>
               </div>
+                  </div>
+                 
 
               <hr className="custom-hr" />
 

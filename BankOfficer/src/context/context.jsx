@@ -96,6 +96,8 @@ const AppContextProvider = (props) => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
 
   // State for bankuser details
+ 
+
   const [userDetails, setUserDetails] = useState({
     firstName: "",
     lastName: "",
@@ -108,6 +110,9 @@ const AppContextProvider = (props) => {
     bankIFSC: "",
     designation: ""
   });
+  
+ 
+
 
   const [avatar, setAvatar] = useState("/user.png")
 

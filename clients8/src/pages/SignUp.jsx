@@ -81,8 +81,8 @@ export default function SignUpPage() {
   const getRedirectUrl = () => {
     const env = import.meta.env.MODE;
     return env === "development"
-      ? import.meta.env.VITE_BANKSIDE_URL_DEV
-      : import.meta.env.VITE_BANKSIDE_URL;
+      ? `${import.meta.env.VITE_BANK_URL_DEV}/sign-up`
+      : `${import.meta.env.VITE_BANK_URL}/sign-up`;
   };
 
   const validateCurrentStep = () => {
@@ -94,7 +94,7 @@ export default function SignUpPage() {
       const key = input.name;
       const value = bankOfficerFormValues[key];
 
-     
+
     });
 
     setFormErrors(errors);
@@ -108,7 +108,7 @@ export default function SignUpPage() {
       navigate("/");
       toast.success("Login Successfully");
     } else {
-      window.location.href = import.meta.env.VITE_BANKSIDE_URL;
+      window.location.href = import.meta.env.VITE_BANK_URL;
     }
   };
 
@@ -134,9 +134,9 @@ export default function SignUpPage() {
             navigate("/");
           } else {
             if (import.meta.env.MODE === 'development') {
-              window.location.href = import.meta.env.VITE_BANKSIDE_URL_DEV;
+              window.location.href = import.meta.env.VITE_BANK_URL_DEV;
             } else {
-              window.location.href = import.meta.env.VITE_BANKSIDE_URL;
+              window.location.href = import.meta.env.VITE_BANK_URL;
             }
           }
         } else {
@@ -146,10 +146,10 @@ export default function SignUpPage() {
         formData = userType === "User"
           ? userFormValues
           : {
-              ...bankOfficerFormValues,
-              firstName: bankOfficerFormValues.firstName,
-              lastName: bankOfficerFormValues.lastName,
-            };
+            ...bankOfficerFormValues,
+            firstName: bankOfficerFormValues.firstName,
+            lastName: bankOfficerFormValues.lastName,
+          };
 
         endpoint = userType === "User"
           ? `${serverUrl}/api/v1/user/register`
@@ -186,8 +186,8 @@ export default function SignUpPage() {
   const formInputs = isSignIn
     ? signInInputs
     : userType === "User"
-    ? userInputs
-    : bankOfficerSteps[currentStep].inputs;
+      ? userInputs
+      : bankOfficerSteps[currentStep].inputs;
 
   return (
     <div className="min-h-screen bg-[#004663] flex flex-col sm:flex-row items-stretch">
@@ -227,11 +227,10 @@ export default function SignUpPage() {
               <button
                 key={type}
                 onClick={() => handleUserTypeChange(type)}
-                className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
-                  userType === type
+                className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${userType === type
                     ? "bg-[#004663] text-white shadow-lg"
                     : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                }`}
+                  }`}
               >
                 {type}
               </button>
@@ -244,11 +243,10 @@ export default function SignUpPage() {
               {bankOfficerSteps.map((step, index) => (
                 <div key={index} className="flex flex-col items-center">
                   <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${
-                      index <= currentStep
+                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${index <= currentStep
                         ? "bg-[#004663] text-white"
                         : "bg-gray-200 text-gray-600"
-                    }`}
+                      }`}
                   >
                     {index + 1}
                   </div>
@@ -277,18 +275,18 @@ export default function SignUpPage() {
                 isSignIn
                   ? handleFormSubmit
                   : userType === "Bank Officer"
-                  ? handleNextStep
-                  : handleFormSubmit
+                    ? handleNextStep
+                    : handleFormSubmit
               }
               className="w-full py-3 bg-[#004663] text-white rounded-lg font-semibold hover:bg-sky-900 transition-colors duration-200"
             >
               {isSignIn
                 ? "Sign In"
                 : userType === "Bank Officer"
-                ? currentStep === bankOfficerSteps.length - 1
-                  ? "Complete Registration"
-                  : "Next Step"
-                : "Sign Up"}
+                  ? currentStep === bankOfficerSteps.length - 1
+                    ? "Complete Registration"
+                    : "Next Step"
+                  : "Sign Up"}
             </button>
 
             <div className="relative my-6">

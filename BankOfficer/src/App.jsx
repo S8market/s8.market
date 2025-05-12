@@ -59,7 +59,7 @@ function App() {
         <Route path="/view" element={<PrivateRoute><AssetsView /></PrivateRoute>} />
         <Route path="/property/:id" element={<PrivateRoute><Single /></PrivateRoute>} />
         <Route path="/addNew" element={<PrivateRoute><AddAsset /></PrivateRoute>} />
-        <Route path="/" element={<Profilepage />} />
+        <Route path="/" element={<PrivateRoute><Profilepage /></PrivateRoute>} />
       </Routes>
 
     </>
