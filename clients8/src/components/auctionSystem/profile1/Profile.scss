@@ -10,6 +10,7 @@
   .sideContainer2 {
     flex: 1;
     min-width: 250px;
+<<<<<<< HEAD
     }
   }
 
@@ -28,6 +29,25 @@
       margin-top: 20px;
       flex-wrap: wrap;
     }
+=======
+  }
+
+  .mainContent {
+    flex: 8;
+    display: flex;
+    flex-direction: column;
+
+    .profile-container {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 20px;
+      border-radius: 10px;
+      background: white;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+>>>>>>> ab4017a27fa915b134478ef99cc42145f7cae973
 
     .avatar-section {
       display: flex;
@@ -437,3 +457,7 @@
     }
   }
 }
+<<<<<<< HEAD
+=======
+}
+>>>>>>> ab4017a27fa915b134478ef99cc42145f7cae973

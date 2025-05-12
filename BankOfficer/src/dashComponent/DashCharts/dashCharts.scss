@@ -1,22 +1,22 @@
-@import "../../responsive.scss"; 
+@import "../../responsive.scss";
 
 .dashboard-charts {
-// flex: 1;
   display: grid;
-max-width: 100%;
+  max-width: 100%;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto auto; // Three rows
-  // gap: 20px;
-  // padding: 10px;
+  grid-template-rows: auto auto auto;
   font-family: "Poppins", sans-serif;
   flex-wrap: wrap;
 
-@include md {
-  display: flex;
- flex-direction: column;
- flex-wrap: wrap;
+  @include md {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
   }
 
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .total-assets {
@@ -26,10 +26,9 @@ max-width: 100%;
   padding: 20px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
   align-items: center;
-  
-  flex-wrap: wrap; /* Allows the child elements to wrap if needed */
+  flex-wrap: wrap;
   justify-content: center;
-  width: 100%; /* Ensure the container takes up full width */
+  width: 100%;
 }
 
 .asset-card {
@@ -44,7 +43,12 @@ max-width: 100%;
   height: 200px;
   margin-bottom: 20px;
   margin-left: 40px;
-  box-sizing: border-box; /* Prevents overflow */
+  box-sizing: border-box;
+
+  @media (max-width: 480px) {
+    width: 100%;
+    margin-left: 0;
+  }
 }
 
 .total-card {
@@ -54,7 +58,7 @@ max-width: 100%;
   color: #5a4b8c;
   height: 80px;
   align-content: center;
-  flex-wrap: wrap ;
+  flex-wrap: wrap;
 }
 
 .total-value {
@@ -65,6 +69,10 @@ max-width: 100%;
   overflow: hidden;
   margin-top: 25px;
   flex-wrap: wrap;
+
+  @media (max-width: 480px) {
+    font-size: 24px;
+  }
 }
 
 p {
@@ -92,9 +100,17 @@ p {
   height: 40px;
   border-radius: 5px;
   background: #e1e0e0;
-  border-radius: 5px;
   overflow: hidden;
   flex-wrap: wrap;
+  margin-left: auto;  // Center align
+  margin-right: auto; // Center align
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-bottom: 10px;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 .fill-bar {
@@ -120,420 +136,315 @@ h3 {
   margin: 0;
 }
 
-p {
-  font-size: 14px;
-  color: #555;
+.asset-analytics {
+  background: white;
+  flex-wrap: wrap;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  width: 100%;
+
+  @include md {
+    width: 100%;
+  }
+
+  h4 {
+    font-size: 18px;
+    margin: 0;
+    font-weight: bold;
+  }
+
+  .filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+
+    select {
+      padding: 5px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+  }
+
+  .donut-chart {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .donut-center {
+    position: absolute;
+    flex-wrap: wrap;
+    top: 43%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+
+    h2 {
+      margin: 0;
+      font-size: 24px;
+      color: #333;
+    }
+
+    p {
+      margin: 0;
+      font-size: 14px;
+      color: #777;
+    }
+  }
 }
 
-/* Media Query for Small Screens */
-@media (max-width: 768px) {
-  .total-assets {
-    flex-direction: column; /* Stack the content vertically */
-    gap: 20px; /* Adjust spacing between stacked elements */
-    padding: 15px; /* Adjust padding for smaller screens */
-  }
+.user-interactions,
+.price-range-analysis {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  flex-wrap: wrap;
+  margin-left: 1px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 11px;
 
-  .asset-card {
-    width: 100%; /* Make asset cards take up full width on smaller screens */
-    
-    flex-wrap: wrap;
-    margin-left: 0; /* Remove margin on smaller screens */
-    margin-bottom: 20px; /* Ensure some space between stacked asset cards */
-  }
-
-  .asset-item {
-    flex-wrap: wrap;
-    width: 100%; /* Make asset items take up full width */
-    margin-bottom: 10px; /* Adjust the margin to avoid overflow */
-  }
-}
-
-/* Additional adjustment for very small screens (e.g., mobile phones) */
-@media (max-width: 480px) {
-  .asset-card {
-    width: 100%; /* Ensure asset cards are full width */
+  @media (max-width: 768px) {
     margin-left: 0;
   }
-
-  .total-value {
-    font-size: 24px; /* Reduce font size for very small screens */
-  }
-
-  .asset-item {
-    width: 100%; /* Ensure asset items take up full width */
-  }
 }
 
+.user-interactions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: wrap;
 
-  .asset-analytics {
-    background: white;
-    flex-wrap: wrap;
-    padding: 20px;
-    border-radius: 10px;
-    // box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-    position: relative;
-    width: 100%;
-@include md {
-  width: 100%;
-}
-
-
-    h4 {
-      font-size: 18px;
-      margin: 0;
-      font-weight: bold;
-    }
-
-
-    .filters {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 10px;
-
-      select {
-        padding: 5px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-      }
-    }
-
-    .donut-chart {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .donut-center {
-      position: absolute;
-      flex-wrap: wrap;
-      top: 43%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      font-size: 16px;
-      font-weight: bold;
-
-      h2 {
-        margin: 0;
-        font-size: 24px;
-        color: #333;
-      }
-
-      p {
-        margin: 0;
-        font-size: 14px;
-        color: #777;
-      }
-    }
+  h4 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
   }
 
-  /* User Interactions & Price Range Analysis (Side by Side) */
-  .user-interactions,
-  .price-range-analysis {
-    background: white;
-    border-radius: 10px;
-    padding: 20px;
-    flex-wrap: wrap;
-    margin-left: 1px;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-    margin-top: 11px;
-    
-  }
-
-  .user-interactions {
+  .filters {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
     flex-wrap: wrap;
-    h4 {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
-    .filters {
-      display: flex;
-      flex-wrap: wrap; // Allows filters to wrap if they overflow
-      gap: 15px; // Increased gap for better separation
-      margin-bottom: 20px; // More space below filters for clarity
-      flex-wrap: wrap;
-      select {
-        padding: 8px; // Slightly increased padding for better UI
-        border: 1px solid #ddd;
-        border-radius: 5px;
-      }
-    }
+    gap: 15px;
+    margin-bottom: 20px;
 
-    // .chart-header {
-    //   display: flex;
-    //   justify-content: space-between;
-    //   align-items: center;
-    //   margin-bottom: 10px;
-
-    //   select {
-    //     padding: 5px;
-    //     border: 1px solid #ccc;
-    //     border-radius: 5px;
-    //   }
-    // }
-
-    // h2 {
-    //   font-size: 24px;
-    //   font-weight: bold;
-    //   color: #2563eb;
-    //   margin-bottom: 10px;
-    // }
-  }
-
-  //price-range-analysis
-  .price-range-analysis {
-    text-align: start;
-    flex-wrap: wrap;
-
-    h4 {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .filters {
-      display: flex;
-      justify-items: start;
-      gap: 10px;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
-
-      input {
-        padding: 5px;
-        width: 120px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        text-align: center;
-        flex-wrap: wrap;
-      }
-
-      select {
-        padding: 5px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
+    select {
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
     }
   }
-  
-   //download button
-   .download-button{
-    font-size: 16px; /* Ensure font size is consistent */
-    padding: 8px 15px; /* Adds padding around the text */
-    border-radius: 4px;
-    //margin-left: 1%;
-    right: 0%;
+}
+
+.price-range-analysis {
+  text-align: start;
+  flex-wrap: wrap;
+
+  h4 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
     flex-wrap: wrap;
-    
-   
- 
-    border: 1px solid #004f6e;
-    cursor: pointer;
-    background-color: transparent;
-    color: #004f6e;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    white-space: nowrap; /* Ensures text stays in one line */
+
+    input {
+      padding: 5px;
+      width: 120px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    select {
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  }
+}
+
+.download-button {
+  font-size: 16px;
+  padding: 8px 15px;
+  border-radius: 4px;
+  right: 0%;
+  flex-wrap: wrap;
+  border: 1px solid #004f6e;
+  cursor: pointer;
+  background-color: transparent;
+  color: #004f6e;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  white-space: nowrap;
 
   @include md {
     font-size: 14px;
     padding: 8px 30px;
-    //-left: 289px;
-    //margin-top: 85px;
     margin-bottom: 20px;
-    width: 400px;
+    width: 100%;
+  }
+}
+
+.dash-table {
+  grid-column: span 2;
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  flex-wrap: wrap;
+
+  @include md {
+    max-width: 100%;
+    margin-right: 0;
+  }
+
+  h4 {
+    font-size: 18px;
+    color: black;
+    font-weight: bold;
+    margin-bottom: 15px;
     flex-wrap: wrap;
-  }
+
+    @include md {
+      margin-bottom: 20px;
+    }
   }
 
-
-  //table style
-  .dash-table {
-    grid-column: span 2;
-    background: white;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  .table-filters {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    margin-left: 1px;
     width: 100%;
     flex-wrap: wrap;
 
     @include md {
-   max-width: 700px;
-   margin-right: 5px;
- }
-   
-    h4 {
-      font-size: 18px;
-      color: black;
-      font-weight: bold;
-      margin-bottom: 15px;
-      flex-wrap: wrap;
-
-      @include md {
-        margin-bottom: 20px;
-      }
-    }
-  
-    .table-filters {
-      display: flex;
-      align-items:center;
-      gap: -1px;
-      margin-bottom: 15px;
-      margin-left: 1px;
-      width: 100%;
-      flex-wrap: wrap;
-      
-
-      @include md{
       margin-top: 70px;
-      }
     }
+  }
 
-      select {
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background: white;
-        cursor: pointer;
+  select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: white;
+    cursor: pointer;
+  }
+
+  input[type="date"] {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+
+  .table-container {
+    max-width: 100%;
+    overflow-x: auto;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+
+      thead {
+        background-color: #B0BAC3;
+        color: white;
+
+        th {
+          padding: 10px;
+          text-align: center;
+          word-wrap: break-word;
+          white-space: normal;
+          overflow-wrap: break-word;
+          max-width: 250px;
+        }
       }
-      input[type="date"] {
-        padding: 5px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-      }
-  
-  
-    .table-container {
-      max-width: 100%;
-      overflow-x: auto;
-      border-radius: 20px;
-      border:1px solid #ddd;
 
-      table {
-        width: 100%;
-        border-collapse: collapse;
+      tbody {
+        tr {
+          &:nth-child(even) {
+            background-color: #f8f9fa;
+          }
 
-        
-        thead {
-          background-color: #B0BAC3;
-          color: white;
-          
-          th {
+          &:hover {
+            background-color: #e3f2fd;
+          }
+
+          td {
             padding: 10px;
             text-align: center;
             word-wrap: break-word;
             white-space: normal;
             overflow-wrap: break-word;
-            max-width: 250px; // Adjust as needed
+            border-bottom: 1px solid #ddd;
           }
-        }
-  
-        tbody {
-          tr {
-            &:nth-child(even) {
-              background-color: #f8f9fa;
-            }
-  
+
+          .asset-link {
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease-in-out;
+
             &:hover {
-              background-color: #e3f2fd;
+              font-weight: 600;
+              font-size: 16px;
             }
-  
-            td {
-              padding: 10px;
-              text-align: center;
-              word-wrap: break-word;
-              white-space: normal;
-              overflow-wrap: break-word;
-              // max-width: 250px; // Adjust as needed
-              border-bottom: 1px solid #ddd;
+          }
 
-//               //For tooltip
-//               position: relative;
-//               cursor: pointer;
-//               white-space: nowrap; 
-//               overflow: hidden;
-//               text-overflow: ellipsis;
-//               max-width: 250px;
-//             }
-// // for tooltip
-//             td:hover::after {
-//               content: attr(title);
-//               position: absolute;
-//               background: rgba(0, 0, 0, 0.75);
-//               color: white;
-//               padding: 5px;
-//               border-radius: 5px;
-//               white-space: nowrap;
-//               top: -30px;
-//               left: 50%;
-//               transform: translateX(-50%);
-//               z-index: 10;
-//               font-size: 12px;
-            }
-            
-            .asset-link {
-              text-decoration: none;
-              // color: #0466c8; // Primary color
-              font-weight: 500;
-              transition: all 0.3s ease-in-out;
-            
-              &:hover {
-                // color: #0353a4;  // Darker shade on hover
-                font-weight: 600; // Make it bold
-                font-size: 16px; // Slightly bigger
-              }
-            }
-            
+          .status {
+            font-weight: bold;
+            text-transform: capitalize;
+            text-align: center;
 
-            .status {
-              font-weight: bold;
-              text-transform: capitalize;
-              text-align: center;
-              &.upcoming { color: #0040ff; }
-              &.ongoing { color: #4caf50; }
-              &.closed { color: #f44336; }
-              &.unknown { color: #757575; }
-            }
+            &.upcoming { color: #0040ff; }
+            &.ongoing { color: #4caf50; }
+            &.closed { color: #f44336; }
+            &.unknown { color: #757575; }
           }
         }
       }
     }
   }
+}
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  gap: 10px;
 
-  .pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 15px;
-    gap: 10px;
-  
-    button {
-      padding: 8px 12px;
-      border: 1px solid #ccc;
-      background: #f8f9fa;
-      cursor: pointer;
-      border-radius: 5px;
-      font-weight: bold;
-      
-      &:hover {
-        background: #d8f3dc;
-      }
-  
-      &:disabled {
-        background: #ddd;
-        cursor: not-allowed;
-      }
-  
-      &.active {
-        background: #004f6e;
-        color: white;
-      }
+  button {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    background: #f8f9fa;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+
+    &:hover {
+      background: #d8f3dc;
+    }
+
+    &:disabled {
+      background: #ddd;
+      cursor: not-allowed;
+    }
+
+    &.active {
+      background: #004f6e;
+      color: white;
     }
   }
-  
+}

@@ -1,7 +1,6 @@
-@use "../../responsive.scss" as res;
-
 .profile {
   display: flex;
+<<<<<<< HEAD
   height: 100vh;
   background-color: #f9f9f9;
   font-family: "Poppins", sans-serif;
@@ -369,3 +368,347 @@
   font-weight: bold;
   animation: fadeInOut 2s ease-in-out;
 }
+=======
+  min-height: 100vh;
+  background-color: #f4f6f8;
+
+  .sideContainer2 {
+    width: 250px;
+    background-color: #fff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+  }
+
+  .mainContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .mainWrapper {
+      padding: 2rem;
+
+      .profile-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: center; // ✅ Center profile sections horizontally
+
+        .avatar-section {
+          width: 100%;
+          max-width: 350px;
+          background: #fff;
+          padding: 2rem;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin: 0 auto; // ✅ Center it
+
+          .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 2px solid #ddd;
+            cursor: pointer;
+          }
+
+          h3 {
+            margin-bottom: 1rem;
+            color: #444;
+          }
+
+          .upload-btn {
+            background-color: #0066cc;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+
+            &:hover {
+              background-color: #005bb5;
+            }
+          }
+        }
+
+        .details-section {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+
+          .info, .info2 {
+            background: #fff;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+
+            h4 {
+              color: #333;
+              margin-bottom: 0.8rem;
+              border-bottom: 1px solid #eee;
+              padding-bottom: 0.3rem;
+            }
+
+            p {
+              margin: 0.4rem 0;
+              color: #555;
+              font-size: 0.95rem;
+
+              strong {
+                color: #222;
+              }
+            }
+
+            .update-details-btn {
+              margin-top: 1rem;
+              padding: 0.5rem 1rem;
+              background-color: #28a745;
+              color: #fff;
+              border: none;
+              border-radius: 5px;
+              cursor: pointer;
+
+              &:hover {
+                background-color: #218838;
+              }
+            }
+          }
+        }
+      }
+
+      .form-container {
+        background: #fff;
+        padding: 2rem;
+        margin-top: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+
+        .form-title {
+          margin-bottom: 1.5rem;
+          font-size: 1.5rem;
+          color: #333;
+        }
+
+        .form-section {
+          margin-bottom: 1.5rem;
+
+          h4 {
+            margin-bottom: 1rem;
+            color: #444;
+          }
+
+          .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+
+            .form-group {
+              flex: 1;
+              display: flex;
+              flex-direction: column;
+
+              label {
+                font-size: 0.9rem;
+                margin-bottom: 0.4rem;
+                color: #555;
+              }
+
+              input, textarea {
+                padding: 0.5rem;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 0.95rem;
+              }
+
+              textarea {
+                resize: vertical;
+              }
+
+              .mobile-input {
+                display: flex;
+                align-items: center;
+
+                .country-code {
+                  padding: 0.5rem;
+                  background: #eee;
+                  border: 1px solid #ccc;
+                  border-right: none;
+                  border-radius: 5px 0 0 5px;
+                }
+
+                input {
+                  border-radius: 0 5px 5px 0;
+                  border-left: none;
+                  flex: 1;
+                }
+              }
+            }
+          }
+        }
+
+        .custom-hr {
+          margin: 1.5rem 0;
+          border: none;
+          height: 1px;
+          background-color: #e0e0e0;
+        }
+
+        .save-btn {
+          padding: 0.6rem 1.2rem;
+          margin-right: 1rem;
+          background-color: #007bff;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #004663;
+          }
+        }
+      }
+
+      .password-popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+
+        .password-popup {
+          background: #fff;
+          padding: 2rem;
+          border-radius: 10px;
+          width: 90%;
+          max-width: 400px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+          h2 {
+            margin-bottom: 1rem;
+            text-align: center;
+          }
+
+          .popup-input-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1rem;
+
+            label {
+              margin-bottom: 0.3rem;
+              font-size: 0.9rem;
+            }
+
+            input {
+              padding: 0.5rem;
+              border: 1px solid #ccc;
+              border-radius: 5px;
+            }
+          }
+
+          .popup-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+
+            button {
+              background-color: #004663;
+              padding: 0.5rem 1rem;
+              border: none;
+              border-radius: 5px;
+              cursor: pointer;
+
+              &:first-of-type {
+                background: #ccc;
+                color: #000;
+              }
+
+              &:last-of-type {
+                background: #28a745;
+                color: white;
+              }
+            }
+          }
+        }
+      }
+
+      .popupMessage {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #28a745;
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        font-weight: bold;
+        animation: fadeinout 3s ease-in-out;
+      }
+
+      @keyframes fadeinout {
+        0% { opacity: 0; transform: translateY(20px); }
+        10% { opacity: 1; transform: translateY(0); }
+        90% { opacity: 1; transform: translateY(0); }
+        100% { opacity: 0; transform: translateY(20px); }
+      }
+    }
+  }
+}
+
+/* 🔁 Responsive Design */
+@media (max-width: 768px) {
+  .profile {
+    flex-direction: column;
+
+    .sideContainer2 {
+      width: 100%;
+    }
+
+    .mainContent {
+      .mainWrapper {
+        padding: 1rem;
+
+        .profile-container {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .form-container {
+          padding: 1rem;
+
+          .form-row {
+            flex-direction: column;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .profile .mainContent .mainWrapper .form-container {
+    .save-btn {
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+
+    .popup-buttons {
+      flex-direction: column;
+      align-items: stretch;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
+>>>>>>> ab4017a27fa915b134478ef99cc42145f7cae973
