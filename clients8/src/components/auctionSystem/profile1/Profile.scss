@@ -10,8 +10,6 @@
   .sideContainer2 {
     flex: 1;
     min-width: 250px;
-<<<<<<< HEAD
-    }
   }
 
   .mainContent {
@@ -29,25 +27,6 @@
       margin-top: 20px;
       flex-wrap: wrap;
     }
-=======
-  }
-
-  .mainContent {
-    flex: 8;
-    display: flex;
-    flex-direction: column;
-
-    .profile-container {
-      display: flex;
-      align-items: flex-start;
-      gap: 20px;
-      padding: 20px;
-      border-radius: 10px;
-      background: white;
-      margin-top: 20px;
-      flex-wrap: wrap;
-    }
->>>>>>> ab4017a27fa915b134478ef99cc42145f7cae973
 
     .avatar-section {
       display: flex;
@@ -78,39 +57,34 @@
         cursor: pointer;
         margin-top: 25px;
         width: 100%;
+
+        &:hover {
+          background-color: #00324a;
+        }
       }
-  
-      .upload-btn:hover {
-        background-color: #00324a;
-      }
-  
-      /* Details Section */
-      .details-section {
-        flex: 1;
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* Two equal columns */
-        gap: 10px;
-        padding: 20px;
-        border-radius: 10px;
-        border: 1px solid #ddd;
-        margin-top: 295px;
-        width: 100%;
-        flex-wrap: wrap;
-        margin-left: -341px;
-        height: 300px;
-        min-height: 260px; /* Ensures minimum height */
-        max-height: 300px; /* Prevents height increase */
-        overflow-y: auto; /* Allows scrolling within the section */
-      }
-  
-      .info {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        overflow: hidden;
-        white-space: nowrap; /* Prevents content from wrapping */
-        text-overflow: ellipsis; /* Adds "..." if content overflows */
+    }
+
+    .details-section {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      min-height: 260px;
+      max-height: 300px;
+      overflow-y: auto;
+      width: calc(100% - 290px);
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
       margin-left: 10px;
 
       h4 {
@@ -457,7 +431,3 @@
     }
   }
 }
-<<<<<<< HEAD
-=======
-}
->>>>>>> ab4017a27fa915b134478ef99cc42145f7cae973
