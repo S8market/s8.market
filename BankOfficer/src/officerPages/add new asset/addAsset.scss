@@ -5,14 +5,14 @@
     display: flex;
     // height: 100vh;
   
-    .sideContainerAdd {
-      flex: 1; // Sidebar takes 1 part of the total flex space
-      min-width: 245px;
+    // .sideContainerAdd {
+    //   flex: 1; // Sidebar takes 1 part of the total flex space
+    //   min-width: 245px;
 
-      @include res.md{
-        min-width: 80px;
-      }
-    }
+    //   @include res.md{
+    //     min-width: 80px;
+    //   }
+    // }
   
     .addAssetContainer {
       flex: 8; // Main content takes remaining space
