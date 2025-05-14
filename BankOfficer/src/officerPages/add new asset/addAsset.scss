@@ -7,7 +7,7 @@
   
     .sideContainerAdd {
       flex: 1; // Sidebar takes 1 part of the total flex space
-      min-width: 245px;
+      min-width: -15px;
 
       @include res.md{
         min-width: 80px;
