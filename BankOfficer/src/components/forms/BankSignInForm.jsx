@@ -1,14 +1,10 @@
 import React, { useState, useContext } from "react";
 import { AppContext } from "../../context/context";
-
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
 const BankSignInForm = ({ onSubmit }) => {
-
     const navigate = useNavigate();
-
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -16,14 +12,38 @@ const BankSignInForm = ({ onSubmit }) => {
     const [error, setError] = useState("");
 
     const { serverUrl, setIsAuthenticated } = useContext(AppContext);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
+    const validateForm = () => {
+        const { email, password } = formData;
+
+
+        if (!email.includes("@") || !email.endsWith(".com")) {
+            return "Email must contain '@' and end with '.com'";
+        }
+
+
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/;
+        if (!passwordRegex.test(password)) {
+            return "Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character";
+        }
+
+        return null;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
+
+        const validationError = validateForm();
+        if (validationError) {
+            setError(validationError);
+            return;
+        }
 
         try {
             const { email, password } = formData;
@@ -31,19 +51,17 @@ const BankSignInForm = ({ onSubmit }) => {
             const res = await axios.post(
                 `${serverUrl}/api/v1/bank-user/login`,
                 { email, password },
-                { withCredentials: true } // IMPORTANT: so browser accepts the cookie
+                { withCredentials: true }
             );
 
             if (res.data.success) {
-                setIsAuthenticated(true); // Set authentication status to true
-                navigate("/"); // or wherever the Bank officer should go
+                setIsAuthenticated(true);
+                navigate("/");
             }
         } catch (err) {
             setError(err?.response?.data?.message || "Something went wrong");
         }
     };
-
-
 
     return (
         <form
@@ -62,7 +80,8 @@ const BankSignInForm = ({ onSubmit }) => {
                     User LogIn <span>→</span>
                 </a>
             </div>
-            <h2 className="text-2xl text-[#004663]  font-bold mb-4 text-center">Bank Sign In</h2>
+
+            <h2 className="text-2xl text-[#004663] font-bold mb-4 text-center">Bank Sign In</h2>
             {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
 
             <div className="mb-4">
@@ -97,14 +116,11 @@ const BankSignInForm = ({ onSubmit }) => {
             >
                 Sign In
             </button>
+
             <div className="text-center mt-6">
-                <span className="text-gray-600">
-                    Don't have an account?
-                </span>
-                <a href="/sign-up"
-                    className="text-[#004663] font-semibold hover:text-sky-900"
-                > &nbsp;
-                    Sign Up
+                <span className="text-gray-600">Don't have an account?</span>
+                <a href="/sign-up" className="text-[#004663] font-semibold hover:text-sky-900">
+                    &nbsp;Sign Up
                 </a>
             </div>
         </form>

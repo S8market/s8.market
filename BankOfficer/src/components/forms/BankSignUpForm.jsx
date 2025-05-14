@@ -63,8 +63,9 @@ const BankSignUpForm = ({ onSubmit }) => {
             return false;
         }
 
-        if (password.length < 6) {
-            setError("Password must be at least 6 characters long.");
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{6,}$/;
+        if (!passwordRegex.test(password)) {
+            setError("Password must contain at least 1 uppercase, 1 lowercase, 1 number, 1 special character and be at least 6 characters long.");
             return false;
         }
 
