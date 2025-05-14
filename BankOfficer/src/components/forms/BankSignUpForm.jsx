@@ -1,11 +1,10 @@
 import React, { useState, useContext } from "react";
 import Otp from "../../components/Otp";
-
 import axios from "axios";
-const steps = ["Personal Info", "Bank Address", "Bank Details"];
 import { useNavigate } from "react-router-dom";
-
 import { AppContext } from "../../context/context";
+
+const steps = ["Personal Info", "Bank Address", "Bank Details"];
 
 const BankSignUpForm = ({ onSubmit }) => {
     const [step, setStep] = useState(1);
@@ -28,9 +27,7 @@ const BankSignUpForm = ({ onSubmit }) => {
     const [error, setError] = useState("");
     const [showOtpPopup, setShowOtpPopup] = useState(false);
 
-
     const navigate = useNavigate();
-
     const { serverUrl, setIsAuthenticated } = useContext(AppContext);
 
     const handleOtpSuccess = () => {
@@ -38,7 +35,6 @@ const BankSignUpForm = ({ onSubmit }) => {
         setIsAuthenticated(true);
         setShowOtpPopup(false);
         navigate("/");
-
     };
 
     const handleChange = (e) => {
@@ -49,37 +45,53 @@ const BankSignUpForm = ({ onSubmit }) => {
     const nextStep = () => setStep(prev => prev + 1);
     const prevStep = () => setStep(prev => prev - 1);
 
+    const validateForm = () => {
+        const { firstName, lastName, phone, email, password, pincode } = formData;
+
+        if (!firstName.trim() || !lastName.trim()) {
+            setError("First and Last name are required.");
+            return false;
+        }
+
+        if (!/^\d{10}$/.test(phone)) {
+            setError("Phone number must be exactly 10 digits.");
+            return false;
+        }
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !email.endsWith(".com")) {
+            setError("Please enter a valid email address ending with .com.");
+            return false;
+        }
+
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{6,}$/;
+        if (!passwordRegex.test(password)) {
+            setError("Password must contain at least 1 uppercase, 1 lowercase, 1 number, 1 special character and be at least 6 characters long.");
+            return false;
+        }
+
+        if (!/^\d{6}$/.test(pincode)) {
+            setError("Pincode must be exactly 6 digits.");
+            return false;
+        }
+
+        return true;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
 
-        try {
-            const {
-                firstName,
-                lastName,
-                phone,
-                email,
-                password,
-                address,
-                city,
-                state,
-                pincode,
-                bankName,
-                bankbranch,
-                employeeID,
-                designation,
-                verificationMethod,
-            } = formData;
+        if (!validateForm()) return;
 
+        try {
             const res = await axios.post(
                 `${serverUrl}/api/v1/bank-user/register`,
                 formData,
-                { withCredentials: true } // IMPORTANT: so browser accepts the cookie
+                { withCredentials: true }
             );
-            console.log(res);
 
             if (res.data.success) {
-                setShowOtpPopup(true); // or wherever the Bank officer should go
+                setShowOtpPopup(true);
             }
         } catch (err) {
             setError(err?.response?.data?.message || "Something went wrong");
@@ -114,7 +126,6 @@ const BankSignUpForm = ({ onSubmit }) => {
                         <Input label="Bank Branch" name="bankbranch" value={formData.bankbranch} onChange={handleChange} />
                         <Input label="Employee ID" name="employeeID" value={formData.employeeID} onChange={handleChange} />
                         <Input label="Designation" name="designation" value={formData.designation} onChange={handleChange} />
-                        {/* Togle for verificationMethod  email/ phone*/}
                         <div className="mb-4">
                             <label className="block mb-1 font-medium">Verification Method</label>
                             <select
@@ -136,7 +147,6 @@ const BankSignUpForm = ({ onSubmit }) => {
 
     return (
         <>
-
             <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-full max-w-md mx-auto">
                 <div className="flex justify-end mb-4">
                     <a
@@ -162,7 +172,7 @@ const BankSignUpForm = ({ onSubmit }) => {
                     {step > 1 && (
                         <button
                             type="button"
-                            onClick={() => setStep(prev => prev - 1)}
+                            onClick={prevStep}
                             className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400"
                         >
                             Back
@@ -171,7 +181,7 @@ const BankSignUpForm = ({ onSubmit }) => {
                     {step < steps.length ? (
                         <button
                             type="button"
-                            onClick={() => setStep(prev => prev + 1)}
+                            onClick={nextStep}
                             className="bg-[#004663] text-white px-4 py-2 rounded hover:bg-blue-700"
                         >
                             Next
@@ -187,16 +197,11 @@ const BankSignUpForm = ({ onSubmit }) => {
                 </div>
 
                 <div className="text-center mt-6">
-                    <span className="text-gray-600">
-                        Already have an account?
-                    </span>
-                    <a href="/sign-in"
-                        className="text-[#004663] font-semibold hover:text-sky-900"
-                    > &nbsp;
-                        Sign In
-                    </a>
+                    <span className="text-gray-600">Already have an account?</span>
+                    <a href="/sign-in" className="text-[#004663] font-semibold hover:text-sky-900">&nbsp;Sign In</a>
                 </div>
             </form>
+
             {showOtpPopup && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                     <Otp
@@ -208,7 +213,6 @@ const BankSignUpForm = ({ onSubmit }) => {
                     />
                 </div>
             )}
-
         </>
     );
 };
