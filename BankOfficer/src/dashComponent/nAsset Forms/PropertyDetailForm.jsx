@@ -3,7 +3,7 @@ import "./propertyDetailForm.scss";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { AppContext } from "../../context/context";
-
+import { useNavigate } from "react-router-dom";
 const PropertyDetailsForm = ({ nextStep }) => {
   const { formData, setFormData } = useContext(AppContext);
 
@@ -19,12 +19,19 @@ const PropertyDetailsForm = ({ nextStep }) => {
   };
 
   const [area, setArea] = useState("");
+  const navigate = useNavigate();
 
   const handleAreaBlur = () => {
     if (area && !area.includes("sq ft")) {
       setArea(`${area} Sq ft`);
     }
   };
+
+  const handleOnClick = () => {
+    console.log("Aryan");
+    navigate("/myAssets");
+  }
+
 
   return (
     <main className="propertyFormContainer">
@@ -157,7 +164,7 @@ const PropertyDetailsForm = ({ nextStep }) => {
 
       {/* Action Buttons */}
       <footer className="actions">
-        <button className="cancelButton">
+        <button onClick= {handleOnClick} className="cancelButton">
           <img src="/delete2.svg" className="buttonIcon" alt="Cancel" />
           Cancel
         </button>

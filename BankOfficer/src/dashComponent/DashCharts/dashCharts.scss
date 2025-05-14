@@ -11,7 +11,17 @@
   @include md {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    & > * {
+      width: 100% !important;
+    }
   }
 
   @media (max-width: 480px) {
@@ -29,6 +39,10 @@
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
+
+  @media (max-width: 768px) {
+    width: 100% !important;
+  }
 }
 
 .asset-card {
@@ -46,7 +60,12 @@
   box-sizing: border-box;
 
   @media (max-width: 480px) {
-    width: 100%;
+    width: 100% !important;
+    margin-left: 0;
+  }
+
+  @media (max-width: 768px) {
+    width: 100% !important;
     margin-left: 0;
   }
 }
@@ -102,8 +121,8 @@ p {
   background: #e1e0e0;
   overflow: hidden;
   flex-wrap: wrap;
-  margin-left: auto;  // Center align
-  margin-right: auto; // Center align
+  margin-left: auto;
+  margin-right: auto;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -147,6 +166,10 @@ h3 {
 
   @include md {
     width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    width: 100% !important;
   }
 
   h4 {
@@ -212,6 +235,7 @@ h3 {
 
   @media (max-width: 768px) {
     margin-left: 0;
+    width: 100% !important;
   }
 }
 

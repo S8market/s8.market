@@ -5,14 +5,14 @@
     display: flex;
     // height: 100vh;
   
-    .sideContainerAdd {
-      flex: 1; // Sidebar takes 1 part of the total flex space
-      min-width: -15px;
+    // .sideContainerAdd {
+    //   flex: 1; // Sidebar takes 1 part of the total flex space
+    //   min-width: 245px;
 
-      @include res.md{
-        min-width: 80px;
-      }
-    }
+    //   @include res.md{
+    //     min-width: 80px;
+    //   }
+    // }
   
     .addAssetContainer {
       flex: 8; // Main content takes remaining space
@@ -73,6 +73,10 @@
       gap: 20px; // Space between components
       padding: 20px;
   
+      @include res.sm {
+      flex-direction: column;
+      align-items: center;
+    }
       // Ensure both components take equal space
       .image-upload-container {
         flex: 1;
@@ -91,10 +95,10 @@
         padding-left: 30px; /* Add spacing for better visibility */
         margin-left: -20px;
       
-      @include res.md{
-        border-left: none;
-        height: auto;
-      }
+      @include res.md {
+      border-left: none;
+      height: auto;
+    }
       }
 
       @include res.md { 
