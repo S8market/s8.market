@@ -3,11 +3,13 @@
 // Wrapper that holds all asset cards including "Add New Asset"
 .assetWrapper {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
 
-  @include sm {
+  // On tablets and smaller: stack vertically
+  @include md {
     flex-direction: column;
     align-items: center;
   }
@@ -24,7 +26,6 @@
   width: 100%;
   height: 540px;
   max-height: 540px;
-  overflow: hidden;
   text-align: center;
   min-width: 250px;
   margin: 0 auto; // Centers card in row
@@ -79,13 +80,9 @@
   }
 }
 
-// Mobile responsiveness for small screens
+// Optional: extra mobile tweak if needed
 @include sm {
   .addNewAssetContainer {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
     .cardImage2,
     h3,
     .addAssetButton {

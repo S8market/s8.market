@@ -150,7 +150,7 @@ h3 {
 
   p,
   .propertyAddress {
-    font-size: 13px;
+    font-size: 20px;
     color: #555;
     margin: 0 0 10px 0;
     text-overflow: ellipsis;
@@ -240,5 +240,9 @@ h3 {
   .viewButton {
     width: auto;
     max-width: none;
+  }
+
+  .propertyAddress {
+    font-size: 20px;
   }
 }

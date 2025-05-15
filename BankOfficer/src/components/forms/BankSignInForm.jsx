@@ -18,32 +18,9 @@ const BankSignInForm = ({ onSubmit }) => {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const validateForm = () => {
-        const { email, password } = formData;
-
-
-        if (!email.includes("@") || !email.endsWith(".com")) {
-            return "Email must contain '@' and end with '.com'";
-        }
-
-
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/;
-        if (!passwordRegex.test(password)) {
-            return "Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character";
-        }
-
-        return null;
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
-
-        const validationError = validateForm();
-        if (validationError) {
-            setError(validationError);
-            return;
-        }
 
         try {
             const { email, password } = formData;

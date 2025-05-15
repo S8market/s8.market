@@ -50,10 +50,10 @@
   flex-direction: column;
   border-radius: 20px;
   text-align: center;
-  flex-wrap: wrap;
+    // flex-wrap: wrap;
   align-content: center;
   border: 1px solid #DCD6FA;
-  width: 270px;
+  width: 270px; 
   height: 200px;
   margin-bottom: 20px;
   margin-left: 40px;
@@ -71,6 +71,7 @@
 }
 
 .total-card {
+  border: bl;
   background: #e9d5ff;
   font-size: 18px;
   border-radius: 20px 20px 0 0;
