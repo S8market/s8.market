@@ -332,7 +332,8 @@ const DashCharts = () => {
          )}
       </div>
       
-      <div style={{ display: 'flex', gap: '20px', alignItems: 'center', marginTop: '20px' }}>
+     
+ <div style={{ display: 'flex', gap: '20px', alignItems: 'center', marginTop: '20px' }}>
   <div style={{ display: 'flex', flexDirection: 'column' }}>
     <label htmlFor="fromDate" style={{ marginBottom: '5px', fontWeight: 'bold' }}>From</label>
     <input
@@ -372,8 +373,9 @@ const DashCharts = () => {
   </div>
 </div>
 
-
           {/* Table (3rd Row) */}
+
+
           <div className="dash-table">
       <h4>Assets Table</h4>
       
