@@ -1,9 +1,14 @@
 import DashCharts from "../../dashComponent/DashCharts/DashCharts.jsx";
 import Header from "../../dashComponent/nav/header/Header";
 import Sidebar from "../../dashComponent/Sidebar/Sidebar";
-import "./dashboard.scss"
+import "./dashboard.scss";
+
+import { useState } from "react";
 
 const Dashboard = () => {
+  const [fromDate, setFromDate] = useState('');
+  const [toDate, setToDate] = useState('');
+
   return (
     <div className="dashboard">
       <div className="sideContainerdash">
@@ -12,46 +17,62 @@ const Dashboard = () => {
       <div className="dashContainer">
         <Header />
         <div className="mainDashboard">
-           <div style={{ display: 'flex', gap: '20px', alignItems: 'center', marginTop: '20px' }}>
-  <div style={{ display: 'flex', flexDirection: 'column' }}>
-    <label htmlFor="fromDate" style={{ marginBottom: '5px', fontWeight: 'bold' }}>From</label>
-    <input
-      id="fromDate"
-      type="date"
-      value={fromDate}
-      onChange={(e) => setFromDate(e.target.value)}
-      onClick={(e) => e.target.showPicker && e.target.showPicker()} // Show calendar UI
-      style={{
-        padding: '6px 10px',
-        fontSize: '16px',
-        border: '1px solid #ccc',
-        borderRadius: '6px',
-        backgroundColor: '#fff',
-        color: '#333'
-      }}
-    />
-  </div>
 
-  <div style={{ display: 'flex', flexDirection: 'column' }}>
-    <label htmlFor="toDate" style={{ marginBottom: '5px', fontWeight: 'bold' }}>To</label>
-    <input
-      id="toDate"
-      type="date"
-      value={toDate}
-      onChange={(e) => setToDate(e.target.value)}
-      onClick={(e) => e.target.showPicker && e.target.showPicker()}
-      style={{
-        padding: '6px 10px',
-        fontSize: '16px',
-        border: '1px solid #ccc',
-        borderRadius: '6px',
-        backgroundColor: '#fff',
-        color: '#333'
-      }}
-    />
-  </div>
-</div>
-          {/* Top header */}
+          {/* Enhanced Date Selector Card */}
+          <div style={{
+            backgroundColor: '#f9f9f9',
+            borderRadius: '12px',
+            padding: '20px 30px',
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
+            display: 'flex',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            gap: '40px',
+            marginBottom: '30px'
+          }}>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <label htmlFor="fromDate" style={{ fontWeight: '600', fontSize: '14px', color: '#555' }}>TO</label>
+              <input
+                type="date"
+                id="fromDate"
+                value={fromDate}
+                onChange={(e) => setFromDate(e.target.value)}
+                onClick={(e) => e.target.showPicker && e.target.showPicker()}
+                style={{
+                  padding: '10px',
+                  fontSize: '15px',
+                  border: '1px solid #ccc',
+                  borderRadius: '8px',
+                  backgroundColor: '#fff',
+                  marginTop: '8px',
+                  color: '#333',
+                  width: '200px'
+                }}
+              />
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <label htmlFor="toDate" style={{ fontWeight: '600', fontSize: '14px', color: '#555' }}>FROM</label>
+              <input
+                type="date"
+                id="toDate"
+                value={toDate}
+                onChange={(e) => setToDate(e.target.value)}
+                onClick={(e) => e.target.showPicker && e.target.showPicker()}
+                style={{
+                  padding: '10px',
+                  fontSize: '15px',
+                  border: '1px solid #ccc',
+                  borderRadius: '8px',
+                  backgroundColor: '#fff',
+                  marginTop: '8px',
+                  color: '#333',
+                  width: '200px'
+                }}
+              />
+            </div>
+          </div>
+
           <DashCharts />
         </div>
       </div>
@@ -59,4 +80,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default Dashboard;

@@ -2,12 +2,72 @@
 // Required imports
 import validator from "validator";
 import User from "../models/userModel.js";
-import { sendEmail } from "../utils/sendEmail.js";
+import { sendEmail } from "../../sendemail.js";
 import passport from "passport";
 import propertyModel from "../models/PropertiesModel.js";
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 import cloudinary from "cloudinary";
 import bcrypt from "bcrypt";
+import crypto from "crypto";
+
+// FORGOT PASSWORD
+export const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+    console.log(req.body);
+
+    // Validate email using validator package
+    if (!email || !validator.isEmail(email)) {
+      return res.status(400).json({ success: false, message: "Invalid email address." });
+    }
+    console.log(email);
+    const user = await User.findOne({ email });
+   
+    // Always return success response to avoid user enumeration
+    if (!user) {
+      return res.status(404).json({
+        success: true,
+        message: "User do not exist",
+      });
+    }
+     console.log("inside forgot password :",email)
+    // Generate reset token and hash it for storing
+    const resetToken = crypto.randomBytes(32).toString("hex");
+    const hashedToken = crypto.createHash("sha256").update(resetToken).digest("hex");
+
+    // Set token and expiry on user document
+    user.resetPasswordToken = hashedToken;
+    user.resetPasswordExpire = Date.now() + 30 * 60 * 1000; // 30 minutes
+
+   
+
+    // Construct reset URL - fallback to localhost if FRONTEND_URL missing
+    const resetUrl = `${process.env.FRONTEND_URL || "http://localhost:3000"}/reset-password/${resetToken}`;
+
+    const message = `You requested a password reset. Please click the following link: \n\n${resetUrl}\n\nIf you didn't request this, please ignore this email.`;
+
+    // Send the email with the reset link
+    await sendEmail({
+      email,
+      subject: "Password Reset Request",
+      message,
+    });
+
+     await user.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Reset link has been sent to your email.",
+    });
+  } catch (error) {
+    console.error("Forgot Password Error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Something went wrong while sending reset link.",
+    });
+  }
+};
+
 
 
 // *******************************
