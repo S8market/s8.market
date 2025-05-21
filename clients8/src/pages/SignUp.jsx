@@ -82,7 +82,7 @@ export default function SignUpPage() {
       </div>
 
       {/* Right Section */}
-      <div className="w-full sm:w-[600px] flex-none bg-white rounded-none sm:rounded-l-3xl shadow-lg px-4 sm:px-12 py-8">
+      <div className="w-full sm:w-[600px] flex-none bg-white shadow-lg px-4 sm:px-12 py-8">
         <div className="h-full flex flex-col">
           <div className="text-2xl font-bold text-center mb-8 text-[#004663]">
             Create Account
@@ -112,16 +112,16 @@ export default function SignUpPage() {
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-300"></div>
               </div>
-              <div className="relative flex justify-center text-sm">
+              {/* <div className="relative flex justify-center text-sm">
                 <span className="px-2 bg-white text-gray-500">Or continue with</span>
-              </div>
+              </div> */}
             </div>
 
-            <div className="space-y-3">
+            {/* <div className="space-y-3">
               {socialButtons.map((button, index) => (
                 <SocialSignInButton key={index} {...button} />
               ))}
-            </div>
+            </div> */}
 
             <div className="text-center mt-6">
               <span className="text-gray-600">Already have an account? </span>
@@ -137,7 +137,7 @@ export default function SignUpPage() {
       </div>
 
       {/* OTP Popup */}
-      {showOtpPopup && <Otp onSuccess={handleOtpSuccess} />}
+      {showOtpPopup && <Otp email={userFormValues.email} onSuccess={handleOtpSuccess} />}
     </div>
   );
 }

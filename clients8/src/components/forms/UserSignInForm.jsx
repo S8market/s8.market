@@ -25,10 +25,10 @@ const UserSignInForm = ({ onSubmit }) => {
             return "Email must contain '@' and end with '.com'";
         }
 
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/;
-        if (!passwordRegex.test(password)) {
-            return "Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character";
-        }
+        // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/;
+        // if (!passwordRegex.test(password)) {
+        //     return "Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character";
+        // }
 
         return null;
     };

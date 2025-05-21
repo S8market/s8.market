@@ -166,8 +166,8 @@ const Profile2 = () => {
                 <p><strong>Bank name:</strong> {userDetails.bankName.toUpperCase()}</p>
                 <p><strong>Job Title:</strong> {userDetails.designation}</p>
                 <p><strong>IFSC:</strong> {userDetails.bankIFSC}</p>
-                <p><strong>Branch Name:</strong> {userDetails.bankBranch}</p>
-                <p><strong>Branch Zone:</strong> {userDetails.branchZone}</p>
+                {/* <p><strong>Branch Name:</strong> {userDetails.bankBranch}</p> */}
+                {/* <p><strong>Branch Zone:</strong> {userDetails.branchZone}</p> */}
                 <p><strong>Branch Address:</strong> {userDetails.bankAddress?.address} {userDetails.bankAddress?.city} {userDetails.bankAddress?.state}-{userDetails.bankAddress?.pincode}</p>
               </div>
             </div>

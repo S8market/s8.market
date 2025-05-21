@@ -26,7 +26,6 @@ const OtpPopup = ({ onSuccess, onClose, email, phone }) => {
     try {
       const endpoint = `${serverUrl}/api/v1/bank-user/otp-verification`;
       console.log("Sending OTP verification request with:", { otp, email, phone });
-
       const response = await axios.post(
         endpoint,
         { otp, email, phone },

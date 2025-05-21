@@ -51,8 +51,16 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/sign-in" element={<BankSignInPage />} />
-        <Route path="/sign-up" element={<BankSignUpPage />} />
+        {(!isAuthenticated) && (
+            <>
+            <Route path="/" element={<BankSignInPage />} />
+            <Route path="/sign-in" element={<BankSignInPage />} />
+            <Route path="/sign-up" element={<BankSignUpPage />} />
+            </>
+        )
+        }
+        
+        
         <Route path="/dashboard" element={<PrivateRoute> <Dashboard /></PrivateRoute>} />
         <Route path="/myAssets" element={<PrivateRoute><MyAssets /></PrivateRoute>} />
         <Route path="/profile" element={<PrivateRoute><Profile2 /></PrivateRoute>} />
