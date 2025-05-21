@@ -14,7 +14,8 @@ const DashCharts = () => {
   const [selectedCity, setSelectedCity] = useState("All");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedStatus, setSelectedStatus] = useState("All");
-  const [selectedDate, setSelectedDate] = useState(""); // State for selected date
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
 
@@ -66,7 +67,8 @@ const DashCharts = () => {
     (selectedCity === "All" || asset.address?.city === selectedCity) &&
     (selectedCategory === "All" || asset.category === selectedCategory) &&
     (selectedStatus === "All" || getStatus(asset.auctionDate) === selectedStatus) &&
-    (selectedDate === "" || new Date(asset.auctionDate).toISOString().split("T")[0] === selectedDate) &&
+    (fromDate === "" || new Date(asset.auctionDate) >= new Date(fromDate)) &&
+    (toDate === "" || new Date(asset.auctionDate) <= new Date(toDate)) &&
     (!minPrice || asset.price >= parseFloat(minPrice)) &&
     (!maxPrice || asset.price <= parseFloat(maxPrice))
   );
@@ -99,14 +101,26 @@ const DashCharts = () => {
   }
 
   // **User Interactions Line Chart Data (Placeholder)**
-  const userData = [
-    { month: "Jan", views: 20 },
-    { month: "Feb", views: 15 },
-    { month: "Mar", views: 18 },
-    { month: "Apr", views: 25 },
-    { month: "May", views: 30 },
-    { month: "Jun", views: 27 },
-  ];
+  const [selectedPeriod, setSelectedPeriod] = useState("Today");
+  const userDataOptions = {
+    Today: [{ label: "Today", views: 22 }],
+    Weekly: [
+      { label: "Mon", views: 18 },
+      { label: "Tue", views: 23 },
+      { label: "Wed", views: 21 },
+      { label: "Thu", views: 19 },
+      { label: "Fri", views: 25 },
+      { label: "Sat", views: 30 },
+      { label: "Sun", views: 27 },
+    ],
+    Monthly: [
+      { label: "Week 1", views: 80 },
+      { label: "Week 2", views: 95 },
+      { label: "Week 3", views: 75 },
+      { label: "Week 4", views: 100 },
+    ],
+  };
+  const userData = userDataOptions[selectedPeriod];
 
   // **Price Range Analysis**
   const priceRangeData = filteredData.reduce((acc, asset) => {
@@ -251,16 +265,16 @@ const DashCharts = () => {
           <div className="user-interactions">
             <h4>User Interactions</h4>
             <div className="filters">
-              <select>
-                <option>Today</option>
-                <option>Weekly</option>
-                <option>Monthly</option>
+              <select value={selectedPeriod} onChange={(e) => setSelectedPeriod(e.target.value)}>
+                <option value="Today">Today</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Monthly">Monthly</option>
               </select>
             </div>
             <ResponsiveContainer width="100%" height={300}>
               <LineChart data={userData}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="month" />
+                <XAxis dataKey="label" />
                 <YAxis />
                 <Tooltip />
                 <Line type="monotone" dataKey="views" stroke="#2563EB" strokeWidth={2} />
@@ -317,23 +331,13 @@ const DashCharts = () => {
              </p>
          )}
       </div>
-      <input
-  type="date"
-  value={selectedDate}
-  onChange={(e) => setSelectedDate(e.target.value)}
-  style={{
-    padding: '2px 8px',
-    fontSize: '16px',
-    border: '1px solid #ccc',
-    borderRadius: '6px',
-    backgroundColor: '#fff',
-    marginTop: '15px',
-    color: '#333'
-  }}
-/>
-
+      
+     
+ 
 
           {/* Table (3rd Row) */}
+
+
           <div className="dash-table">
       <h4>Assets Table</h4>
       

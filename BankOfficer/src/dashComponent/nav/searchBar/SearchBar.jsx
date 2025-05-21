@@ -64,5 +64,7 @@ export function SearchBar() {
         />
       </form>
     </div>
+    
   );
+  
 }

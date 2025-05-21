@@ -17,7 +17,8 @@ import {
   checkAuth,
   getGuestProperties,
   searchProperty,
-  changePassword
+  changePassword,
+  forgotPassword // ← ✅ import added
 } from "../controllers/userController.js";
 
 import userAuth from "../middlewares/authUser.js";
@@ -32,6 +33,9 @@ userRouter.post("/login", login);
 userRouter.get("/auth/google", googleAuth);
 userRouter.get("/auth/google/callback", googleAuthCallback);
 userRouter.get("/get-guest-properties", getGuestProperties);
+
+// ✅ Forgot password route (public)
+userRouter.post("/forgot-password", forgotPassword); // ← ✅ NEW route added
 
 // ✅ Protected routes (user must be authenticated)
 userRouter.get("/logout", userAuth, logout);

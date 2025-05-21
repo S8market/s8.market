@@ -1,35 +1,33 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 
+// Create the App context
 export const AppContext = createContext();
 
-const AppContextProvider = (props) => {
+const AppContextProvider = ({ children }) => {
+  // Dynamically set server URL based on environment
+  const serverUrl = useMemo(() => {
+    const mode = import.meta.env.MODE;
+    const url = mode === "production"
+      ? import.meta.env.VITE_SERVER_URL
+      : import.meta.env.VITE_SERVER_URL_DEV;
+    console.log(`${mode === "production" ? "Production" : "Development"} server URL:`, url);
+    return url;
+  }, []);
 
-  var serverUrl;
+  // ======================= States =======================
 
-  if (import.meta.env.MODE === "development") {
-    serverUrl = import.meta.env.VITE_SERVER_URL_DEV;
-    console.log("Development server URL: ", serverUrl);
-  }
-  else if (import.meta.env.MODE === "production") {
-    serverUrl = import.meta.env.VITE_SERVER_URL;
-    console.log("Production server URL: ", serverUrl);
-  }
-  else {
-    serverUrl = import.meta.env.VITE_SERVER_URL_DEV;
-    console.log("Unknown environment, using development server URL: ", serverUrl);
-  }
-
+  // Property editing and management
   const [editProperty, setEditProperty] = useState(false);
   const [propertyId, setPropertyId] = useState('');
   const [searchString, setSearchString] = useState('');
-
-  // New state for tracking added and removed images
   const [newImages, setNewImages] = useState([]);
   const [removedImages, setRemovedImages] = useState([]);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
 
+  // Property form default data
   const [formData, setFormData] = useState({
-    title: "Prafull Sales Corporation:Residental Flat",
+    title: "Prafull Sales Corporation: Residental Flat",
     category: "Residential",
     auctionType: "E-auction",
     auctionDate: "15/02/25",
@@ -39,12 +37,11 @@ const AppContextProvider = (props) => {
     description:
       "All the part and parcel of land & building in the name of Prafull Sales Corporation: Residential Flat No. 705 admeasuring 1832 Sq. Ft. 7th floor, V. N. Pride, CTS No. 5984, S. No. 148/9, Nashik City-422003",
     contact: "8169178780",
-    nearbyPlaces: "Dmart(1km away),AB School(200m away)",
+    nearbyPlaces: "Dmart(1km away), AB School(200m away)",
     latitude: "1233",
     longitude: "123",
     address: {
-      address:
-        "Flat No. 705 , 7th floor, V. N. Pride, CTS No. 5984, S. No. 148/9",
+      address: "Flat No. 705, 7th floor, V. N. Pride, CTS No. 5984, S. No. 148/9",
       city: "Nashik",
       state: "Maharashtra",
       pincode: "422003",
@@ -62,162 +59,116 @@ const AppContextProvider = (props) => {
       "All bidders are requested to visit the above site & complete the registration, KYC updation & payment 3 to 4 days before date of E-auction to avoid last minute rush",
   });
 
-  // const [formData, setFormData] = useState({
-  //   title: "",
-  //   category: "",
-  //   auctionType: "",
-  //   auctionDate: "",
-  //   auctionTime: "",
-  //   area: "",
-  //   price: "",
-  //   description: "",
-  //   video: "",
-  //   contact: "",
-  //   nearbyPlaces: "",
-  //   latitude: "",
-  //   longitude: "",
-  //   address: {
-  //     address: "",
-  //     city: "",
-  //     state: "",
-  //     pincode: "",
-  //   },
-  //   auctionUrl: "",
-  //   borrower: "",
-  //   amountDue: "",
-  //   deposit: "",
-  //   bidInc: "",
-  //   inspectDate: "",
-  //   inspectTime: "",
-  //   reservPrice: "",
-  //   message: "",
-  // });
-
-  const [uploadedFiles, setUploadedFiles] = useState([]);
-
-  // State for bankuser details
- 
-
+  // Bank user profile
   const [userDetails, setUserDetails] = useState({
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
-    // bankName: "",
     bankAddress: "",
     branchZone: "",
     bankBranch: "",
     bankIFSC: "",
     designation: ""
   });
-  
- 
 
+  const [userUpdateDetails, setUserUpdateDetails] = useState({ ...userDetails });
+  const [avatar, setAvatar] = useState("/user.png");
 
-  const [avatar, setAvatar] = useState("/user.png")
-
-  const [properties, setProperties] = useState([]); // State to store properties
-
+  // Property list and authentication
+  const [properties, setProperties] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [authChecked, setAuthChecked] = useState(false);
 
-  // Get Profile Details
+  // ======================= Side Effects =======================
+
+  // Fetch bank user profile after login
   const handleProfile = async () => {
     try {
-      const { data } = await axios.get(serverUrl + "/api/v1/bank-user/get-profile",
-        { withCredentials: true }
-      );
+      const { data } = await axios.get(`${serverUrl}/api/v1/bank-user/get-profile`, {
+        withCredentials: true
+      });
+
       if (data.success) {
-        setUserDetails({
-          firstName: data.user.firstName,
-          lastName: data.user.lastName,
-          email: data.user.email,
-          phone: data.user.phone,
-          bankName: data.user.bankName,
-          bankAddress: data.user.bankAddress,
-          branchZone: data.user.branchZone,
-          bankBranch: data.user.bankBranch,
-          bankIFSC: data.user.bankIFSC,
-          designation: data.user.designation
-        });
-        setAvatar(data.user.bankProfileImage.url)
+        const user = data.user;
+        const updatedUser = {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          phone: user.phone,
+          bankAddress: user.bankAddress,
+          branchZone: user.branchZone,
+          bankBranch: user.bankBranch,
+          bankIFSC: user.bankIFSC,
+          designation: user.designation
+        };
+        setUserDetails(updatedUser);
+        setUserUpdateDetails(updatedUser);
+        if (user.bankProfileImage?.url) setAvatar(user.bankProfileImage.url);
       } else {
-        console.log(data.message)
+        console.warn("Failed to fetch user profile:", data.message);
       }
     } catch (error) {
-      console.log(error.message);
+      console.error("Error fetching profile:", error.message);
     }
-  }
+  };
 
   useEffect(() => {
-    handleProfile();
-  }, [isAuthenticated])
-
-
-  // Update user details
-  const [userUpdateDetails, setUserUpdateDetails] = useState({
-    firstName: userDetails.firstName,
-    lastName: userDetails.lastName,
-    email: userDetails.email,
-    phone: userDetails.phone,
-    bankName: userDetails.bankName,
-    bankAddress: userDetails.bankAddress,
-    branchZone: userDetails.branchZone,
-    bankBranch: userDetails.bankBranch,
-    bankIFSC: userDetails.bankIFSC,
-    designation: userDetails.designation
-  });
-
-
-
-  // const [properties, setProperties] = useState(null);
-
-  useEffect(() => {
-    getProperties();
+    if (isAuthenticated) handleProfile();
   }, [isAuthenticated]);
 
-  // Function to get properties
+  // Fetch properties
   const getProperties = async () => {
     try {
-      const { data } = await axios.get(serverUrl + "/api/v1/bank-user/get-property", {
-        withCredentials: true,
+      const { data } = await axios.get(`${serverUrl}/api/v1/bank-user/get-property`, {
+        withCredentials: true
       });
       if (data.success) {
         setProperties(data.properties);
       } else {
-        console.log(data.message);
+        console.warn("Failed to fetch properties:", data.message);
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching properties:", error);
     }
-  }
+  };
 
+  useEffect(() => {
+    if (isAuthenticated) getProperties();
+  }, [isAuthenticated]);
 
+  // ======================= Memoized Values =======================
 
+  const latestProperty = useMemo(() => {
+    return properties.length > 0 ? properties[properties.length - 1] : null;
+  }, [properties]);
 
-  // Latest Property
-  const latestProperty = properties[properties.length - 1]
+  // ======================= Context Value =======================
 
   const value = {
     serverUrl,
-    formData,
-    setFormData,
-    uploadedFiles,
-    setUploadedFiles,
-    editProperty,
-    setEditProperty,
-    newImages,
-    setNewImages,
-    removedImages,
-    setRemovedImages,
-    propertyId,
-    setPropertyId,
-    userDetails, searchString, setSearchString, getProperties, latestProperty, isAuthenticated, setIsAuthenticated,
+    formData, setFormData,
+    uploadedFiles, setUploadedFiles,
+    editProperty, setEditProperty,
+    newImages, setNewImages,
+    removedImages, setRemovedImages,
+    propertyId, setPropertyId,
+    searchString, setSearchString,
+    userDetails, setUserDetails,
+    userUpdateDetails, setUserUpdateDetails,
+    avatar, setAvatar,
+    properties, setProperties,
+    latestProperty,
+    getProperties,
+    isAuthenticated, setIsAuthenticated,
     authChecked, setAuthChecked,
-    setUserDetails, avatar, setAvatar, properties, setProperties, handleProfile, userUpdateDetails, setUserUpdateDetails
+    handleProfile,
   };
+
   return (
-    <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
+    <AppContext.Provider value={value}>
+      {children}
+    </AppContext.Provider>
   );
 };
 

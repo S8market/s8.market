@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import crypto from "crypto";
 
 const userSchema = new Schema(
   {
@@ -10,11 +11,6 @@ const userSchema = new Schema(
       trim: true,
       index: true,
     },
-    // lastName: {
-    //   type: String,
-    //   // required: true,
-    //   trim: true,
-    // },
     email: {
       type: String,
       required: true,
@@ -23,7 +19,6 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      // required: true,
       select: false,
     },
     profileImage: {
@@ -33,10 +28,8 @@ const userSchema = new Schema(
     },
     phone: {
       type: String,
-      // required: true,
       trim: true,
     },
-    // **************************************************************************
     address: {
       type: Object,
       default: {
@@ -48,7 +41,7 @@ const userSchema = new Schema(
     },
     dob: {
       type: Date,
-      default: null, ///////////////////////////////////////
+      default: null,
     },
     attemptedAt: {
       type: Date,
@@ -56,7 +49,6 @@ const userSchema = new Schema(
     },
     gender: {
       type: String,
-      // required: true,
       enum: ["Male", "Female", "Other"],
       default: "Other",
     },
@@ -75,7 +67,6 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-// Create a TTL index that will remove documents where verified is false after 3600 seconds (1 hour)
 userSchema.index(
   { attemptedAt: 1 },
   { expireAfterSeconds: 3600, partialFilterExpression: { verified: false } }
@@ -86,9 +77,9 @@ userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
 
   const salt = await bcrypt.genSalt(10);
-  const hassedPassword = await bcrypt.hash(this.password, salt);
+  const hashedPassword = await bcrypt.hash(this.password, salt);
 
-  this.password = hassedPassword;
+  this.password = hashedPassword;
   next();
 });
 
@@ -97,26 +88,37 @@ userSchema.methods.isPasswordCorrect = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 
-// Generating verification Code
+// Generate verification code
 userSchema.methods.generateVerificationCode = function () {
   function generateRandomFiveDigitNumber() {
     const firstDigit = Math.floor(Math.random() * 9) + 1;
     const remainingDigit = Math.floor(Math.random() * 10000)
       .toString()
-      .padStart(4, 0);
+      .padStart(4, "0");
     return parseInt(firstDigit + remainingDigit);
   }
   const verificationCode = generateRandomFiveDigitNumber();
   this.verificationCode = verificationCode;
   this.verificationCodeExpire = Date.now() + 5 * 60 * 1000;
-
   return verificationCode;
 };
 
+// Generate JWT token
 userSchema.methods.generateToken = function () {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET_KEY, {
     expiresIn: process.env.JWT_EXPIRE,
   });
+};
+
+// Generate password reset token
+userSchema.methods.generatePasswordResetToken = function () {
+  const resetToken = crypto.randomBytes(20).toString("hex");
+  this.resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+  this.resetPasswordExpire = Date.now() + 60 * 60 * 1000; // 1 hour
+  return resetToken;
 };
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);
