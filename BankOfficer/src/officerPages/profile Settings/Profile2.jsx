@@ -163,7 +163,7 @@ const Profile2 = () => {
               </div>
               <div className="info2">
                 <h4>Professional Details</h4>
-                <p><strong>Bank name:</strong> {userDetails.bankName.toUpperCase()}</p>
+                <p><strong>Bank name:</strong></p>
                 <p><strong>Job Title:</strong> {userDetails.designation}</p>
                 <p><strong>IFSC:</strong> {userDetails.bankIFSC}</p>
                 {/* <p><strong>Branch Name:</strong> {userDetails.bankBranch}</p> */}
