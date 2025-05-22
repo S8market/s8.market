@@ -31,10 +31,10 @@ const UserSignInForm = () => {
             return "Please enter a valid email address.";
         }
 
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/;
-        if (!passwordRegex.test(password)) {
-            return "Password must include uppercase, lowercase, number, and special character.";
-        }
+        // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/;
+        // if (!passwordRegex.test(password)) {
+        //     return "Password must include uppercase, lowercase, number, and special character.";
+        // }
 
         return null;
     };
