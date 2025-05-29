@@ -194,14 +194,14 @@ const UserSignInForm = () => {
                 </div>
             )}
 
-            {!forgotPasswordMode && (
+            {/* {!forgotPasswordMode && ( */}
                 <div className="text-center mt-6">
                     <span className="text-gray-600">Don't have an account?</span>
                     <a href="/sign-up" className="text-[#004663] font-semibold hover:text-sky-900">
                         &nbsp;Sign Up
                     </a>
                 </div>
-            )}
+            {/* )} */}
 
             {forgotPasswordMode && (
                 <div className="text-center mt-4">
