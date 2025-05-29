@@ -41,7 +41,7 @@ export default function NavigationBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
   const navItems = [
-    { label: "Home", isBold: true, to: "/" },
+    { label: "Home", isBold: true, to: "/" }, 
     { label: "Assets", isBold: false, to: "/properties" },
     { label: "About Us", isBold: false, to: "/about" },
     { label: "Contact Us", isBold: false, to: "/contact" },
