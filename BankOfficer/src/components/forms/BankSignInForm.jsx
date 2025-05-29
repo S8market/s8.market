@@ -48,10 +48,10 @@ const BankSignInForm = () => {
             <div className="flex justify-end mb-4">
                 <a
                     href={
-                        // `${import.meta.env.VITE_CLIENT_URL}/sign-in`
-                        import.meta.env.MODE === 'development'
-                            ? `${import.meta.env.VITE_CLIENT_URL_DEV}/sign-in`
-                            : `${import.meta.env.VITE_CLIENT_URL}/sign-in`
+                        `${import.meta.env.VITE_CLIENT_URL}/sign-in`
+                        // import.meta.env.MODE === 'development'
+                        //     ? `${import.meta.env.VITE_CLIENT_URL_DEV}/sign-in`
+                        //     : `${import.meta.env.VITE_CLIENT_URL}/sign-in`
                     }
                     className="text-[#004663] underline hover:text-blue-700 transition"
                 >
