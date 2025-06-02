@@ -1,9 +1,9 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { AppContext } from "../../context/context";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const BankSignInForm = ({ onSubmit }) => {
+const BankSignInForm = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: "",
@@ -48,9 +48,10 @@ const BankSignInForm = ({ onSubmit }) => {
             <div className="flex justify-end mb-4">
                 <a
                     href={
-                        import.meta.env.MODE === 'development'
-                            ? `${import.meta.env.VITE_CLIENT_URL_DEV}/sign-in`
-                            : `${import.meta.env.VITE_CLIENT_URL}/sign-in`
+                        `${import.meta.env.VITE_CLIENT_URL}/sign-in`
+                        // import.meta.env.MODE === 'development'
+                        //     ? `${import.meta.env.VITE_CLIENT_URL_DEV}/sign-in`
+                        //     : `${import.meta.env.VITE_CLIENT_URL}/sign-in`
                     }
                     className="text-[#004663] underline hover:text-blue-700 transition"
                 >

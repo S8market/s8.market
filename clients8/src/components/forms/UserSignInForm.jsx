@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useContext } from "react";
 import { AppContext } from "../../context/context";
 import axios from "axios";
@@ -31,10 +32,10 @@ const UserSignInForm = () => {
             return "Please enter a valid email address.";
         }
 
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/;
-        if (!passwordRegex.test(password)) {
-            return "Password must include uppercase, lowercase, number, and special character.";
-        }
+        // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/;
+        // if (!passwordRegex.test(password)) {
+        //     return "Password must include uppercase, lowercase, number, and special character.";
+        // }
 
         return null;
     };
@@ -106,8 +107,8 @@ const UserSignInForm = () => {
 
 
                     href={
-                        `${import.meta.env.VITE_BANK_URL}/sign-in`
-                        // import.meta.env.MODE === "development"
+                         `${import.meta.env.VITE_BANK_URL}/sign-in`
+                        // import.meta.env.MODE === 'development'
                         //     ? `${import.meta.env.VITE_BANK_URL_DEV}/sign-in`
                         //     : `${import.meta.env.VITE_BANK_URL}/sign-in`
                     }
@@ -196,14 +197,14 @@ const UserSignInForm = () => {
                 </div>
             )}
 
-            {!forgotPasswordMode && (
+            {/* {!forgotPasswordMode && ( */}
                 <div className="text-center mt-6">
                     <span className="text-gray-600">Don't have an account?</span>
                     <a href="/sign-up" className="text-[#004663] font-semibold hover:text-sky-900">
                         &nbsp;Sign Up
                     </a>
                 </div>
-            )}
+            {/* )} */}
 
             {forgotPasswordMode && (
                 <div className="text-center mt-4">

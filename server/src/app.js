@@ -23,11 +23,11 @@ app.use(cors({
   origin: [
     "http://localhost:5173",
     "http://localhost:5174",
-    "https://s8test-bank-frontend.onrender.com",
-    "https://s8test-client.onrender.com",
     "https://s8-bank-officer.onrender.com",
     "https://s8market.com",
-    "https://bank.s8market.com"
+    "https://bank.s8market.com",
+    "https://s8-user.onrender.com",
+    "https://s8-market.onrender.com"
   ],
   credentials: true,
 }));

@@ -69,12 +69,14 @@ export const bankUserRegister = async (req, res) => {
     // }
 
     // Check if a verified bank user with this email or phone already exists
-    const existingUser = await bankUser.findOne({
-      $or: [
-        { email, verified: true },
-        { phone, verified: true },
-      ],
-    });
+   const existingUser = await bankUser.findOne({
+  email,
+  phone,
+  $or: [
+    { emailVerified: true },
+    { phoneVerified: true },
+  ],
+});
 
     if (existingUser) {
       return res.status(409).json({ success: false, message: "User already exists and is verified." });
@@ -228,6 +230,7 @@ function generateEmailTemplate(verificationCode) {
 // *******************************
 export const verifyOTP = async function (req, res) {
   try {
+    console.log("reached verify otp")
     const { email, phone, otp } = req.body;
     if (!validator.isEmail(email)) {
       return res.status(400).json({
