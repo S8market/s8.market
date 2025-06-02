@@ -4,7 +4,6 @@ import Sidebar from "../../dashComponent/Sidebar/Sidebar";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/context";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const Profile2 = () => {
   const [image, setImage] = useState(null); // For file upload
@@ -35,7 +34,6 @@ const Profile2 = () => {
         designation: userDetails.designation || ""
       });
 
-      // Also load avatar from server if available
       if (userDetails.avatarUrl) {
         setAvatar(userDetails.avatarUrl);
       }
@@ -50,9 +48,13 @@ const Profile2 = () => {
         { withCredentials: true }
       );
 
-      setUserDetails(data.user);
-      if (data.user.avatarUrl) {
-        setAvatar(data.user.avatarUrl);
+      if (data && data.user) {
+        setUserDetails(data.user);
+        if (data.user.avatarUrl) {
+          setAvatar(data.user.avatarUrl);
+        }
+      } else {
+        console.warn("No user data returned from update-profile API");
       }
 
       setShowPopup(true);
@@ -79,7 +81,6 @@ const Profile2 = () => {
           }
         );
 
-        // Save updated avatar
         setAvatar(data.avatarUrl || "/user.png");
         setUserDetails((prev) => ({ ...prev, avatarUrl: data.avatarUrl }));
         setEditAvatar(false);
@@ -124,7 +125,9 @@ const Profile2 = () => {
     setPasswords((prev) => ({ ...prev, [name]: value }));
   };
 
-  return userDetails.firstName && (
+  if (!userDetails) return <div>Loading...</div>;
+
+  return (
     <div className="profile">
       <div className="sideContainer2"><Sidebar /></div>
       <div className="mainContent">
@@ -163,11 +166,9 @@ const Profile2 = () => {
               </div>
               <div className="info2">
                 <h4>Professional Details</h4>
-                <p><strong>Bank name:</strong> {userDetails.bankName.toUpperCase()}</p>
+                <p><strong>Bank name:</strong> {userDetails.bankName}</p>
                 <p><strong>Job Title:</strong> {userDetails.designation}</p>
                 <p><strong>IFSC:</strong> {userDetails.bankIFSC}</p>
-                <p><strong>Branch Name:</strong> {userDetails.bankBranch}</p>
-                <p><strong>Branch Zone:</strong> {userDetails.branchZone}</p>
                 <p><strong>Branch Address:</strong> {userDetails.bankAddress?.address} {userDetails.bankAddress?.city} {userDetails.bankAddress?.state}-{userDetails.bankAddress?.pincode}</p>
               </div>
             </div>
@@ -240,36 +241,47 @@ const Profile2 = () => {
               <hr className="custom-hr" />
               <button className="save-btn" onClick={handleUpdateProfile}>Save changes</button>
               <button className="save-btn" onClick={() => setShowPasswordPopup(true)}>Change Password</button>
+
               {showPasswordPopup && (
-                <div className="password-popup-overlay">
-                  <div className="password-popup">
-                    <h2><b>Change Password</b></h2>
-                    {["oldPassword", "newPassword", "confirmPassword"].map((field) => (
-                      <div className="popup-input-group" key={field}>
-                        <label>{field.replace(/([A-Z])/g, ' $1')}</label>
-                        <input type="password" name={field} value={passwords[field]} onChange={handlePasswordChange} placeholder={`Enter ${field}`} />
-                      </div>
-                    ))}
-                    <div className="popup-buttons">
-                      <button onClick={() => setShowPasswordPopup(false)}>Cancel</button>
-                      <button onClick={() => {
-                        console.log(passwords);
-                        setShowPasswordPopup(false);
-                      }}>Submit</button>
-                    </div>
+                <div className="popup-overlay">
+                  <div className="popup-content">
+                    <h3>Change Password</h3>
+                    <input
+                      type="password"
+                      placeholder="Old Password"
+                      name="oldPassword"
+                      value={passwords.oldPassword}
+                      onChange={handlePasswordChange}
+                    />
+                    <input
+                      type="password"
+                      placeholder="New Password"
+                      name="newPassword"
+                      value={passwords.newPassword}
+                      onChange={handlePasswordChange}
+                    />
+                    <input
+                      type="password"
+                      placeholder="Confirm New Password"
+                      name="confirmPassword"
+                      value={passwords.confirmPassword}
+                      onChange={handlePasswordChange}
+                    />
+                    <button onClick={() => setShowPasswordPopup(false)}>Close</button>
                   </div>
                 </div>
               )}
             </div>
           )}
+
+          {/* Popup after saving */}
+          {showPopup && (
+            <div className="popup-message">
+              Profile updated successfully!
+            </div>
+          )}
         </div>
       </div>
-
-      {showPopup && (
-        <div className="popupMessage">
-          <p>Profile saved successfully!</p>
-        </div>
-      )}
     </div>
   );
 };
